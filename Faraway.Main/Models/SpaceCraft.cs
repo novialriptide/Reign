@@ -21,11 +21,17 @@ namespace Faraway.Main.Models
         }
         private bool IsValidInsertionPosition(int x, int y)
         {
+            if (Modules.ContainsKey((x, y)))
+                return false;
+
             return true;
         }
         public SpaceCraftModule GetModule(int x, int y)
         {
-            return null;
+            if (!Modules.ContainsKey((x, y)))
+                return null;
+
+            return Modules[(x, y)];
         }
         public void SetModule(int x, int y, SpaceCraftModule module)
         {
@@ -39,7 +45,7 @@ namespace Faraway.Main.Models
             foreach ((int x, int y) a in Modules.Keys)
             {
                 SpaceCraftModule module = Modules[a];
-                Rectangle rectangle = new Rectangle((int)Position.X, (int)Position.Y, ModulePixelWidth, ModulePixelHeight);
+                Rectangle rectangle = new Rectangle((int)Position.X * ModulePixelWidth, (int)Position.Y * ModulePixelHeight, ModulePixelWidth, ModulePixelHeight);
                 Engine.Draw.DrawRectangle(spriteBatch, rectangle, Color.Blue);
             }
         }
