@@ -1,11 +1,8 @@
-﻿using Faraway.Main.Models.SpaceCraftModules;
+﻿using Faraway.Main.Engine;
+using Faraway.Main.Models.SpaceCraftModules;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Faraway.Main.Models
 {
@@ -13,30 +10,14 @@ namespace Faraway.Main.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<List<SpaceCraftModule>> Modules { get; }
+        public Vector2 Position { get; set; }
+        public static int ModulePixelWidth = 128;
+        public static int ModulePixelHeight = 128;
+        public Dictionary<(int x, int y), SpaceCraftModule> Modules { get; }
         public SpaceCraft()
         {
-            Modules = new List<List<SpaceCraftModule>>();
-            Modules.Add(new List<SpaceCraftModule>());
+            Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             SetModule(0, 0, new CommandCenterModule());
-        }
-
-        //https://stackoverflow.com/questions/7200780/how-to-use-2d-arrays-with-negative-index
-        private int getUnsignedIndex(int index)
-        {
-            if (index < 0)
-                return -index * 2 - 1;
-            
-            return index * 2;
-        }
-        private int getSignedIndex(int index)
-        {
-            if (index == 0)
-                return 0;
-            else if (index % 2 == 0)
-                return index % 2;
-            
-            return index % 2 + 1;
         }
         private bool IsValidInsertionPosition(int x, int y)
         {
@@ -44,34 +25,23 @@ namespace Faraway.Main.Models
         }
         public SpaceCraftModule GetModule(int x, int y)
         {
-            x = getUnsignedIndex(x);
-            y = getUnsignedIndex(y);
-
-            return Modules[y][x];
+            return null;
         }
         public void SetModule(int x, int y, SpaceCraftModule module)
         {
-            x = getUnsignedIndex(x);
-            y = getUnsignedIndex(y);
-
             if (!IsValidInsertionPosition(x, y))
-            {
                 return;
-            }
 
-            if (y - Modules.Count > 0)
-                for (int iy = 0; iy < y - Modules.Count; iy++)
-                    Modules.Add(new List<SpaceCraftModule>());
-
-            if (x - Modules[0].Count > 0)
-                for (int ix = 0; ix < x - Modules.Count; ix++)
-                    Modules.Add(null);
-
-            Modules[y][x] = module;
+            Modules.Add((x, y), module);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            foreach ((int x, int y) a in Modules.Keys)
+            {
+                SpaceCraftModule module = Modules[a];
+                Rectangle rectangle = new Rectangle((int)Position.X, (int)Position.Y, ModulePixelWidth, ModulePixelHeight);
+                Engine.Draw.DrawRectangle(spriteBatch, rectangle, Color.Blue);
+            }
         }
     }
 }

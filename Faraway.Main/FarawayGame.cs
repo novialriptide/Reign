@@ -38,9 +38,8 @@ namespace Faraway.Main
             _sprite = new Sprite2D(Content.Load<Texture2D>("dva"));
             _sprite.Scale = 0.4f;
 
-            foreach (List<SpaceCraftModule> a in playerSpaceCraft.Modules)
-                foreach (SpaceCraftModule b in a)
-                    Debug.WriteLine(b.ToString());
+            foreach (SpaceCraftModule a in playerSpaceCraft.Modules.Values)
+                Debug.WriteLine(a.Name);
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,6 +58,7 @@ namespace Faraway.Main
 
             _spriteBatch.Begin();
             _sprite.Draw(_spriteBatch);
+            playerSpaceCraft.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
