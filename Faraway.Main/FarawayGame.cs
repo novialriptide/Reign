@@ -1,7 +1,10 @@
 ﻿using Faraway.Main.Engine;
+using Faraway.Main.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Faraway.Main
 {
@@ -12,6 +15,8 @@ namespace Faraway.Main
 
         private Sprite2D _sprite;
 
+        private SpaceCraft playerSpaceCraft;
+
         public FarawayGame()
         {
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
@@ -21,7 +26,7 @@ namespace Faraway.Main
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            playerSpaceCraft = new SpaceCraft();
 
             base.Initialize();
         }
@@ -32,6 +37,10 @@ namespace Faraway.Main
 
             _sprite = new Sprite2D(Content.Load<Texture2D>("dva"));
             _sprite.Scale = 0.4f;
+
+            foreach (List<SpaceCraftModule> a in playerSpaceCraft.Modules)
+                foreach (SpaceCraftModule b in a)
+                    Debug.WriteLine(b.ToString());
         }
 
         protected override void Update(GameTime gameTime)

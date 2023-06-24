@@ -8,9 +8,14 @@ namespace Faraway.Main.Models
 {
     public class SpaceCraftModule
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Width { get; }
-        public int Height { get; }
+        public virtual string Name { get; }
+        public virtual string Description { get; }
+        public virtual int Width { get; }
+        public virtual int Height { get; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
