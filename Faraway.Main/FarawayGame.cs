@@ -57,7 +57,7 @@ namespace Faraway.Main
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _sprite.Draw(_spriteBatch);
+            // _sprite.Draw(_spriteBatch);
             playerSpaceCraft.Draw(_spriteBatch);
             _spriteBatch.End();
 
