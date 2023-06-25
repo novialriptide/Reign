@@ -13,8 +13,6 @@ namespace Faraway.Main
         public static GraphicsDeviceManager GraphicsDeviceManager;
         private SpriteBatch _spriteBatch;
 
-        private Sprite2D _sprite;
-
         private SpaceCraft playerSpaceCraft;
 
         public FarawayGame()
@@ -35,9 +33,6 @@ namespace Faraway.Main
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _sprite = new Sprite2D(Content.Load<Texture2D>("dva"));
-            _sprite.Scale = 0.4f;
-
             foreach (SpaceCraftModule a in playerSpaceCraft.Modules.Values)
                 Debug.WriteLine(a.Name);
         }
@@ -57,7 +52,6 @@ namespace Faraway.Main
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            // _sprite.Draw(_spriteBatch);
             playerSpaceCraft.Draw(_spriteBatch);
             _spriteBatch.End();
 

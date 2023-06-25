@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Faraway.Main.Models
 {
-    public class SpaceCraft
+    public class SpaceCraft : GameObject
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -23,6 +23,8 @@ namespace Faraway.Main.Models
         {
             if (Modules.ContainsKey((x, y)))
                 return false;
+
+            // TODO: Add handler if the module would be a potential neighbor.
 
             return true;
         }

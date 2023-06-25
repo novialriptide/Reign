@@ -10,8 +10,8 @@ namespace Faraway.Main.Models
     {
         public abstract string Name { get; }
         public abstract string Description { get; }
-        public abstract int Width { get; }
-        public abstract int Height { get; }
+        public virtual int Width { get => 1; }
+        public virtual int Height { get => 1; }
 
         public override string ToString()
         {
