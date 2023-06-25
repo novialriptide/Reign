@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Faraway.Main.Models
 {
-    public class SpaceCraftModule
+    public abstract class SpaceCraftModule
     {
-        public virtual string Name { get; }
-        public virtual string Description { get; }
-        public virtual int Width { get; }
-        public virtual int Height { get; }
+        public abstract string Name { get; }
+        public abstract string Description { get; }
+        public abstract int Width { get; }
+        public abstract int Height { get; }
 
         public override string ToString()
         {
