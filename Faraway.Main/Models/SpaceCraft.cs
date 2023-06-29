@@ -19,7 +19,13 @@ namespace Faraway.Main.Models
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             SetModule(0, 0, new CommandCenterModule());
         }
-        private bool IsValidInsertionPosition(int x, int y)
+        /// <summary>
+        /// Returns <c>true</c> if placing a module at <c>x</c> and <c>y</c> is valid.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public bool IsValidInsertionPosition(int x, int y)
         {
             if (Modules.ContainsKey((x, y)))
                 return false;
