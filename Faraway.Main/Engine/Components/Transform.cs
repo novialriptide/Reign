@@ -9,9 +9,21 @@ namespace Faraway.Main.Engine.Components
 {
     public class Transform : Component
     {
+        /// <summary>
+        /// Position of the Component.
+        /// </summary>
         public Vector2 Position = Vector2.Zero;
-        public Vector2 Scale = Vector2.Zero;
+        /// <summary>
+        /// Scale of the Component; default set to (1f, 1f).
+        /// </summary>
+        public Vector2 Scale = new Vector2(1f, 1f);
+        /// <summary>
+        /// Rotation of the Component in Radians.
+        /// </summary>
         public float Rotation = 0f;
+        /// <summary>
+        /// Rotation Anchor of the Component.
+        /// </summary>
         public Vector2 RotationOrigin = Vector2.Zero;
     }
 }

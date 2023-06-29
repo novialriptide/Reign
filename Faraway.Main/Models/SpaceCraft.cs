@@ -34,6 +34,12 @@ namespace Faraway.Main.Models
 
             return true;
         }
+        /// <summary>
+        /// Returns a SpaceCraftModule object, returns null if it doesn't exist.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public SpaceCraftModule GetModule(int x, int y)
         {
             if (!Modules.ContainsKey((x, y)))
@@ -41,6 +47,13 @@ namespace Faraway.Main.Models
 
             return Modules[(x, y)];
         }
+        /// <summary>
+        /// Sets a SpaceCraftModule at the specified 
+        /// coordinates, does nothing if position is invalid.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="module"></param>
         public void SetModule(int x, int y, SpaceCraftModule module)
         {
             if (!IsValidInsertionPosition(x, y))
