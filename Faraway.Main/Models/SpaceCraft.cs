@@ -1,4 +1,5 @@
 ﻿using Faraway.Main.Engine;
+using Faraway.Main.Engine.Components;
 using Faraway.Main.Models.SpaceCraftModules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,10 +15,15 @@ namespace Faraway.Main.Models
         public static int ModulePixelWidth = 128;
         public static int ModulePixelHeight = 128;
         public Dictionary<(int x, int y), SpaceCraftModule> Modules { get; }
+
+        public Sprite2D Sprite2D;
+
         public SpaceCraft()
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             SetModule(0, 0, new CommandCenterModule());
+
+            Sprite2D = AddComponent<Sprite2D>(new Sprite2D());
         }
         /// <summary>
         /// Returns <c>true</c> if placing a module at <c>x</c> and <c>y</c> is valid.
