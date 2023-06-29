@@ -24,6 +24,7 @@
     "content": [
       {
         "files": [
+          "CNAME",
           "api/**.yml",
           "api/index.md"
         ]
