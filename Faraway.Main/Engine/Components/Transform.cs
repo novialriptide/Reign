@@ -14,7 +14,7 @@ namespace Faraway.Main.Engine.Components
         /// </summary>
         public Vector2 Position = Vector2.Zero;
         /// <summary>
-        /// Scale of the Component; default set to (1f, 1f).
+        /// Scale of the Component; default set to <c>(1f, 1f)</c>.
         /// </summary>
         public Vector2 Scale = new Vector2(1f, 1f);
         /// <summary>
