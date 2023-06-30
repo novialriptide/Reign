@@ -18,6 +18,7 @@ namespace Faraway.Main.Engine
         /// <returns></returns>
         public T AddGameObject<T>(GameObject gameObject) where T: GameObject
         {
+            gameObject.Scene = this;
             GameObjects.Add(gameObject);
 
             return (T)gameObject;

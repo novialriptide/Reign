@@ -10,6 +10,10 @@ namespace Faraway.Main.Engine
     public class GameObject
     {
         public int ID { get; set; }
+        /// <summary>
+        /// The scene that the game object is in. Please do not re-assign this.
+        /// </summary>
+        public Scene Scene { get; set; }
         private List<Component> components = new List<Component>();
 
         /// <summary>
