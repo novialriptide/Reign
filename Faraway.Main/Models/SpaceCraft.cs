@@ -22,8 +22,6 @@ namespace Faraway.Main.Models
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             SetModule(0, 0, new CommandCenterModule());
-
-            Sprite2D = AddComponent<Sprite2D>(new Sprite2D());
         }
         /// <summary>
         /// Returns <c>true</c> if placing a module at <c>x</c> and <c>y</c> is valid.

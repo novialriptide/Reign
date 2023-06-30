@@ -1,5 +1,4 @@
-﻿using Faraway.Main.Engine;
-using Faraway.Main.Models;
+﻿using Faraway.Main.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -33,8 +32,6 @@ namespace Faraway.Main
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            foreach (SpaceCraftModule a in playerSpaceCraft.Modules.Values)
-                Debug.WriteLine(a.Name);
         }
 
         protected override void Update(GameTime gameTime)
