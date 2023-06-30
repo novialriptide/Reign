@@ -1,9 +1,5 @@
 ﻿using Faraway.Main.Engine.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Faraway.Main.Engine
 {
@@ -28,7 +24,7 @@ namespace Faraway.Main.Engine
 
             return (T)component;
         }
-        public virtual void Update(float gameTime) { }
+        public virtual void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
         {
             foreach (Component component in components)
