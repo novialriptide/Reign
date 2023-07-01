@@ -4,26 +4,21 @@ using System.Collections.Generic;
 namespace Faraway.Main.Engine
 {
     /// <summary>
-    /// To utilize this object, please use <c>Scene.CreateGameObjectGroup()</c>.
+    /// Mainly used to sort through GameObjects.
     /// </summary>
     public class GameObjectGroup
     {
-        public Scene Scene;
         GameObject[] cachedGameObjects;
-        public GameObjectGroup(Scene scene)
-        {
-            this.Scene = scene;
-        }
         /// <summary>
         /// The result of this function is cached once used.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public GameObject[] Match<T>() where T : Component
+        public GameObject[] Match<T>(GameObject[] gameObjects) where T : Component
         {
             var gameObjects = new List<GameObject>();
 
-            foreach (var gameObject in Scene.GameObjects)
+            foreach (var gameObject in gameObjects)
                 if (gameObject.ContainsComponent<T>())
                     gameObjects.Add(gameObject);
 

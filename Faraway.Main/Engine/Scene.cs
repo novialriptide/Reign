@@ -36,17 +36,6 @@ namespace Faraway.Main.Engine
             return (T)gameObject;
         }
         /// <summary>
-        /// Creates a GameObjectGroup assigned to the scene
-        /// </summary>
-        /// <returns>The created GameObjectGroup</returns>
-        public GameObjectGroup CreateGameObjectGroup()
-        {
-            GameObjectGroup gameObjectGroup = new GameObjectGroup(this);
-
-
-            return gameObjectGroup;
-        }
-        /// <summary>
         /// Called when <c>Scene</c> is loaded.
         /// </summary>
         public virtual void OnStart() { }
