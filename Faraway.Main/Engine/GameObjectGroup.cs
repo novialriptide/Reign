@@ -16,6 +16,9 @@ namespace Faraway.Main.Engine
         /// <returns></returns>
         public GameObject[] Match<T>(GameObject[] gameObjects) where T : Component
         {
+            if (cachedGameObjects != null)
+                return cachedGameObjects;
+
             var outGameObjects = new List<GameObject>();
 
             foreach (var gameObject in gameObjects)
