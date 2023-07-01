@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Faraway.Main.Engine.Components
 {
@@ -8,7 +7,11 @@ namespace Faraway.Main.Engine.Components
     {
         Texture2D texture;
         SpriteBatch spriteBatch;
-
+        public Sprite2D() { }
+        public Sprite2D(Texture2D texture)
+        {
+            this.texture = texture;
+        }
         public override void Update(float deltaTime)
         {
             Transform t = GameObject.GetComponent<Transform>();
