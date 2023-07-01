@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Faraway.Main.Engine.Components;
 
 namespace Faraway.Main.Engine
 {
@@ -10,7 +6,7 @@ namespace Faraway.Main.Engine
     {
         GameObject[] cachedGameObjects;
         public GameObjectGroup() { }
-        public GameObject[] MatchGameObjects()
+        public GameObject[] Match(Component componentType)
         {
             return { };
         }
