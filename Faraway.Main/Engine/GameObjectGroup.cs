@@ -16,13 +16,13 @@ namespace Faraway.Main.Engine
         /// <returns></returns>
         public GameObject[] Match<T>(GameObject[] gameObjects) where T : Component
         {
-            var gameObjects = new List<GameObject>();
+            var outGameObjects = new List<GameObject>();
 
             foreach (var gameObject in gameObjects)
                 if (gameObject.ContainsComponent<T>())
-                    gameObjects.Add(gameObject);
+                    outGameObjects.Add(gameObject);
 
-            cachedGameObjects = gameObjects.ToArray();
+            cachedGameObjects = outGameObjects.ToArray();
 
             return cachedGameObjects;
         }
