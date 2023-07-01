@@ -12,6 +12,8 @@ namespace Faraway.Main.Engine
         GraphicsDevice graphicsDevice;
         SpriteBatch spriteBatch;
 
+        GameObjectGroup spriteGroup;
+
         public Scene(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             this.graphicsDevice = graphicsDevice;
@@ -32,6 +34,17 @@ namespace Faraway.Main.Engine
             GameObjects.Add(gameObject);
 
             return (T)gameObject;
+        }
+        /// <summary>
+        /// Creates a GameObjectGroup assigned to the scene
+        /// </summary>
+        /// <returns>The created GameObjectGroup</returns>
+        public GameObjectGroup CreateGameObjectGroup()
+        {
+            GameObjectGroup gameObjectGroup = new GameObjectGroup(this);
+
+
+            return gameObjectGroup;
         }
         /// <summary>
         /// Called when <c>Scene</c> is loaded.

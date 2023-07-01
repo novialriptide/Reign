@@ -1,5 +1,6 @@
 ﻿using Faraway.Main.Engine.Components;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace Faraway.Main.Engine
 {
@@ -23,6 +24,14 @@ namespace Faraway.Main.Engine
             component.GameObject = this;
 
             return (T)component;
+        }
+        public bool ContainsComponent<T>() where T : Component
+        {
+            foreach (var component in components)
+                if (component.GetType() == typeof(T))
+                    return true;
+
+            return false;
         }
         public virtual void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
