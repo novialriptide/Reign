@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Faraway.Main.Engine.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -7,7 +8,6 @@ namespace Faraway.Main.Engine
     public class Scene
     {
         public List<GameObject> GameObjects { get; }
-        public List<Drawable2DGameObject> Drawable2DGameObjects { get; }
 
         GraphicsDevice graphicsDevice;
         SpriteBatch spriteBatch;
@@ -18,7 +18,6 @@ namespace Faraway.Main.Engine
             this.spriteBatch = spriteBatch;
 
             GameObjects = new List<GameObject>();
-            Drawable2DGameObjects = new List<Drawable2DGameObject>();
         }
         /// <summary>
         /// Add a <c>GameObject</c> to the <c>Scene</c>.
@@ -30,10 +29,7 @@ namespace Faraway.Main.Engine
         {
             gameObject.Scene = this;
 
-            if (gameObject is GameObject)
-                GameObjects.Add(gameObject);
-            else if (gameObject.GetType() == typeof(Drawable2DGameObject))
-                Drawable2DGameObjects.Add((Drawable2DGameObject)gameObject);
+            GameObjects.Add(gameObject);
 
             return (T)gameObject;
         }
@@ -57,8 +53,7 @@ namespace Faraway.Main.Engine
         public virtual void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            for (int i = 0; i < Drawable2DGameObjects.Count; i++)
-                Drawable2DGameObjects[i].Draw(spriteBatch);
+            for (int i = 0; i < GameObjects.Count; i++) { }
             spriteBatch.End();
         }
         /// <summary>
