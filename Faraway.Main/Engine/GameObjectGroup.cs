@@ -8,7 +8,7 @@ namespace Faraway.Main.Engine
         public GameObjectGroup() { }
         public GameObject[] Match(Component componentType)
         {
-            return { };
+            return new GameObject[cachedGameObjects.Length];
         }
     }
 }
