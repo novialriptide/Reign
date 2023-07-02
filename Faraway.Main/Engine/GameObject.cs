@@ -34,6 +34,7 @@ namespace Faraway.Main.Engine
 
             return false;
         }
+        public virtual void OnAdd() { }
         public virtual void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
         {

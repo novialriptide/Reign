@@ -10,21 +10,16 @@ namespace Faraway.Main.Scenes
 {
     public class MainWorld : Scene
     {
-        Texture2D baseModule;
-
-
         private SpaceCraft playerSpaceCraft;
-        private CommandCenterModule testModule;
 
         public MainWorld()
         {
             playerSpaceCraft = AddGameObject<SpaceCraft>(new SpaceCraft());
-            testModule = AddGameObject<CommandCenterModule>(new CommandCenterModule());
         }
 
         public override void OnStart()
         {
-            testModule.GetComponent<Sprite2D>().texture = GameInstance.Content.Load<Texture2D>("baseModule");
+            // CommandCenter -> GameInstance.Content.Load<Texture2D>("baseModule");
 
             base.OnStart();
         }

@@ -4,6 +4,7 @@ using Faraway.Main.Models.SpaceCraftModules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Faraway.Main.Models
 {
@@ -21,8 +22,17 @@ namespace Faraway.Main.Models
         public SpaceCraft()
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
-            SetModule(0, 0, new CommandCenterModule());
         }
+
+        public override void OnAdd()
+        {
+            CommandCenterModule commandCenter = new CommandCenterModule();
+            Scene.AddGameObject<CommandCenterModule>(commandCenter);
+            SetModule(0, 0, commandCenter);
+
+            base.OnAdd();
+        }
+
         /// <summary>
         /// Returns <c>true</c> if placing a module at <c>x</c> and <c>y</c> is valid.
         /// </summary>

@@ -33,6 +33,7 @@ namespace Faraway.Main.Engine
             gameObject.Scene = this;
 
             GameObjects.Add(gameObject);
+            gameObject.OnAdd();
 
             return (T)gameObject;
         }
@@ -71,6 +72,9 @@ namespace Faraway.Main.Engine
                     renderPosition += obj.GetComponent<Transform>().Position;
                     obj = obj.Parent;
                 }
+
+                if (sprite2D.texture == null)
+                    continue;
 
                 spriteBatch.Draw(sprite2D.texture, renderPosition, Color.White);
             }
