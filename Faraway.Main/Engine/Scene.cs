@@ -7,19 +7,20 @@ namespace Faraway.Main.Engine
 {
     public class Scene
     {
+        public GameInstance GameInstance;
+        public bool IsHidden;
+        public bool IsPaused;
         public List<GameObject> GameObjects { get; }
-
-        GraphicsDevice graphicsDevice;
-        SpriteBatch spriteBatch;
 
         GameObjectGroup spriteGroup;
 
-        public Scene(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        public Scene()
         {
-            this.graphicsDevice = graphicsDevice;
-            this.spriteBatch = spriteBatch;
+            IsHidden = false;
+            IsPaused = false;
 
             GameObjects = new List<GameObject>();
+            spriteGroup = new GameObjectGroup();
         }
         /// <summary>
         /// Add a <c>GameObject</c> to the <c>Scene</c>.
@@ -54,8 +55,15 @@ namespace Faraway.Main.Engine
         /// <param name="gameTime"></param>
         public virtual void Draw(GameTime gameTime)
         {
+            SpriteBatch spriteBatch = GameInstance.SpriteBatch;
+
             spriteBatch.Begin();
-            for (int i = 0; i < GameObjects.Count; i++) { }
+            foreach(GameObject gameObject in spriteGroup.Match<Sprite2D>(GameObjects.ToArray()))
+            {
+                var transform = gameObject.GetComponent<Transform>();
+                var sprite2D = gameObject.GetComponent<Sprite2D>();
+                spriteBatch.Draw(sprite2D.texture, transform.Position, Color.White);
+            }
             spriteBatch.End();
         }
         /// <summary>

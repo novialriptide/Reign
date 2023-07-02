@@ -5,7 +5,7 @@ namespace Faraway.Main.Engine.Components
 {
     public class Sprite2D : Component
     {
-        Texture2D texture;
+        public Texture2D texture;
         SpriteBatch spriteBatch;
         public Sprite2D() { }
         public Sprite2D(Texture2D texture)

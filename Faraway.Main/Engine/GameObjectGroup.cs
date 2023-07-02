@@ -8,6 +8,7 @@ namespace Faraway.Main.Engine
     /// </summary>
     public class GameObjectGroup
     {
+        GameObject[] oldGameObjects;
         GameObject[] cachedGameObjects;
         /// <summary>
         /// The result of this function is cached once used.
@@ -19,6 +20,10 @@ namespace Faraway.Main.Engine
             if (cachedGameObjects != null)
                 return cachedGameObjects;
 
+            if (oldGameObjects == gameObjects)
+                return cachedGameObjects;
+
+            oldGameObjects = gameObjects;
             var outGameObjects = new List<GameObject>();
 
             foreach (var gameObject in gameObjects)
