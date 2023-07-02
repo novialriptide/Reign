@@ -14,7 +14,12 @@ namespace Faraway.Main
             IsMouseVisible = true;
 
             Scenes = new List<Scene>();
+        }
+
+        protected override void LoadContent()
+        {
             AddScene(new MainWorld());
+            base.LoadContent();
         }
     }
 }
