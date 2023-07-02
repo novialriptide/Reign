@@ -23,7 +23,9 @@ namespace Faraway.Main.Models
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
         }
-
+        /// <summary>
+        /// Called when the object is added.
+        /// </summary>
         public override void OnAdd()
         {
             CommandCenterModule commandCenter = new CommandCenterModule();
