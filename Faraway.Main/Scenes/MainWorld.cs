@@ -1,5 +1,7 @@
 ﻿using Faraway.Main.Engine;
+using Faraway.Main.Engine.Components;
 using Faraway.Main.Models;
+using Faraway.Main.Models.SpaceCraftModules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,14 +14,17 @@ namespace Faraway.Main.Scenes
 
 
         private SpaceCraft playerSpaceCraft;
+        private CommandCenterModule testModule;
+
         public MainWorld()
         {
-            playerSpaceCraft = new SpaceCraft();
+            playerSpaceCraft = AddGameObject<SpaceCraft>(new SpaceCraft());
+            testModule = AddGameObject<CommandCenterModule>(new CommandCenterModule());
         }
 
         public override void OnStart()
         {
-            baseModule = GameInstance.Content.Load<Texture2D>("baseModule");
+            testModule.GetComponent<Sprite2D>().texture = GameInstance.Content.Load<Texture2D>("baseModule");
 
             base.OnStart();
         }
@@ -32,17 +37,6 @@ namespace Faraway.Main.Scenes
             // TODO: Add your update logic here
 
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            GameInstance.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            GameInstance.SpriteBatch.Begin();
-            playerSpaceCraft.Draw(GameInstance.SpriteBatch);
-            GameInstance.SpriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

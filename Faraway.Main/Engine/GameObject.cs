@@ -11,7 +11,8 @@ namespace Faraway.Main.Engine
         /// The scene that the game object is in. Please do not re-assign this.
         /// </summary>
         public Scene Scene { get; set; }
-        private List<Component> components = new List<Component>(); // TODO: Turn this into a HashSet
+        private List<Component> components = new List<Component>();
+        public GameObject Parent;
 
         /// <summary>
         /// Adds a component to the GameObject.

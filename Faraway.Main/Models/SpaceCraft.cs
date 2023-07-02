@@ -65,14 +65,5 @@ namespace Faraway.Main.Models
 
             Modules.Add((x, y), module);
         }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            foreach ((int x, int y) a in Modules.Keys)
-            {
-                SpaceCraftModule module = Modules[a];
-                Rectangle rectangle = new Rectangle((int)Position.X * ModulePixelWidth, (int)Position.Y * ModulePixelHeight, ModulePixelWidth, ModulePixelHeight);
-                Engine.Draw.DrawRectangle(spriteBatch, rectangle, Color.Blue);
-            }
-        }
     }
 }

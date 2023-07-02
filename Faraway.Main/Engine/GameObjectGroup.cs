@@ -34,5 +34,9 @@ namespace Faraway.Main.Engine
 
             return cachedGameObjects;
         }
+        public GameObject[] GetChildrenComponents()
+        {
+            return cachedGameObjects;
+        }
     }
 }

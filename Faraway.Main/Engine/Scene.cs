@@ -62,7 +62,17 @@ namespace Faraway.Main.Engine
             {
                 var transform = gameObject.GetComponent<Transform>();
                 var sprite2D = gameObject.GetComponent<Sprite2D>();
-                spriteBatch.Draw(sprite2D.texture, transform.Position, Color.White);
+
+                GameObject obj = gameObject;
+                Vector2 renderPosition = Vector2.Zero;
+
+                while (obj != null)
+                {
+                    renderPosition += obj.GetComponent<Transform>().Position;
+                    obj = obj.Parent;
+                }
+
+                spriteBatch.Draw(sprite2D.texture, renderPosition, Color.White);
             }
             spriteBatch.End();
         }
