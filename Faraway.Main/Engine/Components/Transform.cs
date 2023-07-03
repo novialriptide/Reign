@@ -76,7 +76,8 @@ namespace Faraway.Main.Engine.Components
         }
         public Vector2 GetScreenPosition()
         {
-            return Vector2.Zero;
+            Transform camera = GameObject.Scene.ActiveCamera.GameObject.GetComponent<Transform>();
+            return camera.Position + GetWorldPosition();
         }
         /// <summary>
         /// Not implemented.
