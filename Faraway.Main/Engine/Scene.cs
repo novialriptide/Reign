@@ -68,10 +68,10 @@ namespace Faraway.Main.Engine
                 GameObject obj = gameObject;
                 Vector2 renderPosition = obj.GetComponent<Transform>().GetWorldPosition();
 
-                if (sprite2D.texture == null)
+                if (sprite2D.Texture == null)
                     continue;
 
-                spriteBatch.Draw(sprite2D.texture, renderPosition, Color.White);
+                spriteBatch.Draw(sprite2D.Texture, renderPosition, Color.White);
             }
             spriteBatch.End();
         }

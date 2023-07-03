@@ -12,7 +12,7 @@ namespace Faraway.Main.Models.SpaceCraftModules
         public CommandCenterModule() { }
         public override void OnAdd()
         {
-            Sprite2D.texture = Scene.GameInstance.Content.Load<Texture2D>("baseModule");
+            Sprite2D.Texture = Scene.GameInstance.Content.Load<Texture2D>("baseModule");
             base.OnAdd();
         }
     }
