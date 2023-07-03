@@ -55,7 +55,7 @@ namespace Faraway.Main.Engine
         /// Called every frame; should contain draw logic.
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
