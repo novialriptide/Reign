@@ -63,7 +63,16 @@ namespace Faraway.Main.Engine.Components
         }
         public Vector2 GetWorldPosition()
         {
-            return Vector2.Zero;
+            Vector2 value = Vector2.Zero;
+            Transform currentTransform = Parent;
+
+            while (currentTransform != null)
+            {
+                value += currentTransform.Parent.Position;
+                currentTransform = currentTransform.Parent;
+            }
+
+            return value;
         }
         public Vector2 GetScreenPosition()
         {
