@@ -65,13 +65,7 @@ namespace Faraway.Main.Engine
                 var sprite2D = gameObject.GetComponent<Sprite2D>();
 
                 GameObject obj = gameObject;
-                Vector2 renderPosition = Vector2.Zero;
-
-                while (obj != null)
-                {
-                    renderPosition += obj.GetComponent<Transform>().Position;
-                    obj = obj.Parent;
-                }
+                Vector2 renderPosition = obj.GetComponent<Transform>().Position;
 
                 if (sprite2D.texture == null)
                     continue;

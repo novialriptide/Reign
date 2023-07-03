@@ -12,7 +12,6 @@ namespace Faraway.Main.Engine
         /// </summary>
         public Scene Scene { get; set; }
         private List<Component> components = new List<Component>();
-        public GameObject Parent;
 
         /// <summary>
         /// Adds a component to the GameObject.
