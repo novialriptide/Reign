@@ -8,9 +8,10 @@ namespace Faraway.Main.Engine
     public class Scene
     {
         public GameInstance GameInstance;
+        public List<GameObject> GameObjects { get; }
+        public Camera2D ActiveCamera;
         public bool IsHidden;
         public bool IsPaused;
-        public List<GameObject> GameObjects { get; }
 
         GameObjectGroup spriteGroup;
 
