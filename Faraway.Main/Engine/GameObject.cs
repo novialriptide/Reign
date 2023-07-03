@@ -33,6 +33,10 @@ namespace Faraway.Main.Engine
 
             return false;
         }
+        /// <summary>
+        /// If you are calling any objects that require the GameInstance
+        /// to be active, you must use this function.
+        /// </summary>
         public virtual void OnAdd() { }
         public virtual void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
