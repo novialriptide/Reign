@@ -27,6 +27,9 @@ namespace Faraway.Main.Engine.Components
         public Vector2 RotationOrigin = Vector2.Zero;
 
         private Transform _parent;
+        /// <summary>
+        /// Parent of this GameObject.
+        /// </summary>
         public Transform Parent
         {
             get { return _parent; }
@@ -41,6 +44,10 @@ namespace Faraway.Main.Engine.Components
                 _parent = value;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Children of this <c>GameObject</c>.</returns>
         public Transform[] GetChildren()
         {
             List<Transform> children = new List<Transform>();
