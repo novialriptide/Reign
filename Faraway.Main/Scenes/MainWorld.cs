@@ -14,13 +14,11 @@ namespace Faraway.Main.Scenes
 
         public MainWorld()
         {
-            playerSpaceCraft = AddGameObject<SpaceCraft>(new SpaceCraft());
         }
 
         public override void OnStart()
         {
-            // CommandCenter -> GameInstance.Content.Load<Texture2D>("baseModule");
-
+            playerSpaceCraft = AddGameObject<SpaceCraft>(new SpaceCraft());
             base.OnStart();
         }
 

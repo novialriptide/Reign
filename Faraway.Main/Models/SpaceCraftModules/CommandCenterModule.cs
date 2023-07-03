@@ -1,4 +1,6 @@
-﻿using Faraway.Main.Engine.Components;
+﻿using Faraway.Main.Engine;
+using Faraway.Main.Engine.Components;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Main.Models.SpaceCraftModules
 {
@@ -10,6 +12,11 @@ namespace Faraway.Main.Models.SpaceCraftModules
         {
             Transform = new Transform();
             Sprite2D = new Sprite2D();
+        }
+        public override void OnAdd()
+        {
+            Sprite2D.texture = Scene.GameInstance.Content.Load<Texture2D>("baseModule");
+            base.OnAdd();
         }
     }
 }
