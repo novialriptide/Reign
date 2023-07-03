@@ -32,7 +32,7 @@ namespace Faraway.Main.Engine.Components
             get { return _parent; }
             set
             {
-                if (this.Parent.GetChildren().Contains(value))
+                if (Parent.GetChildren().Contains(value))
                     throw new ArgumentException("Cannot make circular reference of parents");
 
                 if (value.Parent == value)
