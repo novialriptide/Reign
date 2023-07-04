@@ -12,7 +12,7 @@ namespace Faraway.Main.Engine
         public Camera2D ActiveCamera;
         public bool IsHidden;
         public bool IsPaused;
-        private GameObjectGroup spriteGroup;
+        GameObjectGroup spriteGroup;
 
         public Scene()
         {
