@@ -1,4 +1,4 @@
-name: Check for .NET formatting standards
+name: .NET Formatting Standards Check
 
 on: push
 
@@ -18,5 +18,5 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Run dotnet format
-        run: dotnet format '.\' --folder --check --verbosity diagnostic
+      - name: Check formatting
+        run: dotnet format --verify-no-changes
