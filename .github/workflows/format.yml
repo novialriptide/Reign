@@ -1,4 +1,4 @@
-name: dotnet format
+name: Check for .NET formatting standards
 
 on: push
 
