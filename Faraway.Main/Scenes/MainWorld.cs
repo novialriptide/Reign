@@ -18,7 +18,8 @@ namespace Faraway.Main.Scenes
 
         public override void OnStart()
         {
-            playerSpaceCraft = AddGameObject<SpaceCraft>(new SpaceCraft());
+            AddGameObject(playerSpaceCraft = new SpaceCraft());
+            playerSpaceCraft.SetModule(0, 1, new IonTurret());
             base.OnStart();
         }
 

@@ -29,14 +29,12 @@ namespace Faraway.Main.Engine
         /// <typeparam name="T"></typeparam>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        public T AddGameObject<T>(GameObject gameObject) where T: GameObject
+        public void AddGameObject(GameObject gameObject)
         {
             gameObject.Scene = this;
 
             GameObjects.Add(gameObject);
             gameObject.OnAdd();
-
-            return (T)gameObject;
         }
         /// <summary>
         /// Called when <c>Scene</c> is loaded.

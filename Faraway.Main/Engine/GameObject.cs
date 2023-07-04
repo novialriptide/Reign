@@ -18,12 +18,10 @@ namespace Faraway.Main.Engine
         /// </summary>
         /// <param name="component"></param>
         /// <returns>Returns itself so you can perform something like <c>Transform = AddComponent<Transform>(new Transform());</c></returns>
-        public T AddComponent<T>(Component component) where T : Component
+        public void AddComponent(Component component)
         {
             components.Add(component);
             component.GameObject = this;
-
-            return (T)component;
         }
         public bool ContainsComponent<T>() where T : Component
         {

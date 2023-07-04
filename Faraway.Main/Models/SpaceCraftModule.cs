@@ -14,8 +14,8 @@ namespace Faraway.Main.Models
 
         public SpaceCraftModule()
         {
-            Transform = AddComponent<Transform>(new Transform());
-            Sprite2D = AddComponent<Sprite2D>(new Sprite2D());
+            AddComponent(Transform = new Transform());
+            AddComponent(Sprite2D = new Sprite2D());
         }
         public override string ToString()
         {
