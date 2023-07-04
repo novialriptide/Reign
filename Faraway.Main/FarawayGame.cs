@@ -12,6 +12,7 @@ namespace Faraway.Main
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            IsFixedTimeStep = false;
 
             Scenes = new List<Scene>();
         }

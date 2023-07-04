@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -74,7 +75,7 @@ namespace Faraway.Main.Engine.Components
 
             while (currentTransform != null)
             {
-                value += currentTransform.Parent.Position;
+                value += currentTransform.Position;
                 currentTransform = currentTransform.Parent;
             }
 

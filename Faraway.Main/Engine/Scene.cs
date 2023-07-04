@@ -57,6 +57,9 @@ namespace Faraway.Main.Engine
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
             spriteBatch.Begin();
+
+            GameInstance.GraphicsDevice.Clear(Color.White);
+
             foreach (GameObject gameObject in spriteGroup.Match<Sprite2D>(GameObjects.ToArray()))
             {
                 var sprite2D = gameObject.GetComponent<Sprite2D>();

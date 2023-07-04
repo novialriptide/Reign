@@ -18,6 +18,7 @@ namespace Faraway.Main.Models
         public SpaceCraft()
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
+            AddComponent(Transform = new Transform());
         }
         /// <summary>
         /// Called when the object is added.
