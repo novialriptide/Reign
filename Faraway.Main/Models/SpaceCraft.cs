@@ -73,6 +73,7 @@ namespace Faraway.Main.Models
             Transform t = module.GetComponent<Transform>();
             t.Position.X += x * ModulePixelWidth;
             t.Position.Y += y * ModulePixelHeight;
+            t.Parent = Transform;
             Scene.AddGameObject(module);
             Modules.Add((x, y), module);
         }

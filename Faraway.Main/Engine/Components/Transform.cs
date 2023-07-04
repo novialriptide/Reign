@@ -26,22 +26,28 @@ namespace Faraway.Main.Engine.Components
         /// </summary>
         public Vector2 RotationOrigin = Vector2.Zero;
 
-        private Transform _parent;
+        private Transform parent;
         /// <summary>
         /// Parent of this GameObject.
         /// </summary>
         public Transform Parent
         {
-            get => _parent;
+            get => parent;
             set
             {
+                if (Parent == null)
+                {
+                    parent = value;
+                    return;
+                }
+
                 if (Parent.GetChildren().Contains(value))
                     throw new ArgumentException("Cannot make circular reference of parents");
 
                 if (value.Parent == value)
                     throw new ArgumentException("Cannot make object a parent of itself.");
 
-                _parent = value;
+                parent = value;
             }
         }
         /// <summary>
