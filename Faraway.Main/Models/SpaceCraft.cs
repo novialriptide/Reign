@@ -1,9 +1,7 @@
 ﻿using Faraway.Main.Engine;
 using Faraway.Main.Engine.Components;
 using Faraway.Main.Models.SpaceCraftModules;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Faraway.Main.Models
 {
@@ -11,12 +9,11 @@ namespace Faraway.Main.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Vector2 Position { get; set; }
-        public static int ModulePixelWidth = 128;
-        public static int ModulePixelHeight = 128;
+        public static int ModulePixelWidth = 32;
+        public static int ModulePixelHeight = 32;
         public Dictionary<(int x, int y), SpaceCraftModule> Modules { get; }
 
-        public Sprite2D Sprite2D;
+        public Transform Transform;
 
         public SpaceCraft()
         {
@@ -28,7 +25,6 @@ namespace Faraway.Main.Models
         public override void OnAdd()
         {
             CommandCenterModule commandCenter = new CommandCenterModule();
-            Scene.AddGameObject<CommandCenterModule>(commandCenter);
             SetModule(0, 0, commandCenter);
 
             base.OnAdd();
@@ -74,6 +70,10 @@ namespace Faraway.Main.Models
             if (!IsValidInsertionPosition(x, y))
                 return;
 
+            Transform t = module.GetComponent<Transform>();
+            t.Position.X = t.Position.X + x * ModulePixelWidth;
+            t.Position.Y = t.Position.Y + y * ModulePixelHeight;
+            Scene.AddGameObject(module);
             Modules.Add((x, y), module);
         }
     }
