@@ -32,7 +32,7 @@ namespace Faraway.Main.Engine.Components
         /// </summary>
         public Transform Parent
         {
-            get { return _parent; }
+            get => _parent;
             set
             {
                 if (Parent.GetChildren().Contains(value))

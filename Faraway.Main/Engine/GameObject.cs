@@ -1,6 +1,6 @@
-﻿using Faraway.Main.Engine.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Design;
+using Faraway.Main.Engine.Components;
 
 namespace Faraway.Main.Engine
 {

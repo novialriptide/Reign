@@ -1,7 +1,7 @@
-﻿using Faraway.Main.Engine;
+﻿using System.Diagnostics;
+using Faraway.Main.Engine;
 using Faraway.Main.Engine.Components;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace Faraway.Main.Models.SpaceCraftModules
 {

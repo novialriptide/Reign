@@ -1,5 +1,5 @@
-﻿using Faraway.Main.Engine.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Faraway.Main.Engine.Components;
 
 namespace Faraway.Main.Engine
 {
@@ -8,8 +8,8 @@ namespace Faraway.Main.Engine
     /// </summary>
     public class GameObjectGroup
     {
-        GameObject[] oldGameObjects;
-        GameObject[] cachedGameObjects;
+        private GameObject[] oldGameObjects;
+        private GameObject[] cachedGameObjects;
         /// <summary>
         /// The result of this function is cached once used.
         /// </summary>

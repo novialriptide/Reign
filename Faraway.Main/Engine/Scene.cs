@@ -1,7 +1,7 @@
-﻿using Faraway.Main.Engine.Components;
+﻿using System.Collections.Generic;
+using Faraway.Main.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace Faraway.Main.Engine
 {
@@ -12,8 +12,7 @@ namespace Faraway.Main.Engine
         public Camera2D ActiveCamera;
         public bool IsHidden;
         public bool IsPaused;
-
-        GameObjectGroup spriteGroup;
+        private GameObjectGroup spriteGroup;
 
         public Scene()
         {

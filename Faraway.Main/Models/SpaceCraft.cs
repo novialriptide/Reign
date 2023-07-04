@@ -1,7 +1,7 @@
-﻿using Faraway.Main.Engine;
+﻿using System.Collections.Generic;
+using Faraway.Main.Engine;
 using Faraway.Main.Engine.Components;
 using Faraway.Main.Models.SpaceCraftModules;
-using System.Collections.Generic;
 
 namespace Faraway.Main.Models
 {
@@ -71,8 +71,8 @@ namespace Faraway.Main.Models
                 return;
 
             Transform t = module.GetComponent<Transform>();
-            t.Position.X = t.Position.X + x * ModulePixelWidth;
-            t.Position.Y = t.Position.Y + y * ModulePixelHeight;
+            t.Position.X += x * ModulePixelWidth;
+            t.Position.Y += y * ModulePixelHeight;
             Scene.AddGameObject(module);
             Modules.Add((x, y), module);
         }

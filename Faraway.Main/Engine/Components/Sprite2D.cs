@@ -6,11 +6,11 @@ namespace Faraway.Main.Engine.Components
     public class Sprite2D : Component
     {
         public Texture2D Texture;
-        SpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
         public Sprite2D() { }
         public Sprite2D(Texture2D texture)
         {
-            this.Texture = texture;
+            Texture = texture;
         }
         public override void Update(float deltaTime)
         {

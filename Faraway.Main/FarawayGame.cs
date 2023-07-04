@@ -1,7 +1,7 @@
-﻿using Faraway.Main.Engine;
+﻿using System.Collections.Generic;
+using Faraway.Main.Engine;
 using Faraway.Main.Scenes;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
 namespace Faraway.Main
 {
