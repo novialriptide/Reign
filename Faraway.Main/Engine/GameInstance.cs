@@ -21,7 +21,7 @@ namespace Faraway.Main.Engine
         public void RemoveScene(Scene scene)
         {
             var foundScene = Scenes.Find(item => scene == item);
-            
+
             if (foundScene == null)
                 return;
 

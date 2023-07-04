@@ -58,7 +58,7 @@ namespace Faraway.Main.Engine
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
             spriteBatch.Begin();
-            foreach(GameObject gameObject in spriteGroup.Match<Sprite2D>(GameObjects.ToArray()))
+            foreach (GameObject gameObject in spriteGroup.Match<Sprite2D>(GameObjects.ToArray()))
             {
                 var sprite2D = gameObject.GetComponent<Sprite2D>();
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
