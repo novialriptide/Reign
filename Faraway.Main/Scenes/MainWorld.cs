@@ -28,8 +28,8 @@ namespace Faraway.Main.Scenes
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 GameInstance.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-                playerSpaceCraft.Transform.Position.X += 100;
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+                playerSpaceCraft.Transform.Position.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // TODO: Add your update logic here
 
