@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Main.Engine.Components
 {
-    public class Sprite2D : Component
+    public class SpriteRenderer : Component
     {
         public Texture2D Texture;
         private SpriteBatch spriteBatch;
-        public Sprite2D() { }
-        public Sprite2D(Texture2D texture)
+        public SpriteRenderer() { }
+        public SpriteRenderer(Texture2D texture)
         {
             Texture = texture;
         }
