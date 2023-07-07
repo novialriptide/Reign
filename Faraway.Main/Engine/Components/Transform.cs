@@ -68,6 +68,10 @@ namespace Faraway.Main.Engine.Components
 
             return children.ToArray();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The position of the GameObject based on the world.</returns>
         public Vector2 GetWorldPosition()
         {
             Vector2 value = Position;
