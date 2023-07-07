@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace Faraway.Main.Models
 {
-    public abstract class TurretModule : SpaceCraftModule { }
+    public abstract class TurretModule : SpaceCraftModule
+    {
+        public int Damage;
+        public int FireRate;
+    }
 }
