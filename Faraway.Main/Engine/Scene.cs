@@ -60,9 +60,9 @@ namespace Faraway.Main.Engine
 
             GameInstance.GraphicsDevice.Clear(Color.White);
 
-            foreach (GameObject gameObject in spriteGroup.Match<Sprite2D>(GameObjects.ToArray()))
+            foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(GameObjects.ToArray()))
             {
-                var sprite2D = gameObject.GetComponent<Sprite2D>();
+                var sprite2D = gameObject.GetComponent<SpriteRenderer>();
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
 
                 if (sprite2D.Texture == null)

@@ -10,12 +10,12 @@ namespace Faraway.Main.Models
         public virtual int Width => 1;
         public virtual int Height => 1;
         public Transform Transform;
-        public Sprite2D Sprite2D;
+        public SpriteRenderer Sprite2D;
 
         public SpaceCraftModule()
         {
             AddComponent(Transform = new Transform());
-            AddComponent(Sprite2D = new Sprite2D());
+            AddComponent(Sprite2D = new SpriteRenderer());
         }
         public override string ToString()
         {
