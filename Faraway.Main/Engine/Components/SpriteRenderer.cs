@@ -6,6 +6,8 @@ namespace Faraway.Main.Engine.Components
     public class SpriteRenderer : Component
     {
         public Texture2D Texture;
+        public bool FlipX = false;
+        public bool FlipY = false;
         public SpriteRenderer() { }
         public SpriteRenderer(Texture2D texture)
         {
