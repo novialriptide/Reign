@@ -10,6 +10,11 @@ namespace Faraway.Main.Models
         public override void OnAdd()
         {
             AddComponent(canvas = new UICanvas());
+
+            canvas.Content = new UIContainer[] {
+
+            };
+
             base.OnAdd();
         }
     }
