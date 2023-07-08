@@ -1,9 +1,8 @@
 ﻿using Faraway.Main.Engine;
-using Faraway.Main.Engine.Components;
+using Faraway.Main.Engine.UI;
 using Faraway.Main.Models;
 using Faraway.Main.Models.SpaceCraftModules;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Faraway.Main.Scenes
@@ -11,13 +10,12 @@ namespace Faraway.Main.Scenes
     public class MainWorld : Scene
     {
         private SpaceCraft playerSpaceCraft;
-
-        public MainWorld()
-        {
-        }
+        private MainWorldHUD hudObject;
 
         public override void OnStart()
         {
+            AddGameObject(hudObject = new MainWorldHUD());
+
             AddGameObject(playerSpaceCraft = new SpaceCraft());
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
             base.OnStart();
