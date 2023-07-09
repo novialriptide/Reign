@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Faraway.Main.Models.SpaceCraftModules
+namespace Faraway.Main.Components.SpaceCraftModules
 {
     public class IonTurret : TurretModule
     {

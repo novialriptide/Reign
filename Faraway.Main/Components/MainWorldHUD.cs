@@ -1,7 +1,7 @@
 ﻿using Faraway.Main.Engine;
 using Faraway.Main.Engine.UI;
 
-namespace Faraway.Main.Models
+namespace Faraway.Main.Components
 {
     public class MainWorldHUD : GameObject
     {
@@ -10,6 +10,7 @@ namespace Faraway.Main.Models
         public override void OnAdd()
         {
             AddComponent(canvas = new UICanvas());
+
 
             canvas.Content = new UIContainer[] {
 

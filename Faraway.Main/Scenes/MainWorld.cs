@@ -1,7 +1,6 @@
 ﻿using Faraway.Main.Engine;
-using Faraway.Main.Engine.UI;
-using Faraway.Main.Models;
-using Faraway.Main.Models.SpaceCraftModules;
+using Faraway.Main.Components;
+using Faraway.Main.Components.SpaceCraftModules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

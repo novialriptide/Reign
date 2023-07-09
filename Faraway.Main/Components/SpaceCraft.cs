@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Faraway.Main.Engine;
 using Faraway.Main.Engine.Components;
-using Faraway.Main.Models.SpaceCraftModules;
+using Faraway.Main.Components.SpaceCraftModules;
 
-namespace Faraway.Main.Models
+namespace Faraway.Main.Components
 {
     public class SpaceCraft : GameObject
     {
