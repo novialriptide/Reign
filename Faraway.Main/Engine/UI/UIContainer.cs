@@ -1,4 +1,4 @@
-﻿using Faraway.Main.Engine.UI.Enums;
+﻿using Faraway.Main.Engine.UI.Styles;
 
 namespace Faraway.Main.Engine.UI
 {
