@@ -11,7 +11,7 @@ namespace Faraway.Main.Engine
         /// The scene that the game object is in. Please do not re-assign this.
         /// </summary>
         public Scene Scene { get; set; }
-        private List<Component> components = new List<Component>();
+        private Dictionary<int, Component> components = new Dictionary<int, Component>();
 
         /// <summary>
         /// Adds a component to the GameObject.
@@ -20,16 +20,14 @@ namespace Faraway.Main.Engine
         /// <returns>Returns itself so you can perform something like <c>Transform = AddComponent<Transform>(new Transform());</c></returns>
         public void AddComponent(Component component)
         {
-            components.Add(component);
+            int code = component.GetType().GetHashCode();
+            components[code] = component;
             component.GameObject = this;
         }
         public bool ContainsComponent<T>() where T : Component
         {
-            foreach (var component in components)
-                if (component.GetType() == typeof(T))
-                    return true;
-
-            return false;
+            int code = typeof(T).GetHashCode();
+            return components.ContainsKey(code);
         }
         /// <summary>
         /// If you are calling any objects that require the GameInstance
@@ -39,11 +37,11 @@ namespace Faraway.Main.Engine
         public virtual void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
         {
-            foreach (Component component in components)
-                if (component.GetType().Equals(typeof(T)))
-                    return (T)component;
+            if (!ContainsComponent<T>())
+                return null;
 
-            return null;
+            int code = typeof(T).GetHashCode();
+            return (T)components[code];
         }
     }
 }
