@@ -13,6 +13,7 @@ namespace Faraway.Main.Engine
         public bool IsHidden;
         public bool IsPaused;
         private GameObjectGroup spriteGroup;
+        private GameObjectGroup fontGroup;
 
         public Scene()
         {
@@ -21,6 +22,7 @@ namespace Faraway.Main.Engine
 
             GameObjects = new List<GameObject>();
             spriteGroup = new GameObjectGroup();
+            fontGroup = new GameObjectGroup();
         }
         /// <summary>
         /// Add a <c>GameObject</c> to the <c>Scene</c>.
@@ -70,6 +72,19 @@ namespace Faraway.Main.Engine
 
                 spriteBatch.Draw(sprite2D.Texture, renderPosition, Color.White);
             }
+
+            foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(GameObjects.ToArray()))
+            {
+                var fontRenderer = gameObject.GetComponent<FontRenderer>();
+                Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
+
+                if (fontRenderer.SpriteFont == null)
+                    continue;
+
+                spriteBatch.DrawString(fontRenderer.SpriteFont, 
+                    fontRenderer.Text, renderPosition, fontRenderer.Color);
+            }
+
             spriteBatch.End();
         }
         /// <summary>
