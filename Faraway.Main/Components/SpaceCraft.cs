@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Faraway.Main.Engine;
-using Faraway.Main.Engine.Components;
+using Faraway.Engine;
+using Faraway.Engine.Components;
 using Faraway.Main.Components.SpaceCraftModules;
 
 namespace Faraway.Main.Components

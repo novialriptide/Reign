@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Design;
-using Faraway.Main.Engine.Components;
+using Faraway.Engine.Components;
 
-namespace Faraway.Main.Engine
+namespace Faraway.Engine
 {
     public class GameObject
     {

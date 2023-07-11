@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Faraway.Main.Engine;
+using Faraway.Engine;
 using Faraway.Main.Scenes;
 using Microsoft.Xna.Framework;
 

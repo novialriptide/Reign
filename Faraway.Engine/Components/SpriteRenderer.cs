@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace Faraway.Main.Engine.Components
+namespace Faraway.Engine.Components
 {
     public class SpriteRenderer : Component
     {

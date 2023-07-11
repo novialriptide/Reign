@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faraway.Main.Engine.Components
+namespace Faraway.Engine.Components
 {
     public class Transform : Component
     {

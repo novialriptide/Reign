@@ -1,6 +1,6 @@
-﻿using Faraway.Main.Engine.Components;
+﻿using Faraway.Engine.Components;
 
-namespace Faraway.Main.Engine.UI
+namespace Faraway.Engine.UI
 {
     /// <summary>
     /// UICanvas is one of the special aspects of 

@@ -1,5 +1,5 @@
-﻿using Faraway.Main.Engine;
-using Faraway.Main.Engine.Components;
+﻿using Faraway.Engine;
+using Faraway.Engine.Components;
 
 namespace Faraway.Main.Components
 {

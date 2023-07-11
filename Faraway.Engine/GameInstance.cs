@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Faraway.Main.Engine
+namespace Faraway.Engine
 {
     public abstract class GameInstance : Game
     {

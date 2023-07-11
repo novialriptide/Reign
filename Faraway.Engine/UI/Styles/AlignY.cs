@@ -1,4 +1,4 @@
-﻿namespace Faraway.Main.Engine.UI.Styles
+﻿namespace Faraway.Engine.UI.Styles
 {
     public enum AlignY
     {

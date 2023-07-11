@@ -1,6 +1,6 @@
-﻿using Faraway.Main.Engine.UI.Styles;
+﻿using Faraway.Engine.UI.Styles;
 
-namespace Faraway.Main.Engine.UI
+namespace Faraway.Engine.UI
 {
     public class UIContainer
     {

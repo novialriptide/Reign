@@ -1,4 +1,4 @@
-﻿namespace Faraway.Main.Engine.UI
+﻿namespace Faraway.Engine.UI
 {
     public class UIButton
     {

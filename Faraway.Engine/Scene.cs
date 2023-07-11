@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Faraway.Main.Engine.Components;
+using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Faraway.Main.Engine
+namespace Faraway.Engine
 {
     public class Scene
     {

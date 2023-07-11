@@ -1,4 +1,4 @@
-﻿using Faraway.Main.Engine;
+﻿using Faraway.Engine;
 using Faraway.Main.Components;
 using Faraway.Main.Components.SpaceCraftModules;
 using Microsoft.Xna.Framework;

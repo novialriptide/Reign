@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Faraway.Main.Engine.Components;
+using Faraway.Engine.Components;
 
-namespace Faraway.Main.Engine
+namespace Faraway.Engine
 {
     /// <summary>
     /// Mainly used to sort through GameObjects.
