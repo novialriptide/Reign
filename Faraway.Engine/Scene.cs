@@ -81,7 +81,7 @@ namespace Faraway.Engine
                 if (fontRenderer.SpriteFont == null)
                     continue;
 
-                spriteBatch.DrawString(fontRenderer.SpriteFont, 
+                spriteBatch.DrawString(fontRenderer.SpriteFont,
                     fontRenderer.Text, renderPosition, fontRenderer.Color);
             }
 
