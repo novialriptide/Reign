@@ -1,4 +1,5 @@
-﻿using Faraway.Engine;
+﻿using System.Diagnostics;
+using Faraway.Engine;
 using Faraway.Main.Components;
 using Faraway.Main.Components.SpaceCraftModules;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,7 @@ namespace Faraway.Main.Scenes
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 playerSpaceCraft.Transform.Position.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            GameInstance.Window.Title = (1 / gameTime.ElapsedGameTime.TotalSeconds).ToString();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
