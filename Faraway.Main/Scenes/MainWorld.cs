@@ -10,12 +10,9 @@ namespace Faraway.Main.Scenes
     public class MainWorld : Scene
     {
         private SpaceCraft playerSpaceCraft;
-        private MainWorldHUD hudObject;
 
         public override void OnStart()
         {
-            AddGameObject(hudObject = new MainWorldHUD());
-
             AddGameObject(playerSpaceCraft = new SpaceCraft());
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
             base.OnStart();
