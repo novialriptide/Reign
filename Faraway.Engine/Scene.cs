@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Engine
 {
-    public class Scene
+    public abstract class Scene
     {
         public GameInstance GameInstance;
         public List<GameObject> GameObjects { get; }
