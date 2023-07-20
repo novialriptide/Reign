@@ -6,10 +6,10 @@ using Faraway.Main.GameObjects;
 
 namespace Faraway.Main.Components
 {
-    public class PlayerInteractionHandler : Component
+    public class PlayerHighlightManager : Component
     {
         public bool IsActive => !GameObject.Scene.IsPaused;
-        public List<SpaceCraft> GetSpaceCraftWithinRegion(Vector2 start, Vector2 end)
+        public List<SpaceCraft> GetSpaceCraftWithinRegion(List<DragSelectElement> elements, Vector2 start, Vector2 end)
         {
             // ensure (x1,y1) and (x2,y2) will be topleft,bottomright
             float x1 = Math.Min(start.X, end.X);
