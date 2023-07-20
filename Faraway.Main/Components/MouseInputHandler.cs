@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Numerics;
 using Faraway.Engine.Components;
-using Faraway.Main.GameObjects;
+using Microsoft.Xna.Framework.Input;
 
 namespace Faraway.Main.Components
 {
-    public class PlayerHighlightManager : Component
+    public class MouseInput
     {
+        private Vector2 start;
+        private Vector2 end;
         public bool IsActive => !GameObject.Scene.IsPaused;
-        public List<SpaceCraft> GetSpaceCraftWithinRegion(List<DragSelectElement> elements, Vector2 start, Vector2 end)
+        public List<DragSelectElement> GetLeftDragRectangle(List<DragSelectElement> elements)
         {
             // ensure (x1,y1) and (x2,y2) will be topleft,bottomright
             float x1 = Math.Min(start.X, end.X);
@@ -19,7 +21,13 @@ namespace Faraway.Main.Components
 
             // TODO: Finish implementation
 
-            return new List<SpaceCraft>();
+            return new List<DragSelectElement>();
+        }
+        public override void Update(float deltaTime)
+        {
+            if ()
+
+            base.Update(deltaTime);
         }
     }
 }
