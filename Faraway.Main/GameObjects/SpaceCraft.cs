@@ -3,7 +3,7 @@ using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components.SpaceCraftModules;
 
-namespace Faraway.Main.Components
+namespace Faraway.Main.GameObjects
 {
     public class SpaceCraft : GameObject
     {
@@ -25,7 +25,7 @@ namespace Faraway.Main.Components
         /// </summary>
         public override void OnAdd()
         {
-            CommandCenterModule commandCenter = new CommandCenterModule();
+            var commandCenter = new CommandCenterModule();
             SetModule(0, 0, commandCenter);
 
             base.OnAdd();
@@ -71,7 +71,7 @@ namespace Faraway.Main.Components
             if (!IsValidInsertionPosition(x, y))
                 return;
 
-            Transform t = module.GetComponent<Transform>();
+            var t = module.GetComponent<Transform>();
             t.Position.X += x * ModulePixelWidth;
             t.Position.Y += y * ModulePixelHeight;
             t.Parent = Transform;

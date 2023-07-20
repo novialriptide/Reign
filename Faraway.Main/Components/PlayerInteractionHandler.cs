@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using Faraway.Engine.Components;
+using Faraway.Main.GameObjects;
 
 namespace Faraway.Main.Components
 {

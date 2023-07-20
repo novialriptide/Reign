@@ -1,7 +1,7 @@
 ﻿using Faraway.Engine;
 using Faraway.Engine.Components;
 
-namespace Faraway.Main.Components
+namespace Faraway.Main.GameObjects
 {
     public abstract class SpaceCraftModule : GameObject
     {

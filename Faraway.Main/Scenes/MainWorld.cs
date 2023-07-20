@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Faraway.Engine;
-using Faraway.Main.Components;
 using Faraway.Main.Components.SpaceCraftModules;
+using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

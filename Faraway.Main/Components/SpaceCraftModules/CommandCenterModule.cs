@@ -1,4 +1,5 @@
 ﻿using Faraway.Engine;
+using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Main.Components.SpaceCraftModules
