@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Faraway.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -36,6 +37,7 @@ namespace Faraway.Engine
         }
         protected override void Update(GameTime gameTime)
         {
+            MouseInput.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             foreach (Scene scene in Scenes)
                 if (!scene.IsPaused)
                     scene.Update(gameTime);
