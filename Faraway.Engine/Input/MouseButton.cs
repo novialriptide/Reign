@@ -21,10 +21,10 @@ namespace Faraway.Engine.Input
         internal void Update(float deltaTime, ButtonState buttonState, double mouseDelay)
         {
             IsHeldDown = buttonState == ButtonState.Pressed;
+
             IsClickedDown = IsHeldDown && lastState == ButtonState.Released;
             IsClickedUp = !IsHeldDown && lastState == ButtonState.Pressed;
 
-            // Must be at the end.
             lastState = buttonState;
         }
     }
