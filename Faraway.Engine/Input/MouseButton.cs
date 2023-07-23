@@ -18,9 +18,6 @@ namespace Faraway.Engine.Input
         /// Amount of clicks within `mouseDelay` per click.
         /// </summary>
         public int ClickCount = 0;
-        /// <summary>
-        /// [!] Not meant to be used by the end-user.
-        /// </summary>
         internal void Update(float deltaTime, ButtonState buttonState, double mouseDelay)
         {
             IsHeldDown = buttonState == ButtonState.Pressed;
