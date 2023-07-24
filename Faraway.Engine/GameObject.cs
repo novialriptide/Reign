@@ -34,7 +34,7 @@ namespace Faraway.Engine
         /// to be active, you must use this function.
         /// </summary>
         public virtual void OnAdd() { }
-        public virtual void Update(double deltaTime) { }
+        internal void Update(double deltaTime) { }
         public T GetComponent<T>() where T : Component
         {
             if (!ContainsComponent<T>())

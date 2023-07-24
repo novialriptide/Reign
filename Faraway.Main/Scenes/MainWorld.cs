@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Faraway.Engine;
-using Faraway.Main.Components.SpaceCraftModules;
+using Faraway.Main.GameObjects.SpaceCraftModules;
 using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -10,11 +10,15 @@ namespace Faraway.Main.Scenes
     public class MainWorld : Scene
     {
         private SpaceCraft playerSpaceCraft;
+        private PlayerInputHandler inputHandler;
 
         public override void OnStart()
         {
             AddGameObject(playerSpaceCraft = new SpaceCraft());
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
+
+            AddGameObject(inputHandler = new PlayerInputHandler());
+
             base.OnStart();
         }
 
@@ -27,7 +31,6 @@ namespace Faraway.Main.Scenes
                 playerSpaceCraft.Transform.Position.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             GameInstance.Window.Title = (1 / gameTime.ElapsedGameTime.TotalSeconds).ToString();
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Faraway.Engine;
 using Faraway.Engine.Components;
-using Faraway.Main.Components.SpaceCraftModules;
+using Faraway.Main.GameObjects.SpaceCraftModules;
 
 namespace Faraway.Main.GameObjects
 {

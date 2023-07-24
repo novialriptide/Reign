@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Faraway.Main.Components.SpaceCraftModules
+namespace Faraway.Main.GameObjects.SpaceCraftModules
 {
     public class IonTurret : TurretModule
     {

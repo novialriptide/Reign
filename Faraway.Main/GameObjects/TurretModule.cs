@@ -1,6 +1,4 @@
-﻿using Faraway.Main.GameObjects;
-
-namespace Faraway.Main.Components
+﻿namespace Faraway.Main.GameObjects
 {
     public abstract class TurretModule : SpaceCraftModule
     {
