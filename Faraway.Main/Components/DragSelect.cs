@@ -10,7 +10,7 @@ namespace Faraway.Main.Components
         private Vector2 start;
         private Vector2 end;
 
-        public override void Update(float deltaTime)
+        public override void Update(double deltaTime)
         {
             Debug.WriteLine("lmao");
 

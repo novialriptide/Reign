@@ -10,7 +10,7 @@ namespace Faraway.Engine.Components
     {
         public GameObject GameObject;
 
-        public virtual void Update(float deltaTime)
+        public virtual void Update(double deltaTime)
         {
 
         }
