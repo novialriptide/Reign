@@ -13,6 +13,7 @@ namespace Faraway.Main
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             IsFixedTimeStep = false;
+            GraphicsDeviceManager.SynchronizeWithVerticalRetrace = false; // vsync
 
             Scenes = new List<Scene>();
         }
