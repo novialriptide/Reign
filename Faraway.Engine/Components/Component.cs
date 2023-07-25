@@ -13,7 +13,6 @@
         /// Called once all OnAdd() calls are complete. Useful for calling
         /// components that are added after this component.
         ///
-        /// TODO: Implement this.
         /// </summary>
         public virtual void Start() { }
         public virtual void Update(double deltaTime)
