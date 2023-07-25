@@ -58,7 +58,12 @@ namespace Faraway.Engine
         internal void Update(double deltaTime)
         {
             foreach (var component in components.Values)
+            {
+                if (!component.IsEnabled)
+                    continue;
+
                 component.Update(deltaTime);
+            }
         }
         public T GetComponent<T>() where T : Component
         {

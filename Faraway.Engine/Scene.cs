@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -72,6 +73,9 @@ namespace Faraway.Engine
             foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(objs))
             {
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
+                if (!sprite2D.IsEnabled)
+                    continue;
+
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
 
                 if (sprite2D.Texture == null)
@@ -83,6 +87,9 @@ namespace Faraway.Engine
             foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
             {
                 var fontRenderer = gameObject.GetComponent<FontRenderer>();
+                if (!fontRenderer.IsEnabled)
+                    continue;
+
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
 
                 if (fontRenderer.SpriteFont == null)
@@ -95,6 +102,9 @@ namespace Faraway.Engine
             foreach (GameObject gameObject in shapeGroup.Match<RectangleRenderer>(objs))
             {
                 var rectRenderer = gameObject.GetComponent<RectangleRenderer>();
+                if (!rectRenderer.IsEnabled)
+                    continue;
+
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition() + rectRenderer.Offset;
 
                 // TODO: Find a cleaner way to approach this. Texture2D being assigned here is not a great idea.
