@@ -98,9 +98,19 @@ namespace Faraway.Engine
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition() + rectRenderer.Offset;
 
                 // TODO: Find a cleaner way to approach this. Texture2D being assigned here is not a great idea.
-                rectRenderer.Texture ??= new Texture2D(GameInstance.GraphicsDevice, 1, 1);
+                if (rectRenderer.Texture == null)
+                {
+                    rectRenderer.Texture = new Texture2D(GameInstance.GraphicsDevice, 1, 1);
+                    rectRenderer.Texture.SetData(new[] { Color.White });
+                }
 
-                spriteBatch.Draw(rectRenderer.Texture, renderPosition, rectRenderer.Color);
+                Rectangle rect = new Rectangle();
+                rect.X = (int)renderPosition.X;
+                rect.Y = (int)renderPosition.Y;
+                rect.Width = (int)rectRenderer.Size.X;
+                rect.Height = (int)rectRenderer.Size.Y;
+
+                spriteBatch.Draw(rectRenderer.Texture, rect, rectRenderer.Color);
             }
 
             spriteBatch.End();
