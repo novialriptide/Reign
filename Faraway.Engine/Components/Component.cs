@@ -2,6 +2,7 @@
 {
     public abstract class Component
     {
+        public bool IsEnabled = true;
         public GameObject GameObject;
 
         /// <summary>

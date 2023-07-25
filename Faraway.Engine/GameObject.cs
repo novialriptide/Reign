@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Linq;
 using Faraway.Engine.Components;
 
 namespace Faraway.Engine
@@ -27,6 +28,7 @@ namespace Faraway.Engine
         /// </summary>
         public Scene Scene { get; set; }
         private Dictionary<int, Component> components = new Dictionary<int, Component>();
+        public Component[] Components => components.Values.ToArray();
 
         /// <summary>
         /// Adds a component to the GameObject.
@@ -38,6 +40,7 @@ namespace Faraway.Engine
             int code = component.GetType().GetHashCode();
             components[code] = component;
             component.GameObject = this;
+            component.OnAdd();
         }
         public bool ContainsComponent<T>() where T : Component
         {
