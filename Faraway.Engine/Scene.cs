@@ -38,6 +38,9 @@ namespace Faraway.Engine
 
             GameObjects.Add(gameObject);
             gameObject.OnAdd();
+
+            foreach (var component in gameObject.Components)
+                component.Start();
         }
         /// <summary>
         /// Called when <c>Scene</c> is loaded.
