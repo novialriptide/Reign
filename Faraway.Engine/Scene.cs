@@ -14,6 +14,7 @@ namespace Faraway.Engine
         public bool IsPaused;
         private GameObjectGroup spriteGroup;
         private GameObjectGroup fontGroup;
+        private GameObjectGroup shapeGroup;
 
         public Scene()
         {
@@ -23,6 +24,7 @@ namespace Faraway.Engine
             GameObjects = new List<GameObject>();
             spriteGroup = new GameObjectGroup();
             fontGroup = new GameObjectGroup();
+            shapeGroup = new GameObjectGroup();
         }
         /// <summary>
         /// Add a <c>GameObject</c> to the <c>Scene</c>.
@@ -62,7 +64,9 @@ namespace Faraway.Engine
 
             GameInstance.GraphicsDevice.Clear(Color.White);
 
-            foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(GameObjects.ToArray()))
+            GameObject[] objs = GameObjects.ToArray();
+
+            foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(objs))
             {
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
@@ -73,7 +77,7 @@ namespace Faraway.Engine
                 spriteBatch.Draw(sprite2D.Texture, renderPosition, Color.White);
             }
 
-            foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(GameObjects.ToArray()))
+            foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
             {
                 var fontRenderer = gameObject.GetComponent<FontRenderer>();
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
@@ -85,7 +89,19 @@ namespace Faraway.Engine
                     fontRenderer.Text, renderPosition, fontRenderer.Color);
             }
 
+            foreach (GameObject gameObject in shapeGroup.Match<RectangleRenderer>(objs))
+            {
+                var rectRenderer = gameObject.GetComponent<RectangleRenderer>();
+                Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition() + rectRenderer.Offset;
+
+                // TODO: Find a cleaner way to approach this. Texture2D being assigned here is not a great idea.
+                rectRenderer.Texture ??= new Texture2D(GameInstance.GraphicsDevice, 1, 1);
+
+                spriteBatch.Draw(rectRenderer.Texture, renderPosition, rectRenderer.Color);
+            }
+
             spriteBatch.End();
+
         }
         /// <summary>
         /// Called when <c>Scene</c> is destroyed.
