@@ -7,6 +7,7 @@
 
 ### `Faraway.Engine`
 
+ - **Leif Theden**, [Tuxemon's State Manager](https://github.com/Tuxemon/Tuxemon)
  - **Matt Hall**, [Creating an Entity-Component-System in C#](https://matthall.codes/blog/ecs/)
  - **Van Hunter Adams**, [Boids algorithm - augmented for distributed consensus](https://vanhunteradams.com/Pico/Animal_Movement/Boids-algorithm.html)
  - **Dean Herbert**, [osu!lazer's coding conventions](https://github.com/ppy/osu/blob/master/.editorconfig)
