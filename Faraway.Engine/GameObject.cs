@@ -4,6 +4,21 @@ using Faraway.Engine.Components;
 
 namespace Faraway.Engine
 {
+    /// <summary>
+    /// All <c>AddComponent()</c> calls should be used in the constructor.
+    ///
+    /// <code>
+    /// public class PlayerInputHandler : GameObject
+    /// {
+    ///     public DragSelect DragSelect;
+    ///     public PlayerInputHandler()
+    ///     {
+    ///         AddComponent(DragSelect = new DragSelect());
+    ///     }
+    /// }
+    /// </code>
+    /// 
+    /// </summary>
     public class GameObject
     {
         public int ID { get; set; }
@@ -32,6 +47,9 @@ namespace Faraway.Engine
         /// <summary>
         /// If you are calling any objects that require the GameInstance
         /// to be active, you must use this function.
+        ///
+        /// TODO: Eliminate this use and make behavior be used in <c>Component.OnAdd()</c>
+        /// 
         /// </summary>
         public virtual void OnAdd() { }
         internal void Update(double deltaTime)

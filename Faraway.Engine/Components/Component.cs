@@ -10,6 +10,15 @@ namespace Faraway.Engine.Components
     {
         public GameObject GameObject;
 
+        /// <summary>
+        /// Used to assign textures or anything that requires a
+        /// <c>GameInstance</c> to be active.
+        /// </summary>
+        public virtual void OnAdd()
+        {
+
+        }
+
         public virtual void Update(double deltaTime)
         {
 
