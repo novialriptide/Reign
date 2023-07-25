@@ -48,7 +48,7 @@ namespace Faraway.Engine
         /// If you are calling any objects that require the GameInstance
         /// to be active, you must use this function.
         ///
-        /// TODO: Eliminate this use and make behavior be used in <c>Component.OnAdd()</c>
+        /// Set your <c>Texture</c> from <c>SpriteRenderer</c> here.
         /// 
         /// </summary>
         public virtual void OnAdd() { }
