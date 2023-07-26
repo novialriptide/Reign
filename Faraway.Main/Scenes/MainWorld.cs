@@ -1,6 +1,6 @@
 ﻿using Faraway.Engine;
-using Faraway.Main.GameObjects.SpaceCraftModules;
 using Faraway.Main.GameObjects;
+using Faraway.Main.GameObjects.SpaceCraftModules;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

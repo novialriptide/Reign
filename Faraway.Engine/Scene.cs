@@ -114,11 +114,13 @@ namespace Faraway.Engine
                     rectRenderer.Texture.SetData(new[] { Color.White });
                 }
 
-                Rectangle rect = new Rectangle();
-                rect.X = (int)renderPosition.X;
-                rect.Y = (int)renderPosition.Y;
-                rect.Width = (int)rectRenderer.Size.X;
-                rect.Height = (int)rectRenderer.Size.Y;
+                Rectangle rect = new Rectangle
+                {
+                    X = (int)renderPosition.X,
+                    Y = (int)renderPosition.Y,
+                    Width = (int)rectRenderer.Size.X,
+                    Height = (int)rectRenderer.Size.Y
+                };
 
                 spriteBatch.Draw(rectRenderer.Texture, rect, rectRenderer.Color);
             }

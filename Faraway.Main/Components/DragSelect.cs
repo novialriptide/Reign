@@ -1,11 +1,11 @@
-﻿using System.Numerics;
-using Faraway.Engine.Input;
-using Faraway.Engine.Components;
+﻿using System;
 using System.Diagnostics;
+using System.Numerics;
+using Faraway.Engine.Components;
+using Faraway.Engine.Input;
 using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework;
 using Vector2 = System.Numerics.Vector2;
-using System;
 
 namespace Faraway.Main.Components
 {
@@ -42,9 +42,7 @@ namespace Faraway.Main.Components
                 end = MouseInput.MousePosition;
 
             if (MouseInput.LeftButton.IsClickedUp)
-            {
                 IsActivelyDragging = false;
-            }
 
             Vector2 pos1 = new Vector2(Math.Min(start.X, end.X), Math.Min(start.Y, end.Y));
             Vector2 size = end - start;
