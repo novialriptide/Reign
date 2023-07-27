@@ -1,7 +1,15 @@
-# Reign (codename: Faraway)
+# Reign
 
 ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https%3A%2F%2Ffarawaygame.net%2F)
 ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=http%3A%2F%2Fdeveloper.farawaygame.net%2F&label=docs)
+
+## Engine Functionality
+
+ - Entity Component System
+ - Scene Management
+ - MouseInput Events
+ - Countdown Timer
+ - Pathfinding
 
 ## Resources
 
@@ -14,3 +22,4 @@
  - **Nicholas Swift**, [Easy A* (star) Pathfinding](https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2)
 
 ### `Faraway.Main`
+
