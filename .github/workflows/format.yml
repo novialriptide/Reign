@@ -1,4 +1,4 @@
-name: .NET Formatting Standards Check
+name: .NET Formatting Standards
 
 on: push
 
