@@ -2,6 +2,7 @@
 
 ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https%3A%2F%2Ffarawaygame.net%2F)
 ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=http%3A%2F%2Fdeveloper.farawaygame.net%2F&label=docs)
+![Formatting](https://github.com/novialriptide/Faraway/actions/workflows/format.yml/badge.svg)
 
 ## Engine Functionality
 
