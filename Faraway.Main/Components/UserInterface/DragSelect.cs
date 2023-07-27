@@ -7,7 +7,7 @@ using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework;
 using Vector2 = System.Numerics.Vector2;
 
-namespace Faraway.Main.Components
+namespace Faraway.Main.Components.UserInterface
 {
     public class DragSelect : Component
     {
@@ -18,7 +18,7 @@ namespace Faraway.Main.Components
         private Vector2 start = Vector2.Zero;
         private Vector2 end = Vector2.Zero;
 
-        public SpaceCraft[] SelectedObjects;
+        public SelectableObject[] SelectedObjects;
 
         public override void Start()
         {
@@ -44,8 +44,8 @@ namespace Faraway.Main.Components
             if (MouseInput.LeftButton.IsClickedUp)
                 IsActivelyDragging = false;
 
-            Vector2 pos1 = new Vector2(Math.Min(start.X, end.X), Math.Min(start.Y, end.Y));
-            Vector2 size = end - start;
+            var pos1 = new Vector2(Math.Min(start.X, end.X), Math.Min(start.Y, end.Y));
+            var size = end - start;
             size.X = Math.Abs(size.X);
             size.Y = Math.Abs(size.Y);
 

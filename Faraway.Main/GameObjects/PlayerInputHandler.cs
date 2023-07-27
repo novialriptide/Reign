@@ -1,6 +1,6 @@
 ﻿using Faraway.Engine;
 using Faraway.Engine.Components;
-using Faraway.Main.Components;
+using Faraway.Main.Components.UserInterface;
 
 namespace Faraway.Main.GameObjects
 {

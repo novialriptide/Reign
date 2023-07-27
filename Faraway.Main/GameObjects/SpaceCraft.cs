@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Faraway.Engine;
 using Faraway.Engine.Components;
+using Faraway.Main.Components;
 using Faraway.Main.GameObjects.SpaceCraftModules;
+using Faraway.Main.Models;
 
 namespace Faraway.Main.GameObjects
 {
@@ -9,16 +11,19 @@ namespace Faraway.Main.GameObjects
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Player Owner;
         public static int ModulePixelWidth = 32;
         public static int ModulePixelHeight = 32;
         public Dictionary<(int x, int y), SpaceCraftModule> Modules { get; }
 
         public Transform Transform;
+        public PathFindingAgent PathFindingAgent;
 
         public SpaceCraft()
         {
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             AddComponent(Transform = new Transform());
+            AddComponent(PathFindingAgent = new PathFindingAgent());
         }
         public override void OnAdd()
         {
