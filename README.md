@@ -21,6 +21,7 @@
  - **Van Hunter Adams**, [Boids algorithm - augmented for distributed consensus](https://vanhunteradams.com/Pico/Animal_Movement/Boids-algorithm.html)
  - **Dean Herbert**, [osu!lazer's coding conventions](https://github.com/ppy/osu/blob/master/.editorconfig)
  - **Nicholas Swift**, [Easy A* (star) Pathfinding](https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2)
+ - **Scott Lembcke**, [2D Lighting Techniques](https://slembcke.github.io/2D-Lighting-Overview)
 
 ### `Faraway.Main`
 
