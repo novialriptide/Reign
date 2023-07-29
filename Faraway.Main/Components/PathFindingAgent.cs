@@ -24,7 +24,7 @@ namespace Faraway.Main.Components
             public double F => G + H;
         }
 
-        private Node[][] Node2DMap;
+        private Node[][] nodeMap;
 
         public override void Start()
         {
