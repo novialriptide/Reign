@@ -2,6 +2,6 @@
 {
     public abstract class ObtainableItem
     {
-
+        public int Quantity;
     }
 }

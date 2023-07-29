@@ -7,5 +7,7 @@ namespace Faraway.Main.GameObjects.SpaceCraftModules
         public override string Name => throw new NotImplementedException();
 
         public override string Description => throw new NotImplementedException();
+
+        public int StorageCapacity => 10_000;
     }
 }
