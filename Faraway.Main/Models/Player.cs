@@ -36,9 +36,13 @@ namespace Faraway.Main.Models
         /// </summary>
         public List<SpaceCraftModule> GetModules<T>() where T : SpaceCraftModule
         {
-            // TODO: Properly implement Player.GetModules<T>()
+            List<SpaceCraftModule> value = new List<SpaceCraftModule>();
+            foreach (SpaceCraft spaceCraft in spaceCrafts)
+                foreach (var module in spaceCraft.Modules)
+                    if (module.GetType() == typeof(T))
+                        value.Add(module);
 
-            return new List<SpaceCraftModule>();
+            return value;
         }
     }
 }

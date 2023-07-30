@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components;
@@ -14,7 +15,8 @@ namespace Faraway.Main.GameObjects
         public Player Owner;
         public static int ModulePixelWidth = 32;
         public static int ModulePixelHeight = 32;
-        public Dictionary<(int x, int y), SpaceCraftModule> Modules { get; }
+        private Dictionary<(int x, int y), SpaceCraftModule> modules = new Dictionary<(int x, int y), SpaceCraftModule>();
+        public List<SpaceCraftModule> Modules => modules.Values.ToList();
 
         public Transform Transform;
         public PathFindingAgent PathFindingAgent;
@@ -22,7 +24,6 @@ namespace Faraway.Main.GameObjects
         public SpaceCraft(Player owner)
         {
             Owner = owner;
-            Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             AddComponent(Transform = new Transform());
             AddComponent(PathFindingAgent = new PathFindingAgent());
         }
@@ -42,7 +43,7 @@ namespace Faraway.Main.GameObjects
         /// <returns></returns>
         public bool IsValidInsertionPosition(int x, int y)
         {
-            if (Modules.ContainsKey((x, y)))
+            if (modules.ContainsKey((x, y)))
                 return false;
 
             // TODO: Add handler if the module would be a potential neighbor.
@@ -57,10 +58,10 @@ namespace Faraway.Main.GameObjects
         /// <returns></returns>
         public SpaceCraftModule GetModule(int x, int y)
         {
-            if (!Modules.ContainsKey((x, y)))
+            if (!modules.ContainsKey((x, y)))
                 return null;
 
-            return Modules[(x, y)];
+            return modules[(x, y)];
         }
         /// <summary>
         /// Sets a SpaceCraftModule at the specified 
@@ -79,7 +80,7 @@ namespace Faraway.Main.GameObjects
             t.Position.Y += y * ModulePixelHeight;
             t.Parent = Transform;
             Scene.AddGameObject(module);
-            Modules.Add((x, y), module);
+            modules.Add((x, y), module);
         }
     }
 }
