@@ -18,7 +18,7 @@ namespace Faraway.Main.Models
         /// </summary>
         public List<SpaceCraftModule> GetModules<T>() where T : SpaceCraftModule
         {
-            // TODO: Properly implement this.
+            // TODO: Properly implement Player.GetModules<T>()
 
             return new List<SpaceCraftModule>();
         }
