@@ -11,7 +11,6 @@ namespace Faraway.Main.Scenes
     {
         private Player player = new Player("novial");
         private SpaceCraft playerSpaceCraft;
-        private PlayerInputHandler inputHandler;
 
         public override void OnStart()
         {
@@ -19,7 +18,7 @@ namespace Faraway.Main.Scenes
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
             player.RegisterSpaceCraft(playerSpaceCraft);
 
-            AddGameObject(inputHandler = new PlayerInputHandler());
+            AddGameObject(new PlayerInputHandler());
 
             base.OnStart();
         }
