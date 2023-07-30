@@ -19,8 +19,9 @@ namespace Faraway.Main.GameObjects
         public Transform Transform;
         public PathFindingAgent PathFindingAgent;
 
-        public SpaceCraft()
+        public SpaceCraft(Player owner)
         {
+            Owner = owner;
             Modules = new Dictionary<(int x, int y), SpaceCraftModule>();
             AddComponent(Transform = new Transform());
             AddComponent(PathFindingAgent = new PathFindingAgent());

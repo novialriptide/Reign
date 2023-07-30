@@ -1,6 +1,7 @@
 ﻿using Faraway.Engine;
 using Faraway.Main.GameObjects;
 using Faraway.Main.GameObjects.SpaceCraftModules;
+using Faraway.Main.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,13 +9,15 @@ namespace Faraway.Main.Scenes
 {
     public class MainWorld : Scene
     {
+        private Player player = new Player("novial");
         private SpaceCraft playerSpaceCraft;
         private PlayerInputHandler inputHandler;
 
         public override void OnStart()
         {
-            AddGameObject(playerSpaceCraft = new SpaceCraft());
+            AddGameObject(playerSpaceCraft = new SpaceCraft(player));
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
+            player.RegisterSpaceCraft(playerSpaceCraft);
 
             AddGameObject(inputHandler = new PlayerInputHandler());
 
