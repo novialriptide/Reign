@@ -110,8 +110,10 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void MoveTo(Vector2 destination)
         {
-            destination = Destination;
+            destination = (Vector2)Destination;
 
+            if (Transform.Position == destination)
+                return;
         }
     }
 }
