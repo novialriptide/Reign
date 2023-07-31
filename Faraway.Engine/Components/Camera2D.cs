@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Faraway.Engine.Components
 {
-    public class Camera2D : Component
+    public sealed class Camera2D : Component
     {
 
     }

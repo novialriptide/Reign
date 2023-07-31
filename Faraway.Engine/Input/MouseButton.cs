@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Faraway.Engine.Input
 {
-    public class MouseButton
+    public sealed class MouseButton
     {
         private ButtonState lastState;
         private Timer clickerTimer = new Timer();

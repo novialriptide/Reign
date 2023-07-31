@@ -6,7 +6,7 @@ namespace Faraway.Engine
     /// <summary>
     /// Mainly used to sort through GameObjects.
     /// </summary>
-    public class GameObjectGroup
+    public sealed class GameObjectGroup
     {
         private GameObject[] oldGameObjects;
         private GameObject[] cachedGameObjects;

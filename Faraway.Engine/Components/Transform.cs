@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Faraway.Engine.Components
 {
-    public class Transform : Component
+    public sealed class Transform : Component
     {
         /// <summary>
         /// Position of the Component.

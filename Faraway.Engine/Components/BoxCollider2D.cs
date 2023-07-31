@@ -2,7 +2,7 @@
 
 namespace Faraway.Engine.Components
 {
-    public class BoxCollider2D : Component
+    public sealed class BoxCollider2D : Component
     {
         public Vector2 Offset;
         public Vector2 Size;

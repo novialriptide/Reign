@@ -7,7 +7,7 @@ namespace Faraway.Engine.Components
     /// <summary>
     /// This is just a temporary renderer until `ShapeRenderer` gets finalized.
     /// </summary>
-    public class RectangleRenderer : Component
+    public sealed class RectangleRenderer : Component
     {
         public Texture2D Texture;
         public Vector2 Offset = Vector2.Zero;

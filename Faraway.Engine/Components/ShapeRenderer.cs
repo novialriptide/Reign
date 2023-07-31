@@ -6,7 +6,7 @@ namespace Faraway.Engine.Components
     /// <summary>
     /// Work-in-progress
     /// </summary>
-    internal class ShapeRenderer : Component
+    internal sealed class ShapeRenderer : Component
     {
         public bool Loop;
         public Vector2[] Vertices;

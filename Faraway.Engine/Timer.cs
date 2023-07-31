@@ -4,7 +4,7 @@
     /// Uses `deltaTime` to see how much time has passed. This is used to prevent the
     /// game from proceeding with the times if there was a huge lagspike.
     /// </summary>
-    public class Timer
+    public sealed class Timer
     {
         public bool IsRunning = false;
         public double Time = 0f;

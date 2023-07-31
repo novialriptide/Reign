@@ -2,7 +2,7 @@
 
 namespace Faraway.Engine.Components
 {
-    public class RigidBody2D : Component
+    public sealed class RigidBody2D : Component
     {
         private Transform transform;
         public Vector2 Velocity = Vector2.Zero;

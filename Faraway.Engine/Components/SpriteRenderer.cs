@@ -2,7 +2,7 @@
 
 namespace Faraway.Engine.Components
 {
-    public class SpriteRenderer : Component
+    public sealed class SpriteRenderer : Component
     {
         public Texture2D Texture;
         public bool FlipX = false;
