@@ -18,12 +18,24 @@ namespace Faraway.Main.GameObjects
         public static int ModulePixelHeight = 32;
         private Dictionary<(int x, int y), SpaceCraftModule> modules = new Dictionary<(int x, int y), SpaceCraftModule>();
         public List<SpaceCraftModule> Modules => modules.Values.ToList();
+        public Vector2? Destination = null;
+        public float Speed
+        {
+            get
+            {
+                float value = 0;
+                List<SpaceCraftModule> mods = GetModules<ThrusterModule>();
+                foreach (ThrusterModule mod in mods)
+                    value += mod.Speed;
 
+                return value;
+            }
+        }
+
+        /* Components */
         public Transform Transform;
         public RigidBody2D RigidBody2D;
         public PathFindingAgent PathFindingAgent;
-
-        public Vector2 Velocity = Vector2.Zero;
 
         public SpaceCraft(Player owner)
         {
@@ -58,15 +70,24 @@ namespace Faraway.Main.GameObjects
         /// <summary>
         /// Returns a SpaceCraftModule object, returns null if it doesn't exist.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
         public SpaceCraftModule GetModule(int x, int y)
         {
             if (!modules.ContainsKey((x, y)))
                 return null;
 
             return modules[(x, y)];
+        }
+        /// <summary>
+        /// Returns a list of modules.
+        /// </summary>
+        public List<SpaceCraftModule> GetModules<T>() where T : SpaceCraftModule
+        {
+            List<SpaceCraftModule> value = new List<SpaceCraftModule>();
+            foreach (SpaceCraftModule module in Modules)
+                if (module.GetType() == typeof(T))
+                    value.Add(module);
+
+            return value;
         }
         /// <summary>
         /// Sets a SpaceCraftModule at the specified 
@@ -87,9 +108,10 @@ namespace Faraway.Main.GameObjects
         /// <summary>
         /// Moves to the specified position.
         /// </summary>
-        public void MoveTo(int x, int y)
+        public void MoveTo(Vector2 destination)
         {
-            // TODO: Implement MoveTowards algorithm using Bezier Blend (ease-in-out).
+            destination = Destination;
+
         }
     }
 }
