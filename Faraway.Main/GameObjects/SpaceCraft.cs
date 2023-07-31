@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components;
@@ -19,19 +20,23 @@ namespace Faraway.Main.GameObjects
         public List<SpaceCraftModule> Modules => modules.Values.ToList();
 
         public Transform Transform;
+        public RigidBody2D RigidBody2D;
         public PathFindingAgent PathFindingAgent;
+
+        public Vector2 Velocity = Vector2.Zero;
 
         public SpaceCraft(Player owner)
         {
             Owner = owner;
             AddComponent(Transform = new Transform());
+            AddComponent(RigidBody2D = new RigidBody2D());
             AddComponent(PathFindingAgent = new PathFindingAgent());
         }
         public override void OnAdd()
         {
             var commandCenter = new CommandCenterModule();
             SetModule(0, 0, commandCenter);
-
+            RigidBody2D.Velocity = new Vector2(2, 2);
             base.OnAdd();
         }
 
@@ -67,9 +72,6 @@ namespace Faraway.Main.GameObjects
         /// Sets a SpaceCraftModule at the specified 
         /// coordinates, does nothing if position is invalid.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="module"></param>
         public void SetModule(int x, int y, SpaceCraftModule module)
         {
             if (!IsValidInsertionPosition(x, y))
@@ -81,6 +83,13 @@ namespace Faraway.Main.GameObjects
             t.Parent = Transform;
             Scene.AddGameObject(module);
             modules.Add((x, y), module);
+        }
+        /// <summary>
+        /// Moves to the specified position.
+        /// </summary>
+        public void MoveTo(int x, int y)
+        {
+            // TODO: Implement MoveTowards algorithm using Bezier Blend (ease-in-out).
         }
     }
 }
