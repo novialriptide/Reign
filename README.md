@@ -22,6 +22,7 @@
  - **Dean Herbert**, [osu!lazer's coding conventions](https://github.com/ppy/osu/blob/master/.editorconfig)
  - **Nicholas Swift**, [Easy A* (star) Pathfinding](https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2)
  - **Scott Lembcke**, [2D Lighting Techniques](https://slembcke.github.io/2D-Lighting-Overview)
+ - **Gustav Dahl**, [Measuring How Game Feel Is Influenced by the Player Avatar’s Acceleration and Deceleration](https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf)
 
 ### `Faraway.Main`
 
