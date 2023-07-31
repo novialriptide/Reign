@@ -28,9 +28,6 @@ namespace Faraway.Main.Scenes
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 GameInstance.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-                playerSpaceCraft.Transform.Position.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             GameInstance.Window.Title = (1 / gameTime.ElapsedGameTime.TotalSeconds).ToString();
 
             base.Update(gameTime);
