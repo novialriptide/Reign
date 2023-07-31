@@ -110,6 +110,16 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void MoveTo(Vector2 destination)
         {
+            /*
+             * PRIORITY TODO: Create the internals of this whereas the velocity of the rigidbody is
+             * being added, and then the velocity goes the opposite direction once its near its
+             * destination.
+             * 
+             * See references: 
+             *  - https://www.youtube.com/watch?v=EwONt4r2rMM
+             *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
+             */
+
             destination = (Vector2)Destination;
 
             if (Transform.Position == destination)
