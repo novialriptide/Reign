@@ -106,9 +106,9 @@ namespace Faraway.Main.GameObjects
             modules.Add((x, y), module);
         }
         /// <summary>
-        /// Moves to the specified position.
+        /// Moves to the specified position. 
         /// </summary>
-        public void MoveTo(Vector2 destination)
+        public void SetWaypoint(Vector2 waypoint)
         {
             /*
              * PRIORITY TODO: Create the internals of this whereas the velocity of the rigidbody
@@ -119,11 +119,7 @@ namespace Faraway.Main.GameObjects
              *  - https://www.youtube.com/watch?v=EwONt4r2rMM
              *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
              */
-
-            destination = (Vector2)Destination;
-
-            if (Transform.Position == destination)
-                return;
+            Vector2 acceleration = Math.SetMagnitude(waypoint - Transform.Position, Speed);
         }
     }
 }
