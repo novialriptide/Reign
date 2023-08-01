@@ -15,7 +15,7 @@ namespace Faraway.Engine.Tests.TestMath
         public void TestMagnitudeFloat()
         {
             var a = new Vector2(756.2f, 24.6f);
-            Assert.AreEqual(Math.Magnitude(a), 756.60004);
+            Assert.AreEqual(Math.Magnitude(a), 756.6000366210938);
         }
     }
 
