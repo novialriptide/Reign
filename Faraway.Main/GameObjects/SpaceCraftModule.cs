@@ -1,5 +1,6 @@
 ﻿using Faraway.Engine;
 using Faraway.Engine.Components;
+using Faraway.Main.Components.UserInterface;
 
 namespace Faraway.Main.GameObjects
 {
@@ -12,12 +13,14 @@ namespace Faraway.Main.GameObjects
         public Transform Transform;
         public BoxCollider2D Collider;
         public SpriteRenderer Sprite2D;
+        public SelectableObject SelectableObject;
 
         public SpaceCraftModule()
         {
             AddComponent(Transform = new Transform());
             AddComponent(Sprite2D = new SpriteRenderer());
             AddComponent(Collider = new BoxCollider2D());
+            AddComponent(SelectableObject = new SelectableObject());
         }
         public override string ToString()
         {

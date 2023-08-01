@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Faraway.Engine
 {
-    public static class Math
+    public static class MathExtended
     {
         /// <summary>
         /// Gets the magnitude.
@@ -15,8 +15,7 @@ namespace Faraway.Engine
         public static Vector2 SetMagnitude(Vector2 vector2, float magnitude)
         {
             // Referenced from: https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
-            float currentMagnitude = Magnitude(vector2);
-            float ratio = magnitude / currentMagnitude;
+            float ratio = magnitude / Magnitude(vector2);
             return vector2 * ratio;
         }
         /// <summary>

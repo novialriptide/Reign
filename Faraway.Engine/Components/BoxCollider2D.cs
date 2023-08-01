@@ -2,6 +2,16 @@
 
 namespace Faraway.Engine.Components
 {
+    /* 
+     * PRIORITY TODO: Create a method in where multiple BoxCollider2Ds can be
+     * collision checked for `DragSelect` in `Faraway.Main`.
+     * 
+     * Methods:
+     *  - When collided, check the parent of the BoxCollider2D's game object to
+     *    see if it has te `SelectableObject` component.
+     *  - Make `SelectableObject` in the child game objects have a reference to
+     *    the parent game object.
+     */
     public sealed class BoxCollider2D : Component
     {
         public Vector2 Offset;

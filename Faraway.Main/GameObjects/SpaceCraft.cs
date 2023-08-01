@@ -4,6 +4,7 @@ using System.Numerics;
 using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components;
+using Faraway.Main.Components.UserInterface;
 using Faraway.Main.GameObjects.SpaceCraftModules;
 using Faraway.Main.Models;
 
@@ -36,6 +37,7 @@ namespace Faraway.Main.GameObjects
         public Transform Transform;
         public RigidBody2D RigidBody2D;
         public PathFindingAgent PathFindingAgent;
+        public BoxCollider2D BoxCollider2D;
 
         public SpaceCraft(Player owner)
         {
@@ -48,7 +50,7 @@ namespace Faraway.Main.GameObjects
         {
             var commandCenter = new CommandCenterModule();
             SetModule(0, 0, commandCenter);
-            RigidBody2D.Velocity = new Vector2(2, 2);
+            
             base.OnAdd();
         }
 
@@ -119,7 +121,8 @@ namespace Faraway.Main.GameObjects
              *  - https://www.youtube.com/watch?v=EwONt4r2rMM
              *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
              */
-            Vector2 acceleration = Math.SetMagnitude(waypoint - Transform.Position, Speed);
+            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, Speed);
+            RigidBody2D.Acceleration = acceleration;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Faraway.Engine.Components;
+using Faraway.Engine.Input;
+using Faraway.Main.GameObjects;
 
 namespace Faraway.Main.Components.UserInterface
 {
@@ -13,7 +15,9 @@ namespace Faraway.Main.Components.UserInterface
         }
         public override void Update(double deltaTime)
         {
-            // TODO: Implement selecting `SelectableObject` game objects.
+            if (DragSelect.SelectedObjects.Count > 0 && MouseInput.RightButton.IsClickedUp)
+                foreach (SelectableObject obj in DragSelect.SelectedObjects)
+                    ((SpaceCraft)obj.GameObject).SetWaypoint(MouseInput.MousePosition);
 
             base.Update(deltaTime);
         }
