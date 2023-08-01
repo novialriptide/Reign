@@ -111,9 +111,9 @@ namespace Faraway.Main.GameObjects
         public void MoveTo(Vector2 destination)
         {
             /*
-             * PRIORITY TODO: Create the internals of this whereas the velocity of the rigidbody is
-             * being added, and then the velocity goes the opposite direction once its near its
-             * destination.
+             * PRIORITY TODO: Create the internals of this whereas the velocity of the rigidbody
+             * is being added, and then the velocity goes the opposite direction once its near
+             * its destination.
              * 
              * See references: 
              *  - https://www.youtube.com/watch?v=EwONt4r2rMM

@@ -7,7 +7,7 @@ namespace Faraway.Main.Models
     public class Player
     {
         public Guid Guid => Guid.NewGuid();
-        public string Name { get; }
+        public readonly string Name;
         public Inventory Inventory;
         /// <summary>
         /// To register spacecrafts use <c>RegisterSpaceCraft()</c>

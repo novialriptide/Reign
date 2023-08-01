@@ -9,7 +9,7 @@ namespace Faraway.Engine
     public abstract class Scene
     {
         public GameInstance GameInstance;
-        public List<GameObject> GameObjects { get; }
+        public readonly List<GameObject> GameObjects;
         public Camera2D ActiveCamera;
         public bool IsHidden;
         public bool IsPaused;

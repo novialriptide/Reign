@@ -18,5 +18,4 @@ namespace Faraway.Engine.Tests.TestMath
             Assert.AreEqual(Math.Magnitude(a), 756.6000366210938);
         }
     }
-
 }

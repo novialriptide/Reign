@@ -5,7 +5,7 @@ namespace Faraway.Engine
 {
     public static class Math
     {
-        public static float Magnitude(Vector2 vector2) => MathF.Sqrt(vector2.X*vector2.X + vector2.Y*vector2.Y);
+        public static float Magnitude(Vector2 vector2) => MathF.Sqrt(vector2.X * vector2.X + vector2.Y * vector2.Y);
         /// <summary>
         /// Moves a Vector2 toward the target.
         /// </summary>
