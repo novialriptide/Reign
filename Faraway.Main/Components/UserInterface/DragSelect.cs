@@ -54,6 +54,16 @@ namespace Faraway.Main.Components.UserInterface
             transform.Position = pos1;
             renderer.Size = size;
 
+            /* 
+             * PRIORITY TODO: Create a method in where multiple BoxCollider2Ds can be
+             * collision checked for `DragSelect` in `Faraway.Main`.
+             * 
+             * Methods:
+             *  - When collided, check the parent of the BoxCollider2D's game object to
+             *    see if it has te `SelectableObject` component.
+             *  - Make `SelectableObject` in the child game objects have a reference to
+             *    the parent game object.
+             */
             if (MouseInput.LeftButton.IsClickedUp)
             {
                 boxCollider.Size = size;
