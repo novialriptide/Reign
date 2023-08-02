@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Faraway.Engine.Components
 {
+    /*
+     * PRIORITY TODO: Implement rotation functionality so that
+     * everything that's being rendered on the screen is also
+     * rotated.
+     */
     public sealed class Transform : Component
     {
         /// <summary>
