@@ -1,17 +1,32 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics;
+using System.Numerics;
 
 namespace Faraway.Engine.Components
 {
     public sealed class BoxCollider2D : Component
     {
+        private Transform transform;
+
         public Vector2 Offset;
         public Vector2 Size;
+
+        public override void Start()
+        {
+            transform = GameObject.GetComponent<Transform>();
+            base.Start();
+        }
+
         public bool CollidesWith(BoxCollider2D collider)
         {
-            return Offset.X + Size.X >= collider.Offset.X &&
-                Offset.X <= collider.Offset.X + collider.Size.X &&
-                Offset.Y + Size.Y >= collider.Offset.Y &&
-                Offset.Y <= collider.Offset.Y + collider.Size.Y;
+            Vector2 worldPosition = transform.Position + Offset;
+
+            Transform otherTransform = collider.GameObject.GetComponent<Transform>();
+            Vector2 otherWorldPosition = otherTransform.Position + collider.Offset;
+
+            return worldPosition.X + Size.X >= otherWorldPosition.X &&
+                worldPosition.X <= otherWorldPosition.X + collider.Size.X &&
+                worldPosition.Y + Size.Y >= otherWorldPosition.Y &&
+                worldPosition.Y <= otherWorldPosition.Y + collider.Size.Y;
         }
     }
 }
