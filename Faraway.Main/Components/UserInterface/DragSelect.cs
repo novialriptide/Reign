@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Numerics;
 using Faraway.Engine;
 using Faraway.Engine.Components;
@@ -54,16 +55,6 @@ namespace Faraway.Main.Components.UserInterface
             transform.Position = pos1;
             renderer.Size = size;
 
-            /* 
-             * PRIORITY TODO: Create a method in where multiple BoxCollider2Ds can be
-             * collision checked for `DragSelect` in `Faraway.Main`.
-             * 
-             * Methods:
-             *  - When collided, check the parent of the BoxCollider2D's game object to
-             *    see if it has te `SelectableObject` component.
-             *  - Make `SelectableObject` in the child game objects have a reference to
-             *    the parent game object.
-             */
             if (MouseInput.LeftButton.IsClickedUp)
             {
                 boxCollider.Size = size;
@@ -71,14 +62,20 @@ namespace Faraway.Main.Components.UserInterface
                 // Get the objects that collide with this object's BoxCollider2D.
                 foreach (var obj in GameObject.Scene.GameObjects)
                 {
-                    bool isValidSelectable = obj.ContainsComponent<SelectableObject>() && obj.ContainsComponent<BoxCollider2D>();
-                    if (isValidSelectable && obj.GetComponent<BoxCollider2D>().CollidesWith(boxCollider))
+                    SelectableObject selectable = obj.GetComponent<SelectableObject>();
+                    if (selectable is null)
+                        continue;
+
+                    foreach (BoxCollider2D collider in selectable.BoxCollider2Ds)
                     {
-                        SelectedObjects.Add(obj.GetComponent<SelectableObject>());
+                        if (collider.CollidesWith(boxCollider))
+                        {
+                            SelectedObjects.Add(selectable);
+                            break; // prevents duplicate `SelectableObject`s being added.
+                        }
                     }
                 }
                 IsActivelyDragging = false;
-                Debug.WriteLine(SelectedObjects.Count);
             }
 
             base.Update(deltaTime);

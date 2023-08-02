@@ -11,16 +11,16 @@ namespace Faraway.Main.GameObjects
         public virtual int Width => 1;
         public virtual int Height => 1;
         public Transform Transform;
-        public BoxCollider2D Collider;
+        public BoxCollider2D BoxCollider2D;
         public SpriteRenderer Sprite2D;
-        public SelectableObject SelectableObject;
 
         public SpaceCraftModule()
         {
             AddComponent(Transform = new Transform());
             AddComponent(Sprite2D = new SpriteRenderer());
-            AddComponent(Collider = new BoxCollider2D());
-            AddComponent(SelectableObject = new SelectableObject());
+            AddComponent(BoxCollider2D = new BoxCollider2D());
+            BoxCollider2D.Size.X = SpaceCraft.ModulePixelWidth;
+            BoxCollider2D.Size.Y = SpaceCraft.ModulePixelHeight;
         }
         public override string ToString()
         {

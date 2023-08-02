@@ -37,7 +37,8 @@ namespace Faraway.Main.GameObjects
         public Transform Transform;
         public RigidBody2D RigidBody2D;
         public PathFindingAgent PathFindingAgent;
-        public BoxCollider2D BoxCollider2D;
+        public List<BoxCollider2D> BoxCollider2Ds = new List<BoxCollider2D>(); // Referenced to the registered `SpaceCraftModule`s.
+        public SelectableObject SelectableObject;
 
         public SpaceCraft(Player owner)
         {
@@ -45,12 +46,14 @@ namespace Faraway.Main.GameObjects
             AddComponent(Transform = new Transform());
             AddComponent(RigidBody2D = new RigidBody2D());
             AddComponent(PathFindingAgent = new PathFindingAgent());
+            AddComponent(SelectableObject = new SelectableObject());
+            SelectableObject.BoxCollider2Ds = BoxCollider2Ds;
         }
         public override void OnAdd()
         {
             var commandCenter = new CommandCenterModule();
             SetModule(0, 0, commandCenter);
-            
+
             base.OnAdd();
         }
 
@@ -101,6 +104,7 @@ namespace Faraway.Main.GameObjects
                 return;
 
             var t = module.GetComponent<Transform>();
+            BoxCollider2Ds.Add(module.GetComponent<BoxCollider2D>());
             t.Position.X += x * ModulePixelWidth;
             t.Position.Y += y * ModulePixelHeight;
             t.Parent = Transform;
