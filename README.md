@@ -24,6 +24,7 @@
  - **Scott Lembcke**, [2D Lighting Techniques](https://slembcke.github.io/2D-Lighting-Overview)
  - **Gustav Dahl**, [Measuring How Game Feel Is Influenced by the Player Avatar’s Acceleration and Deceleration](https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf)
  - **Geek Tutorials**, [Photoshop Tutorial - Make a Space Background](https://www.youtube.com/watch?v=_TIGIxHp9b8)
+ - **Raouf Touti**, [Perlin Noise: A Procedural Generation Algorithm](https://rtouti.github.io/graphics/perlin-noise-algorithm)
 
 ### `Faraway.Main`
 

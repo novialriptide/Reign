@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Faraway.Engine
+namespace Faraway.Engine.MathExtended
 {
     public static class MathExtended
     {
@@ -25,7 +25,7 @@ namespace Faraway.Engine
         public static Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta)
         {
             // Referenced from: https://github.com/pygame/pygame/pull/2929
-            Vector2 a = target - current;
+            var a = target - current;
             float magnitude = Magnitude(a);
             if (magnitude <= maxDistanceDelta || magnitude == 0f)
                 return target;

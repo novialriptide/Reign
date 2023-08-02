@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Faraway.Engine;
 using Faraway.Engine.Components;
+using Faraway.Engine.MathExtended;
 using Faraway.Main.Components;
 using Faraway.Main.Components.UserInterface;
 using Faraway.Main.GameObjects.SpaceCraftModules;
