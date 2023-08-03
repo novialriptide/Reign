@@ -126,7 +126,7 @@ namespace Faraway.Main.GameObjects
              *  - https://www.youtube.com/watch?v=EwONt4r2rMM
              *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
              */
-            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, Speed);
+            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, 5); // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
             RigidBody2D.Acceleration = acceleration;
         }
     }

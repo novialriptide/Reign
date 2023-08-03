@@ -10,10 +10,12 @@ namespace Faraway.Main.GameObjects
         public DragSelect DragSelect;
         public RectangleRenderer RectangleRenderer;
         public BoxCollider2D BoxCollider2D;
+        public WorldPlayerInput WorldPlayerInput;
         public PlayerInputHandler()
         {
             AddComponent(Transform = new Transform());
             AddComponent(DragSelect = new DragSelect());
+            AddComponent(WorldPlayerInput = new WorldPlayerInput());
             AddComponent(RectangleRenderer = new RectangleRenderer());
             AddComponent(BoxCollider2D = new BoxCollider2D());
         }
