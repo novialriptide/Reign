@@ -72,16 +72,40 @@ namespace Faraway.Engine
 
             foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(objs))
             {
+                var transform = gameObject.GetComponent<Transform>();
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
                 if (!sprite2D.IsEnabled)
                     continue;
 
-                Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
+                Vector2 renderPosition = transform.Position;
+                float renderRotation = transform.Rotation;
+                /*
+                 * PRIORITY TODO: `renderRotationOrigin` is not correctly implemented.
+                 * 
+                 * Basic Algorithm Idea
+                 * 1. Create variable `rotationPosition` as a `Vector2`.
+                 * 2. Starting with any child, add the child's `Transform.Position + Transform.RotationOrigin` to `rotationPosition`.
+                 * 3. Repeat until you've reached the parent. Do not add the parent's `Position`, but only add `Transform.RotationOrigin`.
+                 */
+                Vector2 renderRotationOrigin = transform.RotationOrigin;
+                Vector2 renderScale = transform.Scale;
+
+                Transform currentTransform = transform.Parent;
+
+                while (currentTransform != null)
+                {
+                    renderPosition += currentTransform.Position;
+                    renderRotation += currentTransform.Rotation;
+                    renderRotationOrigin += currentTransform.Position;
+                    renderScale *= currentTransform.Scale;
+                    currentTransform = currentTransform.Parent;
+                }
+
 
                 if (sprite2D.Texture == null)
                     continue;
 
-                spriteBatch.Draw(sprite2D.Texture, renderPosition, Color.White);
+                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White, renderRotation, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
             }
 
             foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
