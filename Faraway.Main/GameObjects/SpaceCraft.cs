@@ -125,8 +125,13 @@ namespace Faraway.Main.GameObjects
              * See references: 
              *  - https://www.youtube.com/watch?v=EwONt4r2rMM
              *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
+             *  
+             * Another thing to do is to let the spacecraft rotate facing the waypoint, then
+             * thrust foward.
              */
-            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, 5); // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
+
+            // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
+            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, 5);
             RigidBody2D.Acceleration = acceleration;
         }
     }
