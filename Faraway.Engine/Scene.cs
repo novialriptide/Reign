@@ -85,7 +85,7 @@ namespace Faraway.Engine
                  * Basic Algorithm Idea
                  * 1. Create variable `rotationPosition` as a `Vector2`.
                  * 2. Starting with any child, add the child's `Transform.Position + Transform.RotationOrigin` to `rotationPosition`.
-                 * 3. Repeat until you've reached the parent. Do not add the parent's `Position`, but only add `Transform.RotationOrigin`.
+                 * 3. Repeat until you've reached the parent root. Do not add the parent root's `Position`, but only add `Transform.RotationOrigin`.
                  */
                 Vector2 renderRotationOrigin = transform.RotationOrigin;
                 Vector2 renderScale = transform.Scale;
