@@ -98,6 +98,8 @@ namespace Faraway.Engine
                     renderRotation += currentTransform.Rotation;
                     renderRotationOrigin += currentTransform.Position;
                     renderScale *= currentTransform.Scale;
+
+                    // Next loop
                     currentTransform = currentTransform.Parent;
                 }
 
