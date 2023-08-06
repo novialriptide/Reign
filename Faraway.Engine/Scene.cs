@@ -92,22 +92,22 @@ namespace Faraway.Engine
 
                 Transform currentTransform = transform.Parent;
 
+                if (sprite2D.Texture == null)
+                    continue;
+
                 while (currentTransform != null)
                 {
                     renderPosition += currentTransform.Position;
                     renderRotation += currentTransform.Rotation;
-                    renderRotationOrigin += currentTransform.Position;
+                    // renderRotationOrigin += currentTransform.Position;
                     renderScale *= currentTransform.Scale;
 
                     // Next loop
                     currentTransform = currentTransform.Parent;
                 }
 
-
-                if (sprite2D.Texture == null)
-                    continue;
-
-                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White, renderRotation, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
+                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White,
+                    0, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
             }
 
             foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
