@@ -18,10 +18,10 @@ namespace Faraway.Engine.Components
 
         public bool CollidesWith(BoxCollider2D collider)
         {
-            Vector2 worldPosition = transform.Position + Offset;
+            Vector2 worldPosition = transform.WorldPosition + Offset;
 
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
-            Vector2 otherWorldPosition = otherTransform.Position + collider.Offset;
+            Vector2 otherWorldPosition = otherTransform.WorldPosition + collider.Offset;
 
             return worldPosition.X + Size.X >= otherWorldPosition.X &&
                 worldPosition.X <= otherWorldPosition.X + collider.Size.X &&
