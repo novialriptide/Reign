@@ -74,47 +74,47 @@ namespace Faraway.Engine
             {
                 var transform = gameObject.GetComponent<Transform>();
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
-                if (!sprite2D.IsEnabled)
-                    continue;
-
-                Vector2 renderPosition = transform.Position;
-                float renderRotation = transform.Rotation;
-                /*
-                 * PRIORITY TODO: `renderRotationOrigin` is not correctly implemented.
-                 * 
-                 * Basic Algorithm Idea
-                 * 1. Create variable `rotationPosition` as a `Vector2`.
-                 * 2. Starting with any child, add the child's `Transform.Position + Transform.RotationOrigin` to `rotationPosition`.
-                 * 3. Repeat until you've reached the parent root. Do not add the parent root's `Position`, but only add `Transform.RotationOrigin`.
-                 */
-                Vector2 renderRotationOrigin = transform.RotationOrigin;
-                Vector2 renderScale = transform.Scale;
-
-                Transform currentTransform = transform.Parent;
 
                 if (sprite2D.Texture == null)
                     continue;
 
-                while (currentTransform != null)
+                if (!sprite2D.IsEnabled)
+                    continue;
+
+                Vector2 renderPosition = Vector2.Zero;
+                float renderRotation = 0;
+                Vector2 renderRotationOrigin = Vector2.Zero;
+                Vector2 renderScale = Vector2.One;
+
+                Transform currentTransform = transform;
+                while (currentTransform is not null)
                 {
-                    renderPosition += currentTransform.Position;
                     renderRotation += currentTransform.Rotation;
-                    // renderRotationOrigin += currentTransform.Position;
+
+                    if (currentTransform.IsChild)
+                        renderRotationOrigin -= currentTransform.Position + currentTransform.RotationOrigin;
+
                     renderScale *= currentTransform.Scale;
 
                     // Next loop
                     currentTransform = currentTransform.Parent;
+
+                    /*
+                     * Changing the rotation origin changes the render position, therefore we
+                     * ignore the first position.
+                     */
+                    if (currentTransform is not null)
+                        renderPosition += currentTransform.Position;
                 }
 
-                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White,
-                    0, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
+                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White, renderRotation, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
             }
 
             foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
             {
                 var fontRenderer = gameObject.GetComponent<FontRenderer>();
                 if (!fontRenderer.IsEnabled)
-                    continue;
+                    continue; 
 
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
 

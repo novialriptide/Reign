@@ -53,6 +53,10 @@ namespace Faraway.Engine.Components
             }
         }
         /// <summary>
+        /// Check if this game object is a child.
+        /// </summary>
+        public bool IsChild => Parent is not null;
+        /// <summary>
         /// Children of this GameObject.
         /// </summary>
         public Transform[] Children

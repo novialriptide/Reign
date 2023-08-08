@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Faraway.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,6 +19,8 @@ namespace Faraway.Engine
             scene.OnStart();
             Scenes.Add(scene);
         }
+
+        public double DeltaTime;
 
         public void RemoveScene(Scene scene)
         {
@@ -45,6 +48,8 @@ namespace Faraway.Engine
         }
         protected override void Draw(GameTime gameTime)
         {
+            DeltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+
             foreach (Scene scene in Scenes)
                 if (!scene.IsHidden)
                     scene.Draw(gameTime);

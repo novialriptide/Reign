@@ -1,4 +1,5 @@
 ﻿using Faraway.Engine;
+using Faraway.Engine.Components;
 using Faraway.Main.GameObjects;
 using Faraway.Main.GameObjects.SpaceCraftModules;
 using Faraway.Main.Models;
@@ -17,6 +18,7 @@ namespace Faraway.Main.Scenes
             AddGameObject(playerSpaceCraft = new SpaceCraft(player));
             playerSpaceCraft.SetModule(0, 1, new IonTurret());
             player.RegisterSpaceCraft(playerSpaceCraft);
+            playerSpaceCraft.GetComponent<Transform>().Position = new System.Numerics.Vector2(60, 60);
 
             AddGameObject(new PlayerInputHandler());
 
