@@ -114,7 +114,7 @@ namespace Faraway.Engine
             {
                 var fontRenderer = gameObject.GetComponent<FontRenderer>();
                 if (!fontRenderer.IsEnabled)
-                    continue; 
+                    continue;
 
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
 
