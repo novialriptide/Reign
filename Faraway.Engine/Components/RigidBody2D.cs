@@ -2,6 +2,10 @@
 
 namespace Faraway.Engine.Components
 {
+    /*
+     * PRIORITY TODO: Utilize a physics library (probably Chipmunk2D) to implement proper
+     * RigidBody2D functionality.
+     */
     public sealed class RigidBody2D : Component
     {
         private Transform transform;

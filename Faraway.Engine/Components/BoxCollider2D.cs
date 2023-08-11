@@ -3,6 +3,9 @@ using System.Numerics;
 
 namespace Faraway.Engine.Components
 {
+    /*
+     * PRIORITY TODO: Add multiple rectangle support.
+     */
     public sealed class BoxCollider2D : Component
     {
         private Transform transform;
