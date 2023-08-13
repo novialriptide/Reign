@@ -9,24 +9,15 @@ namespace Faraway.Engine
     public abstract class Scene
     {
         public GameInstance GameInstance;
-        public readonly List<GameObject> GameObjects;
+        public readonly List<GameObject> GameObjects = new List<GameObject>();
         public Camera2D ActiveCamera;
-        public bool IsHidden;
-        public bool IsPaused;
-        private GameObjectGroup spriteGroup;
-        private GameObjectGroup fontGroup;
-        private GameObjectGroup shapeGroup;
+        public bool IsHidden = false;
+        public bool IsPaused = false;
+        private GameObjectGroup spriteGroup = new GameObjectGroup();
+        private GameObjectGroup fontGroup = new GameObjectGroup();
+        private GameObjectGroup shapeGroup = new GameObjectGroup();
 
-        public Scene()
-        {
-            IsHidden = false;
-            IsPaused = false;
-
-            GameObjects = new List<GameObject>();
-            spriteGroup = new GameObjectGroup();
-            fontGroup = new GameObjectGroup();
-            shapeGroup = new GameObjectGroup();
-        }
+        public Scene() { }
         /// <summary>
         /// Add a <c>GameObject</c> to the <c>Scene</c>.
         /// </summary>
