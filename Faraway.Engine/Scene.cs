@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -47,6 +46,38 @@ namespace Faraway.Engine
             for (int i = 0; i < GameObjects.Count; i++)
                 GameObjects[i].Update(gameTime.ElapsedGameTime.TotalSeconds);
         }
+        internal class GameObjectRenderValues
+        {
+            internal Vector2 Position = Vector2.Zero;
+            internal float Rotation = 0f;
+            internal Vector2 RotationOrigin = Vector2.Zero;
+            internal Vector2 Scale = Vector2.One;
+
+            internal GameObjectRenderValues(GameObject gameObject)
+            {
+                Transform currentTransform = gameObject.GetComponent<Transform>();
+                while (currentTransform is not null)
+                {
+                    Rotation += currentTransform.Rotation;
+
+                    if (currentTransform.IsChild)
+                        RotationOrigin -= currentTransform.Position + currentTransform.RotationOrigin;
+
+                    Scale *= currentTransform.Scale;
+
+                    // Next loop
+                    currentTransform = currentTransform.Parent;
+
+                    /*
+                     * Changing the rotation origin changes the render position, therefore we
+                     * ignore the first position.
+                     */
+                    if (currentTransform is not null)
+                        Position += currentTransform.Position;
+                }
+            }
+        }
+
         /// <summary>
         /// Called every frame; should contain draw logic.
         /// </summary>
@@ -63,7 +94,6 @@ namespace Faraway.Engine
 
             foreach (GameObject gameObject in spriteGroup.Match<SpriteRenderer>(objs))
             {
-                var transform = gameObject.GetComponent<Transform>();
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
 
                 if (sprite2D.Texture == null)
@@ -72,33 +102,8 @@ namespace Faraway.Engine
                 if (!sprite2D.IsEnabled)
                     continue;
 
-                Vector2 renderPosition = Vector2.Zero;
-                float renderRotation = 0;
-                Vector2 renderRotationOrigin = Vector2.Zero;
-                Vector2 renderScale = Vector2.One;
-
-                Transform currentTransform = transform;
-                while (currentTransform is not null)
-                {
-                    renderRotation += currentTransform.Rotation;
-
-                    if (currentTransform.IsChild)
-                        renderRotationOrigin -= currentTransform.Position + currentTransform.RotationOrigin;
-
-                    renderScale *= currentTransform.Scale;
-
-                    // Next loop
-                    currentTransform = currentTransform.Parent;
-
-                    /*
-                     * Changing the rotation origin changes the render position, therefore we
-                     * ignore the first position.
-                     */
-                    if (currentTransform is not null)
-                        renderPosition += currentTransform.Position;
-                }
-
-                spriteBatch.Draw(sprite2D.Texture, renderPosition, null, Color.White, renderRotation, renderRotationOrigin, renderScale, SpriteEffects.None, 0);
+                GameObjectRenderValues values = new GameObjectRenderValues(gameObject);
+                spriteBatch.Draw(sprite2D.Texture, values.Position, null, Color.White, values.Rotation, values.RotationOrigin, values.Scale, SpriteEffects.None, 0);
             }
 
             foreach (GameObject gameObject in fontGroup.Match<FontRenderer>(objs))
