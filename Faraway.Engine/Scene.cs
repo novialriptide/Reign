@@ -43,6 +43,7 @@ namespace Faraway.Engine
         /// <param name="gameTime"></param>
         public virtual void Update(GameTime gameTime)
         {
+            // TODO: Make this a non-virtual method.
             for (int i = 0; i < GameObjects.Count; i++)
                 GameObjects[i].Update(gameTime.ElapsedGameTime.TotalSeconds);
         }
