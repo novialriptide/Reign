@@ -43,14 +43,6 @@ namespace Faraway.Engine
         /// </summary>
         /// <param name="gameTime"></param>
         public virtual void Update(GameTime gameTime) { }
-        internal void InternalUpdate()
-        {
-            for (int i = 0; i < GameObjects.Count; i++)
-                GameObjects[i].Update(GameInstance.DeltaTime);
-
-            Simulation.Step(TimeSpan.FromSeconds(GameInstance.DeltaTime));
-        }
-
         /// <summary>
         /// Called every frame; should contain draw logic.
         /// </summary>

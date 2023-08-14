@@ -45,7 +45,11 @@ namespace Faraway.Engine
                 if (!scene.IsPaused)
                 {
                     scene.Update(gameTime);
-                    scene.InternalUpdate();
+
+                    foreach (GameObject go in scene.GameObjects)
+                        go.Update(DeltaTime);
+
+                    scene.Simulation.Step(TimeSpan.FromSeconds(DeltaTime));
                 }
             base.Update(gameTime);
         }
