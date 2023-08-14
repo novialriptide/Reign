@@ -43,7 +43,10 @@ namespace Faraway.Engine
             MouseInput.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             foreach (Scene scene in Scenes)
                 if (!scene.IsPaused)
+                {
                     scene.Update(gameTime);
+                    scene.InternalUpdate();
+                }
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)

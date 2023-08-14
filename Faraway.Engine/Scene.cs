@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,18 +42,20 @@ namespace Faraway.Engine
         /// Called every frame; Should contain game logic.
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime) { }
+        internal void InternalUpdate()
         {
-            // TODO: Make this a non-virtual method.
             for (int i = 0; i < GameObjects.Count; i++)
-                GameObjects[i].Update(gameTime.ElapsedGameTime.TotalSeconds);
+                GameObjects[i].Update(GameInstance.DeltaTime);
+
+            Simulation.Step(TimeSpan.FromSeconds(GameInstance.DeltaTime));
         }
 
         /// <summary>
         /// Called every frame; should contain draw logic.
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Draw(GameTime gameTime)
+        internal void Draw(GameTime gameTime)
         {
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
