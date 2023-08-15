@@ -106,8 +106,7 @@ namespace Faraway.Main.GameObjects
 
             var t = module.GetComponent<Transform>();
             BoxCollider2Ds.Add(module.GetComponent<BoxCollider2D>());
-            t.Position.X += x * ModulePixelWidth;
-            t.Position.Y += y * ModulePixelHeight;
+            t.Position += new Vector2(x * ModulePixelWidth, y * ModulePixelHeight);
             t.Parent = Transform;
             Scene.AddGameObject(module);
             modules.Add((x, y), module);
@@ -131,8 +130,8 @@ namespace Faraway.Main.GameObjects
              */
 
             // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
-            Vector2 acceleration = MathExtended.SetMagnitude(waypoint - Transform.Position, 5);
-            RigidBody2D.Acceleration = acceleration;
+            Vector2 velocity = MathExtended.SetMagnitude(waypoint - Transform.Position, 5);
+            RigidBody2D.ApplyLinearImpulse(velocity);
         }
     }
 }

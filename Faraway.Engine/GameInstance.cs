@@ -40,7 +40,9 @@ namespace Faraway.Engine
         }
         protected override void Update(GameTime gameTime)
         {
-            MouseInput.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            DeltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+
+            MouseInput.Update((float)DeltaTime);
             foreach (Scene scene in Scenes)
                 if (!scene.IsPaused)
                 {

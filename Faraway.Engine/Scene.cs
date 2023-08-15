@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using tainicom.Aether.Physics2D.Dynamics;
 
 namespace Faraway.Engine
 {
@@ -16,6 +17,8 @@ namespace Faraway.Engine
         private GameObjectGroup spriteGroup = new GameObjectGroup();
         private GameObjectGroup fontGroup = new GameObjectGroup();
         private GameObjectGroup shapeGroup = new GameObjectGroup();
+
+        internal readonly World Simulation = new World();
 
         public Scene() { }
         /// <summary>
