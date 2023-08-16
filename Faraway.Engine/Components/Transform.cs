@@ -11,8 +11,8 @@ namespace Faraway.Engine.Components
     /// used. Most functionality should be wrapped so the video game's codebase that imports the game engine
     /// shouldn't have to import <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
     ///
-    /// If a <c>RigidBody2D</c> component isn't attached to the game object, then the game engine will not rely
-    /// on the physics engine's Transform module.
+    /// If a <c>RigidBody2D</c> component isn't attached to the game object, then the component will not rely
+    /// on the physics engine.
     /// </summary>
     public sealed class Transform : Component
     {

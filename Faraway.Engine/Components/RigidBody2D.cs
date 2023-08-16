@@ -3,6 +3,14 @@ using tainicom.Aether.Physics2D.Dynamics;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 
+/*
+ * PRIORITY TODO: Figure out the relationship between RigidBody2D and BoxCollider2D.
+ * 
+ * 1. Should the gameobject have both components? (RigidBody2D + BoxCollider2D + Transform)
+ * 2. Should the gameobject have the RigidBody2D reference the BoxCollider2Ds for multiple collisions?
+ *   2a. If so, what happens if one of the BoxCollider2Ds is detached from the parent?
+ */
+
 namespace Faraway.Engine.Components
 {
     public enum BodyType
@@ -33,6 +41,11 @@ namespace Faraway.Engine.Components
         {
             get => new Vector2(Body.LinearVelocity.X, Body.LinearVelocity.Y);
             set => Body.LinearVelocity = new AVector2(value.X, value.Y);
+        }
+        public Vector2 CenterOfGravity
+        {
+            get => new Vector2(Body.LocalCenter.X, Body.LocalCenter.Y);
+            set => Body.LocalCenter = new AVector2(value.X, value.Y);
         }
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)
