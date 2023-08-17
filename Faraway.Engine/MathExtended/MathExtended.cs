@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Faraway.Engine.MathExtended
 {
-    public static class MathExtended
+    public static class MathV
     {
         /// <summary>
         /// Gets the magnitude.
