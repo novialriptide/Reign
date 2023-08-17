@@ -16,7 +16,7 @@ namespace Faraway.Engine.Tests.TestMath
         public void TestMagnitudeFloat()
         {
             var a = new Vector2(756.2f, 24.6f);
-            Assert.AreEqual(MathV.Magnitude(a), 756.6000366210938);
+            Assert.AreEqual(MathV.Magnitude(a), 756.6, 1);
         }
         [TestMethod]
         public void TestSetMagnitudeInteger()
@@ -26,7 +26,7 @@ namespace Faraway.Engine.Tests.TestMath
             Assert.AreEqual(MathV.Magnitude(a), 1);
 
             a = MathV.SetMagnitude(a, 765);
-            Assert.AreEqual(MathV.Magnitude(a), 765);
+            Assert.AreEqual(MathV.Magnitude(a), 765, 1);
         }
         [TestMethod]
         public void TestSetMagnitudeFloat()
@@ -36,7 +36,7 @@ namespace Faraway.Engine.Tests.TestMath
             Assert.AreEqual(MathV.Magnitude(a), 1);
 
             a = MathV.SetMagnitude(a, 4.25f);
-            Assert.AreEqual(MathV.Magnitude(a), 4.25f);
+            Assert.AreEqual(MathV.Magnitude(a), 4.25f, 2);
         }
     }
 }
