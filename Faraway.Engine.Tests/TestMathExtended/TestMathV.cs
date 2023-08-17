@@ -1,10 +1,10 @@
 using System.Numerics;
 using Faraway.Engine.MathExtended;
 
-namespace Faraway.Engine.Tests.TestMath
+namespace Faraway.Engine.Tests.TestMathExtended
 {
     [TestClass]
-    public class TestVector2
+    public class TestMathV
     {
         [TestMethod]
         public void TestMagnitudeInteger()
