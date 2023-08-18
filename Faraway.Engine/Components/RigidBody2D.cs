@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using System;
 using System.Diagnostics;
+using tainicom.Aether.Physics2D.Common;
+using Vector2 = System.Numerics.Vector2;
+using Faraway.Engine.MathExtended;
 
 /*
  * PRIORITY TODO: Figure out the relationship between RigidBody2D and BoxCollider2D.
@@ -54,6 +57,11 @@ namespace Faraway.Engine.Components
             get => new Vector2(Body.LinearVelocity.X, Body.LinearVelocity.Y);
             set => Body.LinearVelocity = new AVector2(value.X, value.Y);
         }
+        public float Rotation
+        {
+            get => MathFl.RadiansToDegrees(Body.Rotation);
+            set => Body.Rotation = MathFl.DegreesToRadians(value);
+        }
         /// <summary>
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
@@ -84,13 +92,17 @@ namespace Faraway.Engine.Components
 
             AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
             Body = Simulation.CreateBody(position: av, rotation: transform.Rotation, bodyType: ABodyType.Dynamic);
+            PolygonShape box = new PolygonShape(1f);
+            box.Vertices = PolygonTools.CreateRectangle(20f, 20f);
+            Body.CreateFixture(box);
             Body.IgnoreGravity = true;
+            Body.FixedRotation = false;
 
             base.Start();
         }
         public override void Update(double deltaTime)
         {
-            Debug.WriteLine(Body.Rotation);
+            Debug.WriteLine(Rotation + " " + Body.Rotation);
             if (GameObject.ContainsComponent<BoxCollider2D>() && BoxCollider2Ds.Count > 0)
                 throw new MemberAccessException("GameObject cannot contain BoxCollider" +
                     " and RigidBody2D while `RigidBody2D.BoxCollider2Ds` contains items.");

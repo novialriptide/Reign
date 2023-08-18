@@ -132,7 +132,7 @@ namespace Faraway.Main.GameObjects
             // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
             Vector2 velocity = MathV.SetMagnitude(waypoint - Transform.Position, 52);
             RigidBody2D.ApplyLinearImpulse(velocity);
-            RigidBody2D.ApplyAngularImpulse(150);
+            RigidBody2D.ApplyAngularImpulse(15440);
         }
     }
 }
