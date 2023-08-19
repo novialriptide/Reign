@@ -39,8 +39,6 @@ namespace Faraway.Engine.Components
         internal World Simulation => GameObject.Scene.Simulation;
         internal Body Body;
 
-        private bool isNotValid => GameObject.ContainsComponent<BoxCollider2D>() && BoxCollider2Ds.Count > 0;
-
         /// <summary>
         /// Value to decide if the game object should ignore gravity or not.
         ///
@@ -113,14 +111,6 @@ namespace Faraway.Engine.Components
                 AddBoxCollider2D(boxCollider2D);
 
             base.Start();
-        }
-        public override void Update(double deltaTime)
-        {
-            if (isNotValid)
-                throw new MemberAccessException("GameObject cannot contain BoxCollider" +
-                    " and RigidBody2D while `RigidBody2D.BoxCollider2Ds` contains items.");
-
-            base.Update(deltaTime);
         }
 
         /// <summary>
