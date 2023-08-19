@@ -111,6 +111,21 @@ namespace Faraway.Engine.Components
         /// </summary>
         public bool IsChild => Parent is not null;
         /// <summary>
+        /// Check if this game object is a child of the specified game object.
+        /// </summary>
+        public bool IsChildOf(Transform parent)
+        {
+            foreach (Transform child in parent.Children)
+                if (child == this)
+                    return true;
+
+            return false;
+        }
+        /// <summary>
+        /// Check if this game object is a parent of the specified game object.
+        /// </summary>
+        public bool IsParentOf(Transform child) => child.IsChildOf(this);
+        /// <summary>
         /// Children of this GameObject.
         /// </summary>
         public Transform[] Children
