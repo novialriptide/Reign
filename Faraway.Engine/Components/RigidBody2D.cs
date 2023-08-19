@@ -1,12 +1,8 @@
-﻿using System.Numerics;
-using tainicom.Aether.Physics2D.Dynamics;
+﻿using tainicom.Aether.Physics2D.Dynamics;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using System.Collections.Generic;
-using tainicom.Aether.Physics2D.Collision.Shapes;
 using System;
-using System.Diagnostics;
-using tainicom.Aether.Physics2D.Common;
 using Vector2 = System.Numerics.Vector2;
 using Faraway.Engine.MathExtended;
 
@@ -28,6 +24,10 @@ namespace Faraway.Engine.Components
 
     }
     /// <summary>
+    /// The BoxCollider2D component that is attached to this game object will automatically be added as a reference
+    /// to the <c>BoxCollider2Ds</c> array. It is not recommended to have multiple `BoxCollider2D`s as children if
+    /// the game object already has a `BoxCollider2D`.
+    /// 
     /// <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see> is the physics engine
     /// used. Most functionality should be wrapped so the video game's codebase that imports the game engine
     /// shouldn't have to import <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
@@ -38,6 +38,8 @@ namespace Faraway.Engine.Components
 
         internal World Simulation => GameObject.Scene.Simulation;
         internal Body Body;
+
+        private bool isNotValid => GameObject.ContainsComponent<BoxCollider2D>() && BoxCollider2Ds.Count > 0;
 
         /// <summary>
         /// Value to decide if the game object should ignore gravity or not.
@@ -70,10 +72,20 @@ namespace Faraway.Engine.Components
             get => new Vector2(Body.LocalCenter.X, Body.LocalCenter.Y);
             set => Body.LocalCenter = new AVector2(value.X, value.Y);
         }
+        private List<BoxCollider2D> boxCollider2Ds = new List<BoxCollider2D>();
         /// <summary>
         /// If empty, then the BoxCollider2D assignd to this game object will be used.
         /// </summary>
-        public readonly List<BoxCollider2D> BoxCollider2Ds = new List<BoxCollider2D>();
+        public List<BoxCollider2D> BoxCollider2Ds
+        {
+            get => boxCollider2Ds;
+            set
+            {
+                boxCollider2Ds.Clear();
+                foreach (BoxCollider2D b in value)
+                    AddBoxCollider2D(b);
+            }
+        }
 
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)
@@ -92,18 +104,19 @@ namespace Faraway.Engine.Components
 
             AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
             Body = Simulation.CreateBody(position: av, rotation: transform.Rotation, bodyType: ABodyType.Dynamic);
-            PolygonShape box = new PolygonShape(1f);
-            box.Vertices = PolygonTools.CreateRectangle(20f, 20f);
-            Body.CreateFixture(box);
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
+
+            // Handle if this game object contains a BoxCollider2D component.
+            BoxCollider2D boxCollider2D = GameObject.GetComponent<BoxCollider2D>();
+            if (boxCollider2D is not null)
+                AddBoxCollider2D(boxCollider2D);
 
             base.Start();
         }
         public override void Update(double deltaTime)
         {
-            Debug.WriteLine(Rotation + " " + Body.Rotation);
-            if (GameObject.ContainsComponent<BoxCollider2D>() && BoxCollider2Ds.Count > 0)
+            if (isNotValid)
                 throw new MemberAccessException("GameObject cannot contain BoxCollider" +
                     " and RigidBody2D while `RigidBody2D.BoxCollider2Ds` contains items.");
 
@@ -128,11 +141,22 @@ namespace Faraway.Engine.Components
         /// <summary>
         /// Add a BoxCollider2D
         /// </summary>
-        /// <param name="boxCollider"></param>
         public void AddBoxCollider2D(BoxCollider2D boxCollider)
         {
+            Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
+            if (!childTransform.IsChildOf(transform))
+                throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +
+                    " the RigidBody2D's transform is not a parent of the BoxCollider2D.");
+
+            AVector2 offset = new AVector2(boxCollider.Offset.X, boxCollider.Offset.Y);
+            Body.CreateRectangle(boxCollider.Size.X, boxCollider.Size.Y, 0f, offset);
             BoxCollider2Ds.Add(boxCollider);
-            Body.CreateRectangle(boxCollider.Size.X, boxCollider.Size.Y, 0f, new AVector2(boxCollider.Offset.X, boxCollider.Offset.Y));
+        }
+        public void ClearBoxCollider2D()
+        {
+            boxCollider2Ds.Clear();
+            foreach (Fixture f in Body.FixtureList)
+                Body.Remove(f);
         }
     }
 }
