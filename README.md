@@ -4,13 +4,12 @@
 ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=http%3A%2F%2Fdeveloper.farawaygame.net%2F&label=docs)
 ![Formatting](https://github.com/novialriptide/Faraway/actions/workflows/format.yml/badge.svg)
 
-## Engine Functionality
+## Dependencies
 
- - Entity Component System
- - Scene Management
- - MouseInput Events
- - Countdown Timer
- - Pathfinding
+### `Faraway.Engine`
+
+ - [MonoGame](https://docs.monogame.net/) (ver 3.8.1.303)
+ - [Aether.Physics2D](https://tainicom.github.io/Aether.Physics2D/1.7) (ver 1.7)
 
 ## Resources
 
@@ -22,9 +21,9 @@
  - **Dean Herbert**, [osu!lazer's coding conventions](https://github.com/ppy/osu/blob/master/.editorconfig)
  - **Nicholas Swift**, [Easy A* (star) Pathfinding](https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2)
  - **Scott Lembcke**, [2D Lighting Techniques](https://slembcke.github.io/2D-Lighting-Overview)
- - **Gustav Dahl**, [Measuring How Game Feel Is Influenced by the Player Avatar’s Acceleration and Deceleration](https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf)
- - **Geek Tutorials**, [Photoshop Tutorial - Make a Space Background](https://www.youtube.com/watch?v=_TIGIxHp9b8)
  - **Raouf Touti**, [Perlin Noise: A Procedural Generation Algorithm](https://rtouti.github.io/graphics/perlin-noise-algorithm)
 
 ### `Faraway.Main`
 
+ - **Gustav Dahl**, [Measuring How Game Feel Is Influenced by the Player Avatar’s Acceleration and Deceleration](https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf)
+ - **Geek Tutorials**, [Photoshop Tutorial - Make a Space Background](https://www.youtube.com/watch?v=_TIGIxHp9b8)
