@@ -1,13 +1,13 @@
-﻿using tainicom.Aether.Physics2D.Dynamics;
-using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
-using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using Vector2 = System.Numerics.Vector2;
-using Faraway.Engine.MathExtended;
 using System.Linq;
-using tainicom.Aether.Physics2D.Common;
+using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
+using tainicom.Aether.Physics2D.Common;
+using tainicom.Aether.Physics2D.Dynamics;
+using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
+using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
+using Vector2 = System.Numerics.Vector2;
 
 /*
  * PRIORITY TODO: Figure out the relationship between RigidBody2D and BoxCollider2D.
