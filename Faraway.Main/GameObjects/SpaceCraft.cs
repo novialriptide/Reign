@@ -116,6 +116,10 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void SetWaypoint(Vector2 waypoint)
         {
+            /*
+             * PRIORITY TODO: Make the ship rotate towards the target position, then move foward.
+             */
+
             Vector2 velocity = MathV.SetMagnitude(waypoint - Transform.Position, 15552);
             RigidBody2D.Velocity = velocity;
             RigidBody2D.ApplyAngularImpulse(15440);
