@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -142,7 +143,7 @@ namespace Faraway.Engine.Components
             foreach (Transform child in Children)
             {
                 children.Add(child);
-                children = (List<Transform>)children.Concat(allChildren(children));
+                children = (List<Transform>)children.Concat(allChildren(children)); // NOTE: Concat's memory allocation is terrible.
             }
             return children.ToArray();
         }

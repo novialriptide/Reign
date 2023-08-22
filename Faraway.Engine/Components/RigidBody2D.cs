@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
@@ -38,7 +39,7 @@ namespace Faraway.Engine.Components
     {
         private Transform transform;
 
-        private Dictionary<int, Fixture> linkedColliders = new Dictionary<int, Fixture>();
+        private Dictionary<BoxCollider2D, Fixture> linkedColliders = new Dictionary<BoxCollider2D, Fixture>();
 
         internal World Simulation => GameObject.Scene.Simulation;
         internal Body Body;
@@ -74,21 +75,11 @@ namespace Faraway.Engine.Components
             get => new Vector2(Body.LocalCenter.X, Body.LocalCenter.Y);
             set => Body.LocalCenter = new AVector2(value.X, value.Y);
         }
-        private HashSet<BoxCollider2D> boxCollider2Ds = new HashSet<BoxCollider2D>();
-        /// <summary>
-        /// If empty, then the BoxCollider2D assignd to this game object will be used.
-        /// </summary>
-        public readonly List<BoxCollider2D> BoxCollider2Ds = new List<BoxCollider2D>();
 
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)
         {
             IgnoreGravity = ignoreGravity;
-        }
-        public RigidBody2D(bool ignoreGravity, List<BoxCollider2D> boxCollider2Ds)
-        {
-            IgnoreGravity = ignoreGravity;
-            BoxCollider2Ds = boxCollider2Ds;
         }
 
         public override void Start()
@@ -100,16 +91,9 @@ namespace Faraway.Engine.Components
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
 
-            base.Start();
-        }
-        public override void Update(double deltaTime)
-        {
-            // Handle if this game object contains a BoxCollider2D component.
-            BoxCollider2D boxCollider2D = GameObject.GetComponent<BoxCollider2D>();
-            if (boxCollider2D is not null)
-                addBoxCollider2D(boxCollider2D);
+            registerColliders();
 
-            base.Update(deltaTime);
+            base.Start();
         }
 
         /// <summary>
@@ -123,8 +107,11 @@ namespace Faraway.Engine.Components
 
         private void registerColliders()
         {
+            /*
+             * PRIORITY TODO: `Children` must be `AllChildren`, `AllChildren` has performance issues.
+             */
             // Get all child BoxCollider2D components.
-            foreach (Transform child in transform.AllChildren)
+            foreach (Transform child in transform.Children)
             {
                 if (child.GameObject.ContainsComponent<BoxCollider2D>())
                 {
@@ -138,6 +125,7 @@ namespace Faraway.Engine.Components
         /// </summary>
         private void addBoxCollider2D(BoxCollider2D boxCollider)
         {
+            // PRIORITY TODO: Offsets are inaccurate.
             Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
             if (!childTransform.IsChildOf(transform))
                 throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +
@@ -146,13 +134,16 @@ namespace Faraway.Engine.Components
             AVector2 center = new AVector2(boxCollider.Size.X, boxCollider.Size.Y) / 2;
             Vertices fixtureVertices = PolygonTools.CreateRectangle(
                 boxCollider.Size.X / 2, boxCollider.Size.Y / 2, center, childTransform.Rotation);
-            fixtureVertices.Translate(new AVector2(boxCollider.Offset.X, boxCollider.Offset.Y));
+
+            Vector2 worldPosition = childTransform.WorldPosition;
+            Debug.WriteLine(boxCollider.GameObject + " " + worldPosition);
+            fixtureVertices.Translate(new AVector2(worldPosition.X, worldPosition.Y));
 
             Shape rotatedRectangle = new PolygonShape(fixtureVertices, 0.0f);
             Fixture fixture = new Fixture(rotatedRectangle);
 
             Body.Add(fixture);
-            linkedColliders.Add(boxCollider.GetHashCode(), fixture);
+            linkedColliders.Add(boxCollider, fixture);
         }
     }
 }
