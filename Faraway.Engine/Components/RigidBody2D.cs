@@ -70,11 +70,17 @@ namespace Faraway.Engine.Components
         /// <summary>
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
-        public Vector2 CenterOfGravity
+        public Vector2 LocalCenter
         {
             get => new Vector2(Body.LocalCenter.X, Body.LocalCenter.Y);
             set => Body.LocalCenter = new AVector2(value.X, value.Y);
         }
+        /// <summary>
+        /// Gets the center of gravity of the rigid body.
+        /// 
+        /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
+        /// </summary>
+        public Vector2 WorldCenter => new Vector2(Body.WorldCenter.X, Body.WorldCenter.Y);
 
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)

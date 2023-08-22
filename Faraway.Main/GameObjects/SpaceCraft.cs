@@ -120,9 +120,8 @@ namespace Faraway.Main.GameObjects
              * PRIORITY TODO: Make the ship rotate towards the target position, then move foward.
              */
 
-            Vector2 velocity = MathV.SetMagnitude(waypoint - Transform.Position, 15552);
+            Vector2 velocity = MathV.SetMagnitude(waypoint - RigidBody2D.WorldCenter, 15552);
             RigidBody2D.Velocity = velocity;
-            RigidBody2D.ApplyAngularImpulse(15440);
         }
     }
 }
