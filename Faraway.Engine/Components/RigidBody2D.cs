@@ -91,9 +91,12 @@ namespace Faraway.Engine.Components
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
 
-            registerColliders();
-
             base.Start();
+        }
+        public override void Update(double deltaTime)
+        {
+            registerColliders();
+            base.Update(deltaTime);
         }
 
         /// <summary>
@@ -113,11 +116,9 @@ namespace Faraway.Engine.Components
             // Get all child BoxCollider2D components.
             foreach (Transform child in transform.Children)
             {
-                if (child.GameObject.ContainsComponent<BoxCollider2D>())
-                {
-                    BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
+                BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
+                if (collider is not null && !linkedColliders.ContainsKey(collider))
                     addBoxCollider2D(collider);
-                }
             }
         }
         /// <summary>
@@ -135,9 +136,7 @@ namespace Faraway.Engine.Components
             Vertices fixtureVertices = PolygonTools.CreateRectangle(
                 boxCollider.Size.X / 2, boxCollider.Size.Y / 2, center, childTransform.Rotation);
 
-            Vector2 worldPosition = childTransform.WorldPosition;
-            Debug.WriteLine(boxCollider.GameObject + " " + worldPosition);
-            fixtureVertices.Translate(new AVector2(worldPosition.X, worldPosition.Y));
+            fixtureVertices.Translate(new AVector2(childTransform.Position.X, childTransform.Position.Y));
 
             Shape rotatedRectangle = new PolygonShape(fixtureVertices, 0.0f);
             Fixture fixture = new Fixture(rotatedRectangle);
