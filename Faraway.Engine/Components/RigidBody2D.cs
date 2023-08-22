@@ -131,8 +131,6 @@ namespace Faraway.Engine.Components
             /*
              * TOOD: BoxCollider2Ds are only added if they are the RigidBody2D's children, not
              * the RigidBody2D's children's children (and so on).
-             * 
-             * TODO: Rotation no longer works.
              */
             Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
             if (!childTransform.IsChildOf(transform))
