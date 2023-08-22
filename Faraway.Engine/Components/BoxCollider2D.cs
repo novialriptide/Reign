@@ -3,14 +3,10 @@ using System.Numerics;
 
 namespace Faraway.Engine.Components
 {
-    /*
-     * PRIORITY TODO: Add multiple rectangle support.
-     */
     public sealed class BoxCollider2D : Component
     {
         private Transform transform;
 
-        public Vector2 Offset;
         public Vector2 Size;
 
         public override void Start()
@@ -21,10 +17,10 @@ namespace Faraway.Engine.Components
 
         public bool CollidesWith(BoxCollider2D collider)
         {
-            Vector2 worldPosition = transform.WorldPosition + Offset;
+            Vector2 worldPosition = transform.WorldPosition;
 
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
-            Vector2 otherWorldPosition = otherTransform.WorldPosition + collider.Offset;
+            Vector2 otherWorldPosition = otherTransform.WorldPosition;
 
             return worldPosition.X + Size.X >= otherWorldPosition.X &&
                 worldPosition.X <= otherWorldPosition.X + collider.Size.X &&
