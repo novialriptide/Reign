@@ -96,6 +96,8 @@ namespace Faraway.Engine.Components
         public override void Update(double deltaTime)
         {
             registerColliders();
+            Debug.WriteLine(Rotation);
+
             base.Update(deltaTime);
         }
 
@@ -126,7 +128,12 @@ namespace Faraway.Engine.Components
         /// </summary>
         private void addBoxCollider2D(BoxCollider2D boxCollider)
         {
-            // PRIORITY TODO: Offsets are inaccurate.
+            /*
+             * TOOD: BoxCollider2Ds are only added if they are the RigidBody2D's children, not
+             * the RigidBody2D's children's children (and so on).
+             * 
+             * TODO: Rotation no longer works.
+             */
             Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
             if (!childTransform.IsChildOf(transform))
                 throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +

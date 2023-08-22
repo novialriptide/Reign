@@ -116,22 +116,8 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void SetWaypoint(Vector2 waypoint)
         {
-            /*
-             * PRIORITY TODO: Create the internals of this whereas the velocity of the rigidbody
-             * is being added, and then the velocity goes the opposite direction once its near
-             * its destination.
-             * 
-             * See references: 
-             *  - https://www.youtube.com/watch?v=EwONt4r2rMM
-             *  - https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf
-             *  
-             * Another thing to do is to let the spacecraft rotate facing the waypoint, then
-             * thrust foward.
-             */
-
-            // TODO: Temporary speed "5", remove once Speed `property` is properly implemented.
             Vector2 velocity = MathV.SetMagnitude(waypoint - Transform.Position, 15552);
-            RigidBody2D.ApplyLinearImpulse(velocity);
+            RigidBody2D.Velocity = velocity;
             RigidBody2D.ApplyAngularImpulse(15440);
         }
     }
