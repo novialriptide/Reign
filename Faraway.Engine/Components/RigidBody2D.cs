@@ -145,10 +145,8 @@ namespace Faraway.Engine.Components
 
             fixtureVertices.Translate(new AVector2(childTransform.Position.X, childTransform.Position.Y));
 
-            Shape rotatedRectangle = new PolygonShape(fixtureVertices, 0.0f);
-            Fixture fixture = new Fixture(rotatedRectangle);
-
-            Body.Add(fixture);
+            PolygonShape rotatedRectangle = new PolygonShape(fixtureVertices, 1.0f);
+            Fixture fixture = Body.CreateFixture(rotatedRectangle);
             linkedColliders.Add(boxCollider, fixture);
         }
     }
