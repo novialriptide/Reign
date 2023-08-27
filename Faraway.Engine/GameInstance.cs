@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Faraway.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,7 +50,7 @@ namespace Faraway.Engine
                     foreach (GameObject go in scene.GameObjects)
                         go.Update(DeltaTime);
 
-                    scene.Simulation.Step(TimeSpan.FromSeconds(DeltaTime));
+                    scene.Simulation.Step((float)DeltaTime);
                 }
             base.Update(gameTime);
         }
