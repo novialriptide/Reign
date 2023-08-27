@@ -19,6 +19,7 @@ namespace Faraway.Engine.Components
         {
             /*
              * PRIORITY TODO: Rotation via Transform is not supported.
+             * https://gist.github.com/jackmott/021bb1bd1135df71c389b42b8b44cc30
              */
             Vector2 worldPosition = transform.WorldPosition;
 
