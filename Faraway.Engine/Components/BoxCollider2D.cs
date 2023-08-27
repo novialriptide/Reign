@@ -17,6 +17,9 @@ namespace Faraway.Engine.Components
 
         public bool CollidesWith(BoxCollider2D collider)
         {
+            /*
+             * PRIORITY TODO: Rotation via Transform is not supported.
+             */
             Vector2 worldPosition = transform.WorldPosition;
 
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
