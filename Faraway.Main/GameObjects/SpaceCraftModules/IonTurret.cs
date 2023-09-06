@@ -11,7 +11,7 @@ namespace Faraway.Main.GameObjects.SpaceCraftModules
         public override string Description => throw new NotImplementedException();
         public override void OnAdd()
         {
-            Sprite2D.Texture = Sprite2D.LoadTexureFromFile("baseModule.png");
+            Sprite2D.LoadTexureFromFile("baseModule.png");
             base.OnAdd();
         }
     }
