@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Engine.Components
 {
@@ -11,6 +12,12 @@ namespace Faraway.Engine.Components
         public SpriteRenderer(Texture2D texture)
         {
             Texture = texture;
+        }
+        public Texture2D LoadTexureFromFile(string path)
+        {
+            GraphicsDevice graphicsDevice = GameObject.Scene.GameInstance.GraphicsDevice;
+            Stream stream = new FileStream($"Content/{path}", FileMode.Open);
+            return Texture2D.FromStream(graphicsDevice, stream);
         }
     }
 }

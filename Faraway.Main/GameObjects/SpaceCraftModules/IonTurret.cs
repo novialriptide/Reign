@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Main.GameObjects.SpaceCraftModules
@@ -10,7 +11,7 @@ namespace Faraway.Main.GameObjects.SpaceCraftModules
         public override string Description => throw new NotImplementedException();
         public override void OnAdd()
         {
-            Sprite2D.Texture = Scene.GameInstance.Content.Load<Texture2D>("baseModule");
+            Sprite2D.Texture = Sprite2D.LoadTexureFromFile("baseModule.png");
             base.OnAdd();
         }
     }

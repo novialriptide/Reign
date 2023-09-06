@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.IO;
 using Faraway.Engine;
-using Faraway.Main.GameObjects;
+using Faraway.Engine.Components;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Faraway.Main.GameObjects.SpaceCraftModules
@@ -11,7 +11,7 @@ namespace Faraway.Main.GameObjects.SpaceCraftModules
         public override string Description => "The core module of your space craft. If this module dies, then your entire space craft becomes inoperable.";
         public override void OnAdd()
         {
-            Sprite2D.Texture = Scene.GameInstance.Content.Load<Texture2D>("baseModule");
+            Sprite2D.Texture = Sprite2D.LoadTexureFromFile("baseModule.png");
             base.OnAdd();
         }
     }

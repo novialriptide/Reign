@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Faraway.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
