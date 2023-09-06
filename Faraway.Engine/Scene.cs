@@ -80,7 +80,7 @@ namespace Faraway.Engine
                 if (!fontRenderer.IsEnabled)
                     continue;
 
-                Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition();
+                Vector2 renderPosition = gameObject.GetComponent<Transform>().WorldPosition;
 
                 if (fontRenderer.SpriteFont == null)
                     continue;
@@ -95,7 +95,7 @@ namespace Faraway.Engine
                 if (!rectRenderer.IsEnabled)
                     continue;
 
-                Vector2 renderPosition = gameObject.GetComponent<Transform>().GetWorldPosition() + rectRenderer.Offset;
+                Vector2 renderPosition = gameObject.GetComponent<Transform>().WorldPosition + rectRenderer.Offset;
 
                 // TODO: Find a cleaner way to approach this. Texture2D being assigned here is not a great idea.
                 if (rectRenderer.Texture == null)
