@@ -1,13 +1,33 @@
-﻿using System.Diagnostics;
-using System.Numerics;
+﻿using tainicom.Aether.Physics2D.Common;
+using tainicom.Aether.Physics2D.Dynamics;
+using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Faraway.Engine.Components
 {
     public sealed class BoxCollider2D : Component
     {
         private Transform transform;
-
         public Vector2 Size;
+
+        /// <summary>
+        /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
+        /// </summary>
+        internal Fixture Fixture;
+
+        /// <summary>
+        /// Relies on <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
+        /// </summary>
+        internal Vertices Vertices
+        {
+            get
+            {
+                AVector2 center = new AVector2(Size.X, Size.Y) / 2;
+                Vertices fixtureVertices = PolygonTools.CreateRectangle(Size.X / 2, Size.Y / 2, center, transform.Rotation);
+                fixtureVertices.Translate(new AVector2(transform.Position.X, transform.Position.Y));
+                return fixtureVertices;
+            }
+        }
 
         public override void Start()
         {

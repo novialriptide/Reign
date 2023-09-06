@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
@@ -9,14 +7,6 @@ using tainicom.Aether.Physics2D.Dynamics;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
 using Vector2 = System.Numerics.Vector2;
-
-/*
- * PRIORITY TODO: Figure out the relationship between RigidBody2D and BoxCollider2D.
- * 
- * 1. Should the gameobject have both components? (RigidBody2D + BoxCollider2D + Transform)
- * 2. Should the gameobject have the RigidBody2D reference the BoxCollider2Ds for multiple collisions?
- *   2a. If so, what happens if one of the BoxCollider2Ds is detached from the parent?
- */
 
 namespace Faraway.Engine.Components
 {
@@ -38,8 +28,6 @@ namespace Faraway.Engine.Components
     public sealed class RigidBody2D : Component
     {
         private Transform transform;
-
-        private Dictionary<BoxCollider2D, Fixture> linkedColliders = new Dictionary<BoxCollider2D, Fixture>();
 
         internal World Simulation => GameObject.Scene.Simulation;
         internal Body Body;
@@ -102,7 +90,6 @@ namespace Faraway.Engine.Components
         public override void Update(double deltaTime)
         {
             registerColliders();
-            Debug.WriteLine(Rotation);
 
             base.Update(deltaTime);
         }
@@ -125,7 +112,7 @@ namespace Faraway.Engine.Components
             foreach (Transform child in transform.Children)
             {
                 BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
-                if (collider is not null && !linkedColliders.ContainsKey(collider))
+                if (collider is not null && !(collider.Fixture is not null))
                     addBoxCollider2D(collider);
             }
         }
@@ -143,15 +130,9 @@ namespace Faraway.Engine.Components
                 throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +
                     " the RigidBody2D's transform is not a parent of the BoxCollider2D.");
 
-            AVector2 center = new AVector2(boxCollider.Size.X, boxCollider.Size.Y) / 2;
-            Vertices fixtureVertices = PolygonTools.CreateRectangle(
-                boxCollider.Size.X / 2, boxCollider.Size.Y / 2, center, childTransform.Rotation);
-
-            fixtureVertices.Translate(new AVector2(childTransform.Position.X, childTransform.Position.Y));
-
-            PolygonShape rotatedRectangle = new PolygonShape(fixtureVertices, 1.0f);
+            PolygonShape rotatedRectangle = new PolygonShape(boxCollider.Vertices, 1.0f);
             Fixture fixture = Body.CreateFixture(rotatedRectangle);
-            linkedColliders.Add(boxCollider, fixture);
+            boxCollider.Fixture = fixture;
         }
     }
 }
