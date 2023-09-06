@@ -31,14 +31,12 @@ namespace Faraway.Main.Scenes
             base.OnStart();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 GameInstance.Exit();
 
-            GameInstance.Window.Title = (1 / gameTime.ElapsedGameTime.TotalSeconds).ToString();
-
-            base.Update(gameTime);
+            base.Update();
         }
     }
 }

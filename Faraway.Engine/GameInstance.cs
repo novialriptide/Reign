@@ -19,7 +19,8 @@ namespace Faraway.Engine
             Scenes.Add(scene);
         }
 
-        public double DeltaTime;
+        public double DeltaTime { get; private set; }
+        public double FramesPerSecond { get; private set; }
 
         public void RemoveScene(Scene scene)
         {
@@ -40,12 +41,13 @@ namespace Faraway.Engine
         protected override void Update(GameTime gameTime)
         {
             DeltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+            FramesPerSecond = 1 / DeltaTime;
 
             MouseInput.Update((float)DeltaTime);
             foreach (Scene scene in Scenes)
                 if (!scene.IsPaused)
                 {
-                    scene.Update(gameTime);
+                    scene.Update();
 
                     foreach (GameObject go in scene.GameObjects)
                         go.Update(DeltaTime);
@@ -57,10 +59,11 @@ namespace Faraway.Engine
         protected override void Draw(GameTime gameTime)
         {
             DeltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+            FramesPerSecond = 1 / DeltaTime;
 
             foreach (Scene scene in Scenes)
                 if (!scene.IsHidden)
-                    scene.Draw(gameTime);
+                    scene.Draw();
             base.Draw(gameTime);
         }
     }

@@ -43,13 +43,11 @@ namespace Faraway.Engine
         /// <summary>
         /// Called every frame; Should contain game logic.
         /// </summary>
-        /// <param name="gameTime"></param>
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update() { }
         /// <summary>
         /// Called every frame; should contain draw logic.
         /// </summary>
-        /// <param name="gameTime"></param>
-        internal void Draw(GameTime gameTime)
+        internal void Draw()
         {
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
