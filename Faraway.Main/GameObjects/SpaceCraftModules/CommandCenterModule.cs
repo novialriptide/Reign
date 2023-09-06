@@ -1,9 +1,4 @@
-﻿using System.IO;
-using Faraway.Engine;
-using Faraway.Engine.Components;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Faraway.Main.GameObjects.SpaceCraftModules
+﻿namespace Faraway.Main.GameObjects.SpaceCraftModules
 {
     public class CommandCenterModule : SpaceCraftModule
     {
