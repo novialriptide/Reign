@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
-using tainicom.Aether.Physics2D.Common;
 using tainicom.Aether.Physics2D.Dynamics;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -18,8 +16,8 @@ namespace Faraway.Engine.Components
     }
     /// <summary>
     /// The BoxCollider2D component that is attached to this game object will automatically be added as a reference
-    /// to the <c>BoxCollider2Ds</c> array. It is not recommended to have multiple `BoxCollider2D`s as children if
-    /// the game object already has a `BoxCollider2D`.
+    /// to the <c>BoxCollider2Ds</c> array. It is not recommended to have multiple <see cref="BoxCollider2D"/>s as
+    /// children if the game object with the <see cref="RigidBody2D"/> attached already has a <see cref="BoxCollider2D"/>.
     /// 
     /// <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see> is the physics engine
     /// used. Most functionality should be wrapped so the video game's codebase that imports the game engine
