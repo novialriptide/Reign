@@ -45,6 +45,7 @@ namespace Faraway.Engine
 
             MouseInput.Update((float)DeltaTime);
             foreach (Scene scene in Scenes)
+            {
                 if (!scene.IsPaused)
                 {
                     scene.Update();
@@ -54,6 +55,7 @@ namespace Faraway.Engine
 
                     scene.Simulation.Step((float)DeltaTime);
                 }
+            }
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
