@@ -1,4 +1,5 @@
-﻿using Faraway.Engine;
+﻿using System;
+using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.GameObjects;
 using Faraway.Main.GameObjects.SpaceCraftModules;
@@ -35,6 +36,10 @@ namespace Faraway.Main.Scenes
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 GameInstance.Exit();
+
+            float fps = MathF.Round((float)GameInstance.FramesPerSecond, 0);
+            float dt = MathF.Round((float)GameInstance.DeltaTime, 5);
+            GameInstance.Window.Title = $"{fps} fps ({dt} ms)";
 
             base.Update();
         }
