@@ -67,6 +67,11 @@ namespace Faraway.Engine.Components
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
         public Vector2 WorldCenter => new Vector2(Body.WorldCenter.X, Body.WorldCenter.Y);
+        public BodyType BodyType
+        {
+            get => (BodyType)Body.BodyType;
+            set => Body.BodyType = (ABodyType)value;
+        }
 
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)
@@ -79,7 +84,7 @@ namespace Faraway.Engine.Components
             transform = GameObject.GetComponent<Transform>();
 
             AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
-            Body = Simulation.CreateBody(position: av, rotation: transform.Rotation, bodyType: ABodyType.Dynamic);
+            Body = Simulation.CreateBody(position: av, rotation: transform.Rotation, bodyType: (ABodyType)BodyType.Dynamic);
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
 
