@@ -9,6 +9,13 @@
         public bool IsRunning = false;
         public double Time = 0f;
 
+        public Timer() { }
+
+        public Timer(bool runOnStart)
+        {
+            IsRunning = runOnStart;
+        }
+
         public void Reset()
         {
             Time = 0;

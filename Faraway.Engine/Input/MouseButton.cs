@@ -6,7 +6,7 @@ namespace Faraway.Engine.Input
     public sealed class MouseButton
     {
         private ButtonState lastState;
-        private Timer clickerTimer = new Timer();
+        private Timer clickerTimer = new Timer(true);
         /// <summary>
         /// Returns `true` if mouse button is being held down.
         /// </summary>
