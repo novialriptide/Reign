@@ -17,6 +17,15 @@ namespace Faraway.Engine.Components
     /// </summary>
     public sealed class Transform : Component
     {
+        public new bool IsEnabled => true; /* Never meant to be disabled */
+        private bool checkRigidBody2D
+        {
+            get
+            {
+                RigidBody2D rigidBody2D = GameObject.GetComponent<RigidBody2D>();
+                return rigidBody2D is not null && rigidBody2D.IsEnabled;
+            }
+        }
         private Vector2 position = Vector2.Zero;
         /// <summary>
         /// Position of the Component.
@@ -25,7 +34,7 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                if (GameObject.ContainsComponent<RigidBody2D>())
+                if (checkRigidBody2D)
                 {
                     RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                     if (rb.Body is null)
@@ -37,7 +46,7 @@ namespace Faraway.Engine.Components
             }
             set
             {
-                if (GameObject.ContainsComponent<RigidBody2D>())
+                if (checkRigidBody2D)
                 {
                     RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                     rb.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
@@ -58,7 +67,7 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                if (GameObject.ContainsComponent<RigidBody2D>())
+                if (checkRigidBody2D)
                 {
                     RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                     if (rb.Body is null)
@@ -70,7 +79,7 @@ namespace Faraway.Engine.Components
             }
             set
             {
-                if (GameObject.ContainsComponent<RigidBody2D>())
+                if (checkRigidBody2D)
                 {
                     RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                     rb.Body.SetTransform(rb.Body.Position, value);
