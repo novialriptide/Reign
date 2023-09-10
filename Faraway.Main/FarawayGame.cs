@@ -12,8 +12,9 @@ namespace Faraway.Main
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            IsFixedTimeStep = false;
+            IsFixedTimeStep = false; // Priority TODO: DeltaTime is NOT correct.
             GraphicsDeviceManager.SynchronizeWithVerticalRetrace = false; // vsync
+            // TargetElapsedTime = TimeSpan.FromSeconds(1d / 2000d); // cap framerate
 
             Scenes = new List<Scene>();
         }
