@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using Faraway.Engine;
@@ -116,11 +117,7 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void SetWaypoint(Vector2 waypoint)
         {
-            /*
-             * PRIORITY TODO: Make the ship rotate towards the target position, then move foward.
-             */
-
-            Vector2 velocity = MathV.SetMagnitude(waypoint - RigidBody2D.WorldCenter, 15552);
+            Vector2 velocity = MathV.SetMagnitude(waypoint - RigidBody2D.WorldCenter, 100);
             RigidBody2D.Velocity = velocity;
         }
     }
