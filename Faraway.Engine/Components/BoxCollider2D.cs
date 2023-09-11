@@ -1,4 +1,5 @@
-﻿using tainicom.Aether.Physics2D.Collision.Shapes;
+﻿using Faraway.Engine.MathExtended;
+using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
 using tainicom.Aether.Physics2D.Dynamics;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -21,7 +22,6 @@ namespace Faraway.Engine.Components
         /// </summary>
         internal Fixture Fixture;
 
-
         public override void Start()
         {
             transform = GameObject.GetComponent<Transform>();
@@ -35,7 +35,7 @@ namespace Faraway.Engine.Components
                 rectangle = new PolygonShape(fixtureVertices, 1.0f);
             else
                 rectangle = new PolygonShape(fixtureVertices, Density);
-            
+
             Fixture = new Fixture(rectangle);
 
             base.Start();
@@ -47,15 +47,10 @@ namespace Faraway.Engine.Components
              * PRIORITY TODO: Rotation via Transform is not supported.
              * https://gist.github.com/jackmott/021bb1bd1135df71c389b42b8b44cc30
              */
-            Vector2 worldPosition = transform.WorldPosition;
-
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
-            Vector2 otherWorldPosition = otherTransform.WorldPosition;
 
-            return worldPosition.X + Size.X >= otherWorldPosition.X &&
-                worldPosition.X <= otherWorldPosition.X + collider.Size.X &&
-                worldPosition.Y + Size.Y >= otherWorldPosition.Y &&
-                worldPosition.Y <= otherWorldPosition.Y + collider.Size.Y;
+            return Collisions.RectToRect(transform.WorldPosition, Size,
+                otherTransform.WorldPosition, collider.Size);
         }
     }
 }
