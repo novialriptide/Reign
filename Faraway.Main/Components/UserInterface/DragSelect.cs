@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
 using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Engine.Input;
-using Faraway.Main.GameObjects;
 using Microsoft.Xna.Framework;
 using Vector2 = System.Numerics.Vector2;
 
