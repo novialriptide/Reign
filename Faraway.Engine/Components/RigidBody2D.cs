@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Dynamics;
@@ -92,7 +93,16 @@ namespace Faraway.Engine.Components
         }
         public override void Update(double deltaTime)
         {
-            registerColliders();
+            /*
+             * PRIORITY TODO: `Children` must be `AllChildren`, `AllChildren` has performance issues.
+             */
+            // Get all child BoxCollider2D components.
+            foreach (Transform child in transform.Children)
+            {
+                BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
+                if (collider is not null)
+                    addBoxCollider2D(collider);
+            }
 
             base.Update(deltaTime);
         }
@@ -106,19 +116,6 @@ namespace Faraway.Engine.Components
         /// </summary>
         public void ApplyAngularImpulse(float torque) => Body.ApplyAngularImpulse(torque);
 
-        private void registerColliders()
-        {
-            /*
-             * PRIORITY TODO: `Children` must be `AllChildren`, `AllChildren` has performance issues.
-             */
-            // Get all child BoxCollider2D components.
-            foreach (Transform child in transform.Children)
-            {
-                BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
-                if (collider is not null && !(collider.Fixture is not null))
-                    addBoxCollider2D(collider);
-            }
-        }
         /// <summary>
         /// Add a BoxCollider2D.
         /// </summary>
@@ -133,9 +130,10 @@ namespace Faraway.Engine.Components
                 throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +
                     " the RigidBody2D's transform is not a parent of the BoxCollider2D.");
 
-            PolygonShape rotatedRectangle = new PolygonShape(boxCollider.Vertices, 1.0f);
-            Fixture fixture = Body.CreateFixture(rotatedRectangle);
-            boxCollider.Fixture = fixture;
+            if (Body.FixtureList.Contains(boxCollider.Fixture))
+                return;
+
+            Body.Add(boxCollider.Fixture);
         }
     }
 }
