@@ -41,6 +41,7 @@ namespace Faraway.Main.Components.UserInterface
             {
                 IsActivelyDragging = true;
                 start = MouseInput.MousePosition;
+                SelectedObjects.Clear();
             }
 
             if (MouseInput.LeftButton.IsHeldDown)
@@ -58,27 +59,25 @@ namespace Faraway.Main.Components.UserInterface
             if (MouseInput.LeftButton.IsClickedUp)
             {
                 boxCollider.Size = size;
-                SelectedObjects.Clear();
-                // Get the objects that collide with this object's BoxCollider2D.
-                foreach (var obj in GameObject.Scene.GameObjects)
-                {
-                    SelectableObject selectable = obj.GetComponent<SelectableObject>();
-                    if (selectable is null)
-                        continue;
-
-                    foreach (BoxCollider2D collider in selectable.BoxCollider2Ds)
-                    {
-                        if (collider.CollidesWith(boxCollider))
-                        {
-                            SelectedObjects.Add(selectable);
-                            break; // prevents duplicate `SelectableObject`s being added.
-                        }
-                    }
-                }
                 IsActivelyDragging = false;
             }
 
             base.Update(deltaTime);
+        }
+
+        public override void OnCollisionEnter(BoxCollider2D other)
+        {
+            Debug.WriteLine(other.GameObject);
+            if (!IsActivelyDragging)
+                return;
+            
+            SelectableObject selectable = other.GameObject.GetComponent<SelectableObject>();
+            if (selectable is null)
+                return;
+            
+            SelectedObjects.Add(selectable);
+
+            base.OnCollisionEnter(other);
         }
     }
 }
