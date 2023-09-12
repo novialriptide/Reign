@@ -61,7 +61,7 @@ namespace Faraway.Engine.Components
         public Vector2 Scale = new Vector2(1f, 1f);
         private float rotation = 0f;
         /// <summary>
-        /// Rotation of the Component in rotations.
+        /// Rotation of the Component in radians.
         /// </summary>
         public float Rotation
         {
