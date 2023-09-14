@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using Faraway.Engine.MathExtended;
-using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Dynamics;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -30,6 +29,7 @@ namespace Faraway.Engine.Components
 
         internal World Simulation => GameObject.Scene.Simulation;
         internal Body Body;
+        internal Dictionary<Fixture, BoxCollider2D> LinkedFixtures = new();
 
         /// <summary>
         /// Value to decide if the game object should ignore gravity or not.
@@ -103,6 +103,7 @@ namespace Faraway.Engine.Components
                 if (collider is not null)
                     addBoxCollider2D(collider);
             }
+            
 
             base.Update(deltaTime);
         }
@@ -134,6 +135,7 @@ namespace Faraway.Engine.Components
                 return;
 
             Body.Add(boxCollider.Fixture);
+            LinkedFixtures.Add(boxCollider.Fixture, boxCollider);
         }
     }
 }
