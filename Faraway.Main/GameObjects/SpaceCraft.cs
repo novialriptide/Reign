@@ -117,7 +117,7 @@ namespace Faraway.Main.GameObjects
         /// </summary>
         public void SetWaypoint(Vector2 waypoint)
         {
-            Vector2 velocity = MathV.SetMagnitude(waypoint - RigidBody2D.WorldCenter, 100);
+            Vector2 velocity = (waypoint - RigidBody2D.WorldCenter).SetMagnitude(100);
             RigidBody2D.Velocity = velocity;
         }
     }

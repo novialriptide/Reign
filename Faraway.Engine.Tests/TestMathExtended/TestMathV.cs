@@ -10,33 +10,33 @@ namespace Faraway.Engine.Tests.TestMathExtended
         public void TestMagnitudeInteger()
         {
             var a = new Vector2(5, 5);
-            Assert.AreEqual(MathV.Magnitude(a), 7.071067810058594);
+            Assert.AreEqual(a.GetMagnitude(), 7.071067810058594);
         }
         [TestMethod]
         public void TestMagnitudeFloat()
         {
             var a = new Vector2(756.2f, 24.6f);
-            Assert.AreEqual(MathV.Magnitude(a), 756.6, 1);
+            Assert.AreEqual(a.GetMagnitude(), 756.6, 1);
         }
         [TestMethod]
         public void TestSetMagnitudeInteger()
         {
             var a = new Vector2(5, 5);
-            a = MathV.SetMagnitude(a, 1);
-            Assert.AreEqual(MathV.Magnitude(a), 1);
+            a = a.SetMagnitude(1);
+            Assert.AreEqual(MathV.GetMagnitude(a), 1);
 
-            a = MathV.SetMagnitude(a, 765);
-            Assert.AreEqual(MathV.Magnitude(a), 765, 1);
+            a = a.SetMagnitude(765);
+            Assert.AreEqual(MathV.GetMagnitude(a), 765, 1);
         }
         [TestMethod]
         public void TestSetMagnitudeFloat()
         {
             var a = new Vector2(2346754.43f, 346.24f);
-            a = MathV.SetMagnitude(a, 1);
-            Assert.AreEqual(MathV.Magnitude(a), 1);
+            a = a.SetMagnitude(1);
+            Assert.AreEqual(a.GetMagnitude(), 1);
 
-            a = MathV.SetMagnitude(a, 4.25f);
-            Assert.AreEqual(MathV.Magnitude(a), 4.25f, 2);
+            a = a.SetMagnitude(4.25f);
+            Assert.AreEqual(a.GetMagnitude(), 4.25f, 2);
         }
     }
 }
