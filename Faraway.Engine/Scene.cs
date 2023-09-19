@@ -8,7 +8,23 @@ namespace Faraway.Engine
 {
     public abstract class Scene
     {
-        public GameInstance GameInstance;
+        private GameInstance gameInstance;
+        /// <summary>
+        /// Fetch the GameInstance for the scene, throws <see cref="System.MemberAccessException">
+        /// if not attached to a <see cref="Faraway.Engine.GameInstance"/>.
+        /// </summary>
+        public GameInstance GameInstance
+        {
+            get
+            {
+                if (gameInstance is null)
+                    throw new System.MemberAccessException("This scene is not attached to any game instance.");
+
+
+                return gameInstance;
+            }
+            internal set => gameInstance = value;
+        }
         public readonly List<GameObject> GameObjects = new List<GameObject>();
         public Camera2D ActiveCamera;
         public bool IsHidden = false;
