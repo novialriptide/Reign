@@ -11,8 +11,7 @@ namespace Faraway.Engine.Tests.TestComonents
         {
             TestSceneBoxCollider scene = new TestSceneBoxCollider();
             scene.OnStart();
-
-            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            _ = scene.Obj1.GetComponent<Transform>();
             BoxCollider2D collider1 = scene.Obj1.GetComponent<BoxCollider2D>();
             Transform transform2 = scene.Obj2.GetComponent<Transform>();
             BoxCollider2D collider2 = scene.Obj2.GetComponent<BoxCollider2D>();
@@ -27,12 +26,11 @@ namespace Faraway.Engine.Tests.TestComonents
 
     internal class TestObjectCollider : GameObject
     {
-        private Transform transform;
         private BoxCollider2D collider;
 
         public TestObjectCollider()
         {
-            AddComponent(transform = new Transform());
+            AddComponent(new Transform());
             AddComponent(collider = new BoxCollider2D());
             collider.Size.X = 150;
             collider.Size.Y = 150;
