@@ -15,8 +15,6 @@ namespace Faraway.Main
             IsFixedTimeStep = false; // Priority TODO: DeltaTime is NOT correct.
             GraphicsDeviceManager.SynchronizeWithVerticalRetrace = false; // vsync
             // TargetElapsedTime = TimeSpan.FromSeconds(1d / 2000d); // cap framerate
-
-            Scenes = new List<Scene>();
         }
 
         protected override void LoadContent()

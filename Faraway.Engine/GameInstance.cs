@@ -12,7 +12,7 @@ namespace Faraway.Engine
         public GraphicsDeviceManager GraphicsDeviceManager;
         public SpriteBatch SpriteBatch;
 
-        public List<Scene> Scenes;
+        public List<Scene> Scenes = new List<Scene>();
 
         public void AddScene(Scene scene)
         {
@@ -47,17 +47,7 @@ namespace Faraway.Engine
 
             MouseInput.Update((float)DeltaTime);
             foreach (Scene scene in Scenes)
-            {
-                if (!scene.IsPaused)
-                {
-                    scene.Simulation.Step((float)DeltaTime);
-
-                    scene.Update();
-
-                    foreach (GameObject go in scene.GameObjects)
-                        go.Update(DeltaTime);
-                }
-            }
+                scene.Step(DeltaTime);
 
             base.Update(gameTime);
         }
@@ -67,8 +57,8 @@ namespace Faraway.Engine
             FramesPerSecond = 1 / DeltaTime;
 
             foreach (Scene scene in Scenes)
-                if (!scene.IsHidden)
-                    scene.Draw();
+                scene.Draw();
+
             base.Draw(gameTime);
         }
     }

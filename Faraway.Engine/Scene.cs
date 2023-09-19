@@ -49,6 +49,9 @@ namespace Faraway.Engine
         /// </summary>
         internal void Draw()
         {
+            if (IsHidden)
+                return;
+
             SpriteBatch spriteBatch = GameInstance.SpriteBatch;
 
             spriteBatch.Begin();
@@ -119,5 +122,17 @@ namespace Faraway.Engine
         /// Called when <c>Scene</c> is destroyed.
         /// </summary>
         public virtual void OnDestroy() { }
+
+        public void Step(double deltaTime)
+        {
+            if (IsPaused)
+                return;
+
+            Simulation.Step((float)deltaTime);
+            Update();
+
+            foreach (GameObject go in GameObjects)
+                go.Update(deltaTime);
+        }
     }
 }
