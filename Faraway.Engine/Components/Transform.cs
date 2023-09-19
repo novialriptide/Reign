@@ -55,6 +55,7 @@ namespace Faraway.Engine.Components
                 position = value;
             }
         }
+        private Vector2 scale = new Vector2(1f, 1f);
         /// <summary>
         /// Scale of the Component; default set to <c>(1f, 1f)</c>.
         /// </summary>
@@ -188,16 +189,5 @@ namespace Faraway.Engine.Components
                 return camera.Position + WorldPosition;
             }
         }
-        /// <summary>
-        /// Not implemented.
-        /// </summary>
-        /// <returns></returns>
-        public Vector2 GetPositionFromCamera()
-        {
-            return Vector2.Zero;
-        }
-
-        [Obsolete("Use property `WorldPosition` instead.")]
-        public Vector2 GetWorldPosition() => WorldPosition;
     }
 }
