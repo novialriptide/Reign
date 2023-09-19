@@ -18,7 +18,8 @@ namespace Faraway.Engine
             get
             {
                 if (gameInstance is null)
-                    throw new System.MemberAccessException("This scene is not attached to any game instance.");
+                    throw new System.MemberAccessException(
+                        "This scene is not attached to any game instance. Are you trying to add a GameObject in the scene constructor?");
 
 
                 return gameInstance;
