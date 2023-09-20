@@ -17,6 +17,16 @@ namespace Faraway.Engine.Tests.TestComonents
             BoxCollider2D collider2 = scene.Obj2.GetComponent<BoxCollider2D>();
             Assert.IsTrue(collider1.CollidesWith(collider2));
 
+            collider1.IsEnabled = false;
+            collider2.IsEnabled = true;
+
+            Assert.IsFalse(collider1.CollidesWith(collider2));
+            
+            collider1.IsEnabled = true;
+            collider2.IsEnabled = false;
+
+            Assert.IsFalse(collider1.CollidesWith(collider2));
+
             transform2.Position = new Vector2(0, 4000);
             Assert.IsFalse(collider1.CollidesWith(collider2));
 
