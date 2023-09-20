@@ -43,6 +43,9 @@ namespace Faraway.Engine.Components
 
         public bool CollidesWith(BoxCollider2D collider)
         {
+            if (!IsEnabled || !collider.IsEnabled)
+                return false;
+
             /*
              * PRIORITY TODO: Rotation via Transform is not supported.
              * https://gist.github.com/jackmott/021bb1bd1135df71c389b42b8b44cc30
