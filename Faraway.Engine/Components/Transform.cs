@@ -17,7 +17,10 @@ namespace Faraway.Engine.Components
     /// </summary>
     public sealed class Transform : Component
     {
-        public new bool IsEnabled => true; /* Never meant to be disabled */
+        /// <summary>
+        /// This component is never meant to be disabled.
+        /// </summary>
+        public new bool IsEnabled => true;
         private bool checkRigidBody2D
         {
             get
