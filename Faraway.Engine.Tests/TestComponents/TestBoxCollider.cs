@@ -21,7 +21,7 @@ namespace Faraway.Engine.Tests.TestComonents
             collider2.IsEnabled = true;
 
             Assert.IsFalse(collider1.CollidesWith(collider2));
-            
+
             collider1.IsEnabled = true;
             collider2.IsEnabled = false;
 
