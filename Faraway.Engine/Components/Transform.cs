@@ -113,7 +113,7 @@ namespace Faraway.Engine.Components
                 if (Parent.Children.Contains(value))
                     throw new ArgumentException("Cannot make circular reference of parents");
 
-                if (value.Parent == value)
+                if (value is not null && value.Parent == value)
                     throw new ArgumentException("Cannot make object a parent of itself.");
 
                 parent = value;
