@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Threading.Tasks.Dataflow;
 using Faraway.Engine.Components;
 
 namespace Faraway.Engine.Tests.TestComonents
@@ -9,7 +10,7 @@ namespace Faraway.Engine.Tests.TestComonents
         [TestMethod]
         public void TestEnabled()
         {
-            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            TestSceneTransform scene = new TestSceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -23,7 +24,7 @@ namespace Faraway.Engine.Tests.TestComonents
         [TestMethod]
         public void TestPosition()
         {
-            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            TestSceneTransform scene = new TestSceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -45,7 +46,7 @@ namespace Faraway.Engine.Tests.TestComonents
         [TestMethod]
         public void TestRotation()
         {
-            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            TestSceneTransform scene = new TestSceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -55,15 +56,69 @@ namespace Faraway.Engine.Tests.TestComonents
 
             scene.OnDestroy();
         }
+        [TestMethod]
+        public void TestNoParentChildRelation()
+        {
+            TestSceneTransform scene = new TestSceneTransform();
+            scene.OnStart();
+
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Assert.AreEqual(transform1.Children.Length, 0);
+            Assert.AreEqual(transform1.Parent, null);
+        }
+        [TestMethod]
+        public void TestSetParent()
+        {
+            TestSceneTransform scene = new TestSceneTransform();
+            scene.OnStart();
+
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Transform transform2 = scene.Obj2.GetComponent<Transform>();
+            transform1.Parent = transform2;
+            Assert.IsTrue(transform2.IsParentOf(transform1));
+            Assert.IsTrue(transform1.IsChildOf(transform2));
+            Assert.AreEqual(transform1.Parent, transform2);
+            Assert.AreEqual(transform2.Children[0], transform1);
+            Assert.AreEqual(transform2.Children.Length, 1);
+            Assert.AreEqual(transform1.Children.Length, 0);
+            Assert.IsTrue(transform2.Children.Contains(transform1));
+            Assert.IsTrue(transform1.IsChild);
+
+            scene.OnDestroy();
+        }
+        [TestMethod]
+        public void TestChildPosition()
+        {
+            TestSceneTransform scene = new TestSceneTransform();
+            scene.OnStart();
+
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Transform transform2 = scene.Obj2.GetComponent<Transform>();
+            transform1.Parent = transform2;
+
+            Assert.AreEqual(transform1.WorldPosition, Vector2.Zero);
+
+            transform2.Position = new Vector2(2350, 1521);
+            Assert.AreEqual(transform1.WorldPosition, new Vector2(2350, 1521));
+            Assert.AreEqual(transform1.Position, new Vector2(0, 0));
+
+            transform1.Position = new Vector2(3529, -1250);
+            Assert.AreEqual(transform1.WorldPosition, new Vector2(2350+3529, 1521-1250));
+            Assert.AreEqual(transform1.Position, new Vector2(3529, -1250));
+
+            transform1.Parent = null;
+            Assert.AreEqual(transform2.Position, new Vector2(2350, 1521));
+            Assert.AreEqual(transform1.Position, new Vector2(3529, -1250));
+
+            scene.OnDestroy();
+        }
     }
 
     internal class TestObjectTransform : GameObject
     {
-        private Transform transform;
-
         public TestObjectTransform()
         {
-            AddComponent(transform = new Transform());
+            AddComponent(new Transform());
             base.OnAdd();
         }
     }
