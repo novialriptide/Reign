@@ -103,7 +103,7 @@ namespace Faraway.Engine.Tests.TestComonents
             Assert.AreEqual(transform1.Position, new Vector2(0, 0));
 
             transform1.Position = new Vector2(3529, -1250);
-            Assert.AreEqual(transform1.WorldPosition, new Vector2(2350+3529, 1521-1250));
+            Assert.AreEqual(transform1.WorldPosition, new Vector2(2350 + 3529, 1521 - 1250));
             Assert.AreEqual(transform1.Position, new Vector2(3529, -1250));
 
             transform1.Parent = null;
