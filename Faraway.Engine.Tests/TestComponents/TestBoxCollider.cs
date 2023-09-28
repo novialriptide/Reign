@@ -3,6 +3,10 @@ using Faraway.Engine.Components;
 
 namespace Faraway.Engine.Tests.TestComponents
 {
+    /// <summary>
+    /// This is heavily based on <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>. If
+    /// the physics engine were to change, the test cases would need to be heavily modified.
+    /// </summary>
     [TestClass]
     public class TestBoxCollider
     {
@@ -28,6 +32,17 @@ namespace Faraway.Engine.Tests.TestComponents
 
             transform2.Position = new Vector2(0, 4000);
             Assert.IsFalse(collider1.CollidesWith(collider2));
+
+            scene.OnDestroy();
+        }
+        [TestMethod]
+        public void TestFixureExists()
+        {
+            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            scene.OnStart();
+            BoxCollider2D collider1 = scene.Obj1.GetComponent<BoxCollider2D>();
+
+            Assert.IsNotNull(collider1.Fixture);
 
             scene.OnDestroy();
         }

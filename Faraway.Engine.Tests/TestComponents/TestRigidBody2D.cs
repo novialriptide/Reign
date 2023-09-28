@@ -13,9 +13,12 @@ namespace Faraway.Engine.Tests
 
             Assert.IsNull(rb1.Body);
             scene.OnStart();
+            rb1.Update(0f);
 
             Assert.IsNotNull(rb1.Body);
             Assert.IsNotNull(rb1.Simulation);
+            Assert.AreEqual(BodyType.Dynamic, rb1.BodyType);
+            Assert.AreEqual(1, rb1.Body.FixtureList.Count);
 
             scene.OnDestroy();
         }
