@@ -1,7 +1,7 @@
 using System.Numerics;
 using Faraway.Engine.Components;
 
-namespace Faraway.Engine.Tests.TestComonents
+namespace Faraway.Engine.Tests.TestComponents
 {
     [TestClass]
     public class TestBoxCollider
