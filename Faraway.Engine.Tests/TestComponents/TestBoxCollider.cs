@@ -11,7 +11,6 @@ namespace Faraway.Engine.Tests.TestComonents
         {
             TestSceneBoxCollider scene = new TestSceneBoxCollider();
             scene.OnStart();
-            _ = scene.Obj1.GetComponent<Transform>();
             BoxCollider2D collider1 = scene.Obj1.GetComponent<BoxCollider2D>();
             Transform transform2 = scene.Obj2.GetComponent<Transform>();
             BoxCollider2D collider2 = scene.Obj2.GetComponent<BoxCollider2D>();
