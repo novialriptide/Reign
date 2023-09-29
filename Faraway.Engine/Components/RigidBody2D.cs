@@ -49,10 +49,10 @@ namespace Faraway.Engine.Components
             get => new Vector2(Body.LinearVelocity.X, Body.LinearVelocity.Y);
             set => Body.LinearVelocity = new AVector2(value.X, value.Y);
         }
-        public float Rotation
+        public float AngularVelocity
         {
-            get => MathFl.RadiansToDegrees(Body.Rotation);
-            set => Body.Rotation = MathFl.DegreesToRadians(value);
+            get => MathFl.RadiansToDegrees(Body.AngularVelocity);
+            set => Body.AngularVelocity = MathFl.DegreesToRadians(value);
         }
         /// <summary>
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
