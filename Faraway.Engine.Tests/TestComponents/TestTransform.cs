@@ -22,6 +22,7 @@ namespace Faraway.Engine.Tests.TestComponents
             public ObjectTransform Obj4 = new ObjectTransform();
             public ObjectTransform Obj5 = new ObjectTransform();
             public ObjectTransform Obj6 = new ObjectTransform();
+            public ObjectTransform Obj7 = new ObjectTransform();
             public override void OnStart()
             {
                 AddGameObject(Obj1);
@@ -30,6 +31,7 @@ namespace Faraway.Engine.Tests.TestComponents
                 AddGameObject(Obj4);
                 AddGameObject(Obj5);
                 AddGameObject(Obj6);
+                AddGameObject(Obj7);
                 base.OnStart();
             }
         }
@@ -139,7 +141,6 @@ namespace Faraway.Engine.Tests.TestComponents
 
             scene.OnDestroy();
         }
-        [Ignore]
         [TestMethod]
         public void TestGetAllChildren()
         {
@@ -153,11 +154,13 @@ namespace Faraway.Engine.Tests.TestComponents
             Transform transform4 = scene.Obj4.GetComponent<Transform>();
             Transform transform5 = scene.Obj5.GetComponent<Transform>();
             Transform transform6 = scene.Obj6.GetComponent<Transform>();
+            Transform transform7 = scene.Obj7.GetComponent<Transform>();
 
             transform1.AddChild(transform2);
             transform1.AddChild(transform3);
-            transform4.AddChild(transform5);
-            transform5.AddChild(transform6);
+            transform3.AddChild(transform5);
+            transform5.AddChild(transform4);
+            transform6.AddChild(transform7);
 
             Transform[] allChildren = transform1.AllChildren;
 
@@ -165,7 +168,8 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.IsTrue(allChildren.Contains(transform3));
             Assert.IsTrue(allChildren.Contains(transform4));
             Assert.IsTrue(allChildren.Contains(transform5));
-            Assert.IsTrue(allChildren.Contains(transform6));
+            Assert.IsFalse(allChildren.Contains(transform6));
+            Assert.IsFalse(allChildren.Contains(transform7));
 
             scene.OnDestroy();
         }

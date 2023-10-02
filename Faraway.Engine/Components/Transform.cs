@@ -155,14 +155,18 @@ namespace Faraway.Engine.Components
                 return children.ToArray();
             }
         }
-        private Transform[] allChildren(List<Transform> children)
+        private List<Transform> allChildren(List<Transform> children)
         {
-            return new Transform[] { };
+            foreach (Transform t in Children) {
+                children.Add(t);
+                t.allChildren(children);
+            }
+            return children;
         }
         /// <summary>
-        /// Gets all children of this game object.
+        /// Recurisvely retrieves all of the children game objects.
         /// </summary>
-        public Transform[] AllChildren => allChildren(new List<Transform>());
+        public Transform[] AllChildren => allChildren(new List<Transform>()).ToArray();
 
         /// <summary>
         /// The position of the GameObject based on the world.
