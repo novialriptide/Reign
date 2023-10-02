@@ -203,8 +203,5 @@ namespace Faraway.Engine.Components
         {
             return Vector2.Zero;
         }
-
-        [Obsolete("Use property `WorldPosition` instead.")]
-        public Vector2 GetWorldPosition() => WorldPosition;
     }
 }
