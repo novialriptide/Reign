@@ -59,7 +59,7 @@ namespace Faraway.Engine.Tests
             Assert.IsTrue(rb1.IsEnabled);
             Assert.AreEqual(BodyType.Dynamic, rb1.BodyType);
             Assert.AreEqual(1, rb1.BoxCollider2Ds.Count);
-            
+
             // Internal attribute checks
             Assert.IsNotNull(rb1.Body);
             Assert.IsNotNull(rb1.Simulation);
@@ -80,7 +80,7 @@ namespace Faraway.Engine.Tests
             Assert.IsTrue(rb1.IsEnabled);
             Assert.AreEqual(BodyType.Dynamic, rb1.BodyType);
             Assert.AreEqual(1, rb1.BoxCollider2Ds.Count);
-            
+
             // Internal attribute checks
             Assert.IsNotNull(rb1.Body);
             Assert.IsNotNull(rb1.Simulation);

@@ -84,7 +84,10 @@ namespace Faraway.Engine.Components
             transform = GameObject.GetComponent<Transform>();
 
             AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
-            Body = Simulation.CreateBody(position: av, rotation: transform.Rotation, bodyType: (ABodyType)BodyType.Dynamic);
+            Body = Simulation.CreateBody(
+                position: av,
+                rotation: transform.Rotation,
+                bodyType: (ABodyType)BodyType.Dynamic);
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
 
@@ -114,13 +117,7 @@ namespace Faraway.Engine.Components
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
         public void ApplyAngularImpulse(float torque) => Body.ApplyAngularImpulse(torque);
-        public List<BoxCollider2D> BoxCollider2Ds
-        {
-            get
-            {
-                return new List<BoxCollider2D>();
-            }
-        }
+        public List<BoxCollider2D> BoxCollider2Ds => new List<BoxCollider2D>();
 
         /// <summary>
         /// Add a BoxCollider2D.

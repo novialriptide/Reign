@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("Faraway.Engine.Tests")]
+[assembly: InternalsVisibleTo("Faraway.Engine.Tests")]
 namespace Faraway.Engine.Components
 {
     public abstract class Component
