@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using Faraway.Engine.MathExtended;
-using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Dynamics;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -115,6 +114,13 @@ namespace Faraway.Engine.Components
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
         public void ApplyAngularImpulse(float torque) => Body.ApplyAngularImpulse(torque);
+        public List<BoxCollider2D> BoxCollider2Ds
+        {
+            get
+            {
+                return new List<BoxCollider2D>();
+            }
+        }
 
         /// <summary>
         /// Add a BoxCollider2D.

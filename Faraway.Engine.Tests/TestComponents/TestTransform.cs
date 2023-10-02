@@ -6,10 +6,30 @@ namespace Faraway.Engine.Tests.TestComponents
     [TestClass]
     public class TestTransform
     {
+        private class ObjectTransform : GameObject
+        {
+            public ObjectTransform()
+            {
+                AddComponent(new Transform());
+                base.OnAdd();
+            }
+        }
+        private class SceneTransform : Scene
+        {
+            public ObjectTransform Obj1 = new ObjectTransform();
+            public ObjectTransform Obj2 = new ObjectTransform();
+            public override void OnStart()
+            {
+                AddGameObject(Obj1);
+                AddGameObject(Obj2);
+                base.OnStart();
+            }
+        }
+
         [TestMethod]
         public void TestEnabled()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -23,7 +43,7 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestPosition()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -45,7 +65,7 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestRotation()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -58,7 +78,7 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestNoParentChildRelation()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -68,7 +88,7 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestSetParent()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -88,7 +108,7 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestChildPosition()
         {
-            TestSceneTransform scene = new TestSceneTransform();
+            SceneTransform scene = new SceneTransform();
             scene.OnStart();
 
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
@@ -110,26 +130,6 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.AreEqual(transform1.Position, new Vector2(3529, -1250));
 
             scene.OnDestroy();
-        }
-    }
-
-    internal class TestObjectTransform : GameObject
-    {
-        public TestObjectTransform()
-        {
-            AddComponent(new Transform());
-            base.OnAdd();
-        }
-    }
-    internal class TestSceneTransform : Scene
-    {
-        public TestObjectTransform Obj1 = new TestObjectTransform();
-        public TestObjectTransform Obj2 = new TestObjectTransform();
-        public override void OnStart()
-        {
-            AddGameObject(Obj1);
-            AddGameObject(Obj2);
-            base.OnStart();
         }
     }
 }

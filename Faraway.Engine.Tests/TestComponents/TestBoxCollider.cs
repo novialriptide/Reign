@@ -10,10 +10,35 @@ namespace Faraway.Engine.Tests.TestComponents
     [TestClass]
     public class TestBoxCollider
     {
+        private class ObjectCollider : GameObject
+        {
+            private BoxCollider2D collider;
+
+            public ObjectCollider()
+            {
+                AddComponent(new Transform());
+                AddComponent(collider = new BoxCollider2D());
+                collider.Size.X = 150;
+                collider.Size.Y = 150;
+                base.OnAdd();
+            }
+        }
+        private class SceneCollider : Scene
+        {
+            public ObjectCollider Obj1 = new ObjectCollider();
+            public ObjectCollider Obj2 = new ObjectCollider();
+            public override void OnStart()
+            {
+                AddGameObject(Obj1);
+                AddGameObject(Obj2);
+                base.OnStart();
+            }
+        }
+
         [TestMethod]
         public void TestCollidesWith()
         {
-            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            SceneCollider scene = new SceneCollider();
             scene.OnStart();
             BoxCollider2D collider1 = scene.Obj1.GetComponent<BoxCollider2D>();
             Transform transform2 = scene.Obj2.GetComponent<Transform>();
@@ -38,38 +63,13 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestFixureExists()
         {
-            TestSceneBoxCollider scene = new TestSceneBoxCollider();
+            SceneCollider scene = new SceneCollider();
             scene.OnStart();
             BoxCollider2D collider1 = scene.Obj1.GetComponent<BoxCollider2D>();
 
             Assert.IsNotNull(collider1.Fixture);
 
             scene.OnDestroy();
-        }
-    }
-
-    internal class TestObjectCollider : GameObject
-    {
-        private BoxCollider2D collider;
-
-        public TestObjectCollider()
-        {
-            AddComponent(new Transform());
-            AddComponent(collider = new BoxCollider2D());
-            collider.Size.X = 150;
-            collider.Size.Y = 150;
-            base.OnAdd();
-        }
-    }
-    internal class TestSceneBoxCollider : Scene
-    {
-        public TestObjectCollider Obj1 = new TestObjectCollider();
-        public TestObjectCollider Obj2 = new TestObjectCollider();
-        public override void OnStart()
-        {
-            AddGameObject(Obj1);
-            AddGameObject(Obj2);
-            base.OnStart();
         }
     }
 }
