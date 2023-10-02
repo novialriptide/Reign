@@ -18,10 +18,18 @@ namespace Faraway.Engine.Tests.TestComponents
         {
             public ObjectTransform Obj1 = new ObjectTransform();
             public ObjectTransform Obj2 = new ObjectTransform();
+            public ObjectTransform Obj3 = new ObjectTransform();
+            public ObjectTransform Obj4 = new ObjectTransform();
+            public ObjectTransform Obj5 = new ObjectTransform();
+            public ObjectTransform Obj6 = new ObjectTransform();
             public override void OnStart()
             {
                 AddGameObject(Obj1);
                 AddGameObject(Obj2);
+                AddGameObject(Obj3);
+                AddGameObject(Obj4);
+                AddGameObject(Obj5);
+                AddGameObject(Obj6);
                 base.OnStart();
             }
         }
@@ -128,6 +136,36 @@ namespace Faraway.Engine.Tests.TestComponents
             transform1.Parent = null;
             Assert.AreEqual(transform2.Position, new Vector2(2350, 1521));
             Assert.AreEqual(transform1.Position, new Vector2(3529, -1250));
+
+            scene.OnDestroy();
+        }
+        [Ignore]
+        [TestMethod]
+        public void TestGetAllChildren()
+        {
+            SceneTransform scene = new SceneTransform();
+            scene.OnStart();
+
+            // Messy implementation that could've used an array... but it works.
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Transform transform2 = scene.Obj2.GetComponent<Transform>();
+            Transform transform3 = scene.Obj3.GetComponent<Transform>();
+            Transform transform4 = scene.Obj4.GetComponent<Transform>();
+            Transform transform5 = scene.Obj5.GetComponent<Transform>();
+            Transform transform6 = scene.Obj6.GetComponent<Transform>();
+
+            transform1.AddChild(transform2);
+            transform1.AddChild(transform3);
+            transform4.AddChild(transform5);
+            transform5.AddChild(transform6);
+
+            Transform[] allChildren = transform1.AllChildren;
+
+            Assert.IsTrue(allChildren.Contains(transform2));
+            Assert.IsTrue(allChildren.Contains(transform3));
+            Assert.IsTrue(allChildren.Contains(transform4));
+            Assert.IsTrue(allChildren.Contains(transform5));
+            Assert.IsTrue(allChildren.Contains(transform6));
 
             scene.OnDestroy();
         }
