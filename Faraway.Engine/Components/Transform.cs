@@ -120,6 +120,11 @@ namespace Faraway.Engine.Components
             }
         }
         /// <summary>
+        /// Add a child to this game object
+        /// </summary>
+        /// <param name="child"></param>
+        public void AddChild(Transform child) => child.parent = this;
+        /// <summary>
         /// Check if this game object is a child.
         /// </summary>
         public bool IsChild => Parent is not null;
@@ -152,12 +157,7 @@ namespace Faraway.Engine.Components
         }
         private Transform[] allChildren(List<Transform> children)
         {
-            foreach (Transform child in Children)
-            {
-                children.Add(child);
-                children = (List<Transform>)children.Concat(allChildren(children)); // NOTE: Concat's memory allocation is terrible.
-            }
-            return children.ToArray();
+            return new Transform[] { };
         }
         /// <summary>
         /// Gets all children of this game object.
