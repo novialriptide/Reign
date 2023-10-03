@@ -173,5 +173,65 @@ namespace Faraway.Engine.Tests.TestComponents
 
             scene.OnDestroy();
         }
+        [TestMethod]
+        public void TestComponentsFromChildren()
+        {
+            SceneTransform scene = new SceneTransform();
+            scene.OnStart();
+
+            // Messy implementation that could've used an array... but it works.
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Transform transform2 = scene.Obj2.GetComponent<Transform>();
+            transform2.Parent = transform1;
+            Transform transform3 = scene.Obj3.GetComponent<Transform>();
+            transform3.Parent = transform1;
+            Transform transform4 = scene.Obj4.GetComponent<Transform>();
+            transform4.Parent = transform1;
+            Transform transform5 = scene.Obj5.GetComponent<Transform>();
+            transform5.Parent = transform1;
+            Transform transform6 = scene.Obj6.GetComponent<Transform>();
+            transform6.Parent = transform2;
+            Transform transform7 = scene.Obj7.GetComponent<Transform>();
+
+            Transform[] transforms = transform1.GetComponentFromChildren<Transform>();
+            Assert.IsTrue(transforms.Contains(transform2));
+            Assert.IsTrue(transforms.Contains(transform3));
+            Assert.IsTrue(transforms.Contains(transform4));
+            Assert.IsTrue(transforms.Contains(transform5));
+            Assert.IsFalse(transforms.Contains(transform6));
+            Assert.IsFalse(transforms.Contains(transform7));
+
+            scene.OnDestroy();
+        }
+        [TestMethod]
+        public void TestComponentsFromAllChildren()
+        {
+            SceneTransform scene = new SceneTransform();
+            scene.OnStart();
+
+            // Messy implementation that could've used an array... but it works.
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
+            Transform transform2 = scene.Obj2.GetComponent<Transform>();
+            transform2.Parent = transform1;
+            Transform transform3 = scene.Obj3.GetComponent<Transform>();
+            transform3.Parent = transform1;
+            Transform transform4 = scene.Obj4.GetComponent<Transform>();
+            transform4.Parent = transform1;
+            Transform transform5 = scene.Obj5.GetComponent<Transform>();
+            transform5.Parent = transform1;
+            Transform transform6 = scene.Obj6.GetComponent<Transform>();
+            transform6.Parent = transform2;
+            Transform transform7 = scene.Obj7.GetComponent<Transform>();
+
+            Transform[] transforms = transform1.GetComponentFromAllChildren<Transform>();
+            Assert.IsTrue(transforms.Contains(transform2));
+            Assert.IsTrue(transforms.Contains(transform3));
+            Assert.IsTrue(transforms.Contains(transform4));
+            Assert.IsTrue(transforms.Contains(transform5));
+            Assert.IsTrue(transforms.Contains(transform6));
+            Assert.IsFalse(transforms.Contains(transform7));
+
+            scene.OnDestroy();
+        }
     }
 }
