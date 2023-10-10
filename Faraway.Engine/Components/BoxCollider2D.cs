@@ -1,4 +1,5 @@
-﻿using Faraway.Engine.MathExtended;
+﻿using System;
+using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
 using tainicom.Aether.Physics2D.Dynamics;
@@ -40,16 +41,19 @@ namespace Faraway.Engine.Components
 
             base.Start();
         }
-
+        /// <summary>
+        /// Deprecated: Utilize event handlers instead.
+        /// 
+        /// This never supported rotated BoxCollider2Ds.
+        /// </summary>
+        [Obsolete("Use the event handlers instead.")]
         public bool CollidesWith(BoxCollider2D collider)
         {
+            return false;
+
             if (!IsEnabled || !collider.IsEnabled)
                 return false;
 
-            /*
-             * PRIORITY TODO: Rotation via Transform is not supported.
-             * https://gist.github.com/jackmott/021bb1bd1135df71c389b42b8b44cc30
-             */
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
 
             return Collisions.RectToRect(transform.WorldPosition, Size,

@@ -35,6 +35,7 @@ namespace Faraway.Engine.Tests.TestComponents
             }
         }
 
+        [Ignore]
         [TestMethod]
         public void TestCollidesWith()
         {
