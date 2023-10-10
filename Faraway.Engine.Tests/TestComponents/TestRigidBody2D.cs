@@ -1,23 +1,31 @@
 ﻿using System.Numerics;
 using Faraway.Engine.Components;
 
-namespace Faraway.Engine.Tests
+namespace Faraway.Engine.Tests.TestComponents
 {
-    [Ignore]
     [TestClass]
     public class TestRigidBody2D
     {
-        private class ObjectBody : GameObject
+        private class ObjectBodyWithCollider : GameObject
         {
             private BoxCollider2D collider;
 
-            public ObjectBody()
+            public ObjectBodyWithCollider()
             {
                 AddComponent(new Transform());
                 AddComponent(collider = new BoxCollider2D());
                 AddComponent(new RigidBody2D());
                 collider.Size.X = 150;
                 collider.Size.Y = 150;
+                base.OnAdd();
+            }
+        }
+        private class ObjectBody : GameObject
+        {
+            public ObjectBody()
+            {
+                AddComponent(new Transform());
+                AddComponent(new RigidBody2D());
                 base.OnAdd();
             }
         }
@@ -36,12 +44,14 @@ namespace Faraway.Engine.Tests
         }
         private class SceneBody : Scene
         {
-            public ObjectBody Obj1 = new ObjectBody();
+            public ObjectBodyWithCollider Obj1 = new ObjectBodyWithCollider();
             public ObjectCollider Obj2 = new ObjectCollider();
+            public ObjectBody Obj3 = new ObjectBody();
             public override void OnStart()
             {
                 AddGameObject(Obj1);
                 AddGameObject(Obj2);
+                AddGameObject(Obj3);
                 base.OnStart();
             }
         }
@@ -50,19 +60,15 @@ namespace Faraway.Engine.Tests
         public void TestInitSuccessNoChildren()
         {
             SceneBody scene = new SceneBody();
-            RigidBody2D rb1 = scene.Obj1.GetComponent<RigidBody2D>();
-
-            Assert.IsNull(rb1.Body);
             scene.OnStart();
-            rb1.Update(0f);
+
+            RigidBody2D rb1 = scene.Obj1.GetComponent<RigidBody2D>();
+            scene.OnStart();
+            scene.Update();
 
             Assert.IsTrue(rb1.IsEnabled);
             Assert.AreEqual(BodyType.Dynamic, rb1.BodyType);
             Assert.AreEqual(1, rb1.BoxCollider2Ds.Count);
-
-            // Internal attribute checks
-            Assert.IsNotNull(rb1.Body);
-            Assert.IsNotNull(rb1.Simulation);
 
             scene.OnDestroy();
         }
@@ -70,20 +76,16 @@ namespace Faraway.Engine.Tests
         public void TestInitSuccessWithChildren()
         {
             SceneBody scene = new SceneBody();
-            scene.Obj2.GetComponent<Transform>().Parent = scene.Obj1.GetComponent<Transform>();
+            scene.OnStart();
+
+            scene.Obj3.GetComponent<Transform>().Parent = scene.Obj1.GetComponent<Transform>();
             RigidBody2D rb1 = scene.Obj1.GetComponent<RigidBody2D>();
 
-            Assert.IsNull(rb1.Body);
-            scene.OnStart();
-            rb1.Update(0f);
+            scene.Step(0f);
 
             Assert.IsTrue(rb1.IsEnabled);
             Assert.AreEqual(BodyType.Dynamic, rb1.BodyType);
             Assert.AreEqual(1, rb1.BoxCollider2Ds.Count);
-
-            // Internal attribute checks
-            Assert.IsNotNull(rb1.Body);
-            Assert.IsNotNull(rb1.Simulation);
 
             scene.OnDestroy();
         }
@@ -91,10 +93,12 @@ namespace Faraway.Engine.Tests
         public void TestApplyRotationVelocity()
         {
             SceneBody scene = new SceneBody();
-
             scene.OnStart();
 
+            scene.Step(0f);
+
             RigidBody2D rb1 = scene.Obj1.GetComponent<RigidBody2D>();
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
 
             Assert.AreEqual(0, rb1.AngularVelocity);
             rb1.ApplyAngularImpulse(200);
@@ -102,6 +106,7 @@ namespace Faraway.Engine.Tests
 
             scene.Step(200);
             Assert.IsTrue(rb1.AngularVelocity != 0);
+            Assert.IsTrue(transform1.Rotation != 0);
 
             rb1.AngularVelocity = 0;
             Assert.AreEqual(0, rb1.AngularVelocity);
@@ -112,10 +117,10 @@ namespace Faraway.Engine.Tests
         public void TestApplyVelocity()
         {
             SceneBody scene = new SceneBody();
-
             scene.OnStart();
 
             RigidBody2D rb1 = scene.Obj1.GetComponent<RigidBody2D>();
+            Transform transform1 = scene.Obj1.GetComponent<Transform>();
 
             Assert.AreEqual(Vector2.Zero, rb1.Velocity);
             rb1.ApplyLinearImpulse(new Vector2(50, 50));
@@ -123,6 +128,7 @@ namespace Faraway.Engine.Tests
 
             scene.Step(200);
             Assert.IsTrue(rb1.Velocity != Vector2.Zero);
+            Assert.IsTrue(transform1.Position != Vector2.Zero);
 
             rb1.Velocity = Vector2.Zero;
             Assert.AreEqual(Vector2.Zero, rb1.Velocity);

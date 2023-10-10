@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Dynamics;
 using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
@@ -72,6 +73,7 @@ namespace Faraway.Engine.Components
             get => (BodyType)Body.BodyType;
             set => Body.BodyType = (ABodyType)value;
         }
+        public List<BoxCollider2D> BoxCollider2Ds { get; } = new List<BoxCollider2D>();
 
         public RigidBody2D() { }
         public RigidBody2D(bool ignoreGravity)
@@ -91,20 +93,13 @@ namespace Faraway.Engine.Components
             Body.IgnoreGravity = true;
             Body.FixedRotation = false;
 
+            syncFixtures();
+
             base.Start();
         }
         public override void Update(double deltaTime)
         {
-            /*
-             * PRIORITY TODO: `Children` must be `AllChildren`, `AllChildren` has performance issues.
-             */
-            // Get all child BoxCollider2D components.
-            foreach (Transform child in transform.Children)
-            {
-                BoxCollider2D collider = child.GameObject.GetComponent<BoxCollider2D>();
-                if (collider is not null)
-                    addBoxCollider2D(collider);
-            }
+            syncFixtures();
 
             base.Update(deltaTime);
         }
@@ -117,26 +112,61 @@ namespace Faraway.Engine.Components
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
         public void ApplyAngularImpulse(float torque) => Body.ApplyAngularImpulse(torque);
-        public List<BoxCollider2D> BoxCollider2Ds => new List<BoxCollider2D>();
 
+        /// <summary>
+        /// Adds or removes Fixtures (from the physics engine) and BoxCollider2Ds that are
+        /// supposed to be with the RigidBody2D
+        /// </summary>
+        private void syncFixtures()
+        {
+            List<BoxCollider2D> allBoxCollider2Ds = transform.GetComponentFromAllChildren<BoxCollider2D>().ToList();
+            if (GameObject.ContainsComponent<BoxCollider2D>())
+                allBoxCollider2Ds.Add(GameObject.GetComponent<BoxCollider2D>());
+
+            if (allBoxCollider2Ds.ToList().Equals(BoxCollider2Ds))
+                return; // Everything is up-to-date!
+
+            List<BoxCollider2D> componentsToAdd = Algorithms.FindMissingComponents(allBoxCollider2Ds, BoxCollider2Ds);
+            List<BoxCollider2D> componentsToRemove = Algorithms.FindMissingComponents(BoxCollider2Ds, allBoxCollider2Ds);
+
+            foreach (BoxCollider2D collider in componentsToAdd)
+                addBoxCollider2D(collider);
+
+            foreach (BoxCollider2D collider in componentsToRemove)
+                removeBoxCollider2D(collider);
+        }
+        /// <summary>
+        /// Throws exception if the BoxCollider2D is not assignable to this RigidBody2D
+        /// </summary>
+        private void isAssignable(BoxCollider2D boxCollider)
+        {
+            Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
+            if (!childTransform.IsChildOf(transform) && !GameObject.ContainsComponent<BoxCollider2D>())
+                throw new Exception("This BoxCollider2D is not assignable to this RigidBody2D as it is not a child of this body and it's not one of the components in its game object.");
+        }
         /// <summary>
         /// Add a BoxCollider2D.
         /// </summary>
         private void addBoxCollider2D(BoxCollider2D boxCollider)
         {
-            /*
-             * TOOD: BoxCollider2Ds are only added if they are the RigidBody2D's children, not
-             * the RigidBody2D's children's children (and so on).
-             */
-            Transform childTransform = boxCollider.GameObject.GetComponent<Transform>();
-            if (!childTransform.IsChildOf(transform))
-                throw new Exception("Cannot add a BoxCollider2D to a RigidBody2D reference if" +
-                    " the RigidBody2D's transform is not a parent of the BoxCollider2D.");
-
+            isAssignable(boxCollider);
             if (Body.FixtureList.Contains(boxCollider.Fixture))
-                return;
+                throw new Exception("BoxCollider2D is already added to this RigidBody2D");
 
             Body.Add(boxCollider.Fixture);
+            BoxCollider2Ds.Add(boxCollider);
+        }
+        /// <summary>
+        /// Removes a BoxCollider2D.
+        /// </summary>
+        private void removeBoxCollider2D(BoxCollider2D boxCollider)
+        {
+            isAssignable(boxCollider);
+            if (!Body.FixtureList.Contains(boxCollider.Fixture))
+                throw new Exception("BoxCollider2D is not added to this RigidBody2D");
+
+            Body.Remove(boxCollider.Fixture);
+            BoxCollider2Ds.Remove(boxCollider);
         }
     }
 }
