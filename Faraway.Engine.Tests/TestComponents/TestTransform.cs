@@ -170,6 +170,7 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.IsTrue(allChildren.Contains(transform5));
             Assert.IsFalse(allChildren.Contains(transform6));
             Assert.IsFalse(allChildren.Contains(transform7));
+            Assert.IsFalse(allChildren.Contains(null));
 
             scene.OnDestroy();
         }
@@ -200,6 +201,7 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.IsTrue(transforms.Contains(transform5));
             Assert.IsFalse(transforms.Contains(transform6));
             Assert.IsFalse(transforms.Contains(transform7));
+            Assert.IsFalse(transforms.Contains(null));
 
             scene.OnDestroy();
         }
@@ -230,6 +232,7 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.IsTrue(transforms.Contains(transform5));
             Assert.IsTrue(transforms.Contains(transform6));
             Assert.IsFalse(transforms.Contains(transform7));
+            Assert.IsFalse(transforms.Contains(null));
 
             scene.OnDestroy();
         }
