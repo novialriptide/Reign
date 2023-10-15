@@ -101,15 +101,16 @@ namespace Faraway.Engine.Tests.TestComponents
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
 
             Assert.AreEqual(0, rb1.AngularVelocity);
+
             rb1.ApplyAngularImpulse(200);
-            Assert.AreEqual(0, rb1.AngularVelocity);
+
+            Assert.AreNotEqual(0f, rb1.AngularVelocity);
+            Assert.AreEqual(0f, transform1.Rotation);
 
             scene.Step(200);
-            Assert.IsTrue(rb1.AngularVelocity != 0);
-            Assert.IsTrue(transform1.Rotation != 0);
+            Assert.AreNotEqual(0f, transform1.Rotation);
 
             rb1.AngularVelocity = 0;
-            Assert.AreEqual(0, rb1.AngularVelocity);
 
             scene.OnDestroy();
         }
@@ -123,12 +124,14 @@ namespace Faraway.Engine.Tests.TestComponents
             Transform transform1 = scene.Obj1.GetComponent<Transform>();
 
             Assert.AreEqual(Vector2.Zero, rb1.Velocity);
+
             rb1.ApplyLinearImpulse(new Vector2(50, 50));
-            Assert.AreEqual(Vector2.Zero, rb1.Velocity);
+
+            Assert.AreNotEqual(Vector2.Zero, rb1.Velocity);
+            Assert.AreEqual(Vector2.Zero, transform1.Position);
 
             scene.Step(200);
-            Assert.IsTrue(rb1.Velocity != Vector2.Zero);
-            Assert.IsTrue(transform1.Position != Vector2.Zero);
+            Assert.AreNotEqual(Vector2.Zero, transform1.Position);
 
             rb1.Velocity = Vector2.Zero;
             Assert.AreEqual(Vector2.Zero, rb1.Velocity);
