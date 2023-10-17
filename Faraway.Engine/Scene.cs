@@ -35,6 +35,7 @@ namespace Faraway.Engine
         private GameObjectGroup shapeGroup = new GameObjectGroup();
 
         internal readonly World Simulation = new World();
+        internal Dictionary<Fixture, BoxCollider2D> Fixtures = new();
 
         public Scene() { }
         /// <summary>
@@ -52,6 +53,13 @@ namespace Faraway.Engine
 
             foreach (var component in gameObject.Components)
                 component.Start();
+        }
+        public void RemoveGameObject(GameObject gameObject)
+        {
+            GameObjects.Remove(gameObject);
+            
+            foreach (var component in gameObject.Components)
+                component.OnDestroy();
         }
         /// <summary>
         /// Called when <c>Scene</c> is loaded.
