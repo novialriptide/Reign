@@ -150,12 +150,12 @@ namespace Faraway.Engine.Tests.TestComponents
         [TestMethod]
         public void TestOnCollisionWhile()
         {
-            
+
         }
         [TestMethod]
         public void TestOnCollisionExit()
         {
-            
+
         }
     }
 }

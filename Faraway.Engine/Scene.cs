@@ -57,7 +57,7 @@ namespace Faraway.Engine
         public void RemoveGameObject(GameObject gameObject)
         {
             GameObjects.Remove(gameObject);
-            
+
             foreach (var component in gameObject.Components)
                 component.OnDestroy();
         }
