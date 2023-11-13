@@ -31,8 +31,20 @@ namespace Faraway.Engine.Components
         public virtual void Start() { }
         public virtual void OnDestroy() { }
         public virtual void Update(double deltaTime) { }
+        /// <summary>
+        /// When an object first collides with another object when both have
+        /// BoxCollider2Ds, then this will be called once.
+        /// </summary>
         public virtual void OnCollisionEnter(CollisionData collisionData) { }
+        /// <summary>
+        /// While an object is colliding with another object when both have
+        /// BoxCollider2Ds, this will be repeatedly called.
+        /// </summary>
         public virtual void OnCollisionWhile(CollisionData collisionData) { }
+        /// <summary>
+        /// When an object is about to exit collision with another object when
+        /// both have BoxCollider2Ds, this will be called once.
+        /// </summary>
         public virtual void OnCollisionExit(CollisionData collisionData) { }
         public virtual void OnTriggerEnter(CollisionData collisionData) { }
         public virtual void OnTriggerWhile(CollisionData collisionData) { }

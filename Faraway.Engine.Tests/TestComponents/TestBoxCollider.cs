@@ -17,9 +17,7 @@ namespace Faraway.Engine.Tests.TestComponents
             public ObjectCollider()
             {
                 AddComponent(new Transform());
-                AddComponent(collider = new BoxCollider2D());
-                collider.Size.X = 150;
-                collider.Size.Y = 150;
+                AddComponent(collider = new BoxCollider2D(new Vector2(150, 150)));
                 base.OnAdd();
             }
         }
@@ -34,6 +32,7 @@ namespace Faraway.Engine.Tests.TestComponents
                 base.OnStart();
             }
         }
+        private class EmptyScene : Scene { }
 
         [Ignore]
         [TestMethod]
@@ -71,6 +70,92 @@ namespace Faraway.Engine.Tests.TestComponents
             Assert.IsNotNull(collider1.Fixture);
 
             scene.OnDestroy();
+        }
+
+        private class DetectionComponent : Component
+        {
+            public int OnCollisionEnterCalledTimes = 0;
+            public int OnCollisionWhileCalledTimes = 0;
+            public int OnCollisionExitCalledTimes = 0;
+
+            public override void OnCollisionEnter(CollisionData collisionData)
+            {
+                OnCollisionEnterCalledTimes += 1;
+                base.OnCollisionEnter(collisionData);
+            }
+            public override void OnCollisionWhile(CollisionData collisionData)
+            {
+                OnCollisionWhileCalledTimes += 1;
+                base.OnCollisionWhile(collisionData);
+            }
+            public override void OnCollisionExit(CollisionData collisionData)
+            {
+                OnCollisionExitCalledTimes += 1;
+                base.OnCollisionExit(collisionData);
+            }
+        }
+        private class DummyObjectWithCollisionDetectors : GameObject
+        {
+            private BoxCollider2D collider;
+            private DetectionComponent detector;
+
+            public DummyObjectWithCollisionDetectors()
+            {
+                AddComponent(new Transform());
+                AddComponent(collider = new BoxCollider2D(new Vector2(150, 150)));
+                AddComponent(new RigidBody2D());
+                AddComponent(detector = new DetectionComponent());
+                base.OnAdd();
+            }
+        }
+
+        /// <summary>
+        /// Just like how women flirt to get what they want, the objects
+        /// will flirt with each other while testing.
+        /// 
+        /// TODO: Make this pass without needing a RigidBody2D.
+        /// </summary>
+        [TestMethod]
+        public void TestOnCollisionEnter()
+        {
+            EmptyScene scene = new EmptyScene();
+            DummyObjectWithCollisionDetectors o1;
+            DummyObjectWithCollisionDetectors o2;
+            scene.OnStart();
+
+            scene.AddGameObject(o1 = new DummyObjectWithCollisionDetectors());
+            o1.GetComponent<Transform>().Position = new Vector2(0, 0);
+            DetectionComponent o1_c = o1.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.Step(0);
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.AddGameObject(o2 = new DummyObjectWithCollisionDetectors());
+            DetectionComponent o2_c = o2.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+            Assert.AreEqual(0, o2_c.OnCollisionEnterCalledTimes);
+            scene.Step(0);
+            Assert.AreEqual(1, o1_c.OnCollisionEnterCalledTimes);
+            Assert.AreEqual(1, o2_c.OnCollisionEnterCalledTimes);
+            scene.Step(0);
+            Assert.AreEqual(1, o1_c.OnCollisionEnterCalledTimes);
+            Assert.AreEqual(1, o2_c.OnCollisionEnterCalledTimes);
+
+            scene.OnDestroy();
+        }
+        [TestMethod]
+        public void TestOnCollisionWhile()
+        {
+            
+        }
+        [TestMethod]
+        public void TestOnCollisionExit()
+        {
+            
         }
     }
 }

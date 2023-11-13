@@ -1,4 +1,5 @@
-﻿using Faraway.Engine;
+﻿using System.Numerics;
+using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components.UserInterface;
 
@@ -18,9 +19,7 @@ namespace Faraway.Main.GameObjects
         {
             AddComponent(Transform = new Transform());
             AddComponent(Sprite2D = new SpriteRenderer());
-            AddComponent(BoxCollider2D = new BoxCollider2D());
-            BoxCollider2D.Size.X = SpaceCraft.ModulePixelWidth;
-            BoxCollider2D.Size.Y = SpaceCraft.ModulePixelHeight;
+            AddComponent(BoxCollider2D = new BoxCollider2D(new Vector2(SpaceCraft.ModulePixelWidth, SpaceCraft.ModulePixelHeight)));
         }
         public override string ToString()
         {

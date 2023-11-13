@@ -13,10 +13,8 @@ namespace Faraway.Engine.Tests.TestComponents
             public ObjectBodyWithCollider()
             {
                 AddComponent(new Transform());
-                AddComponent(collider = new BoxCollider2D());
+                AddComponent(collider = new BoxCollider2D(new Vector2(150, 150)));
                 AddComponent(new RigidBody2D());
-                collider.Size.X = 150;
-                collider.Size.Y = 150;
                 base.OnAdd();
             }
         }
@@ -36,9 +34,7 @@ namespace Faraway.Engine.Tests.TestComponents
             public ObjectCollider()
             {
                 AddComponent(new Transform());
-                AddComponent(collider = new BoxCollider2D());
-                collider.Size.X = 150;
-                collider.Size.Y = 150;
+                AddComponent(collider = new BoxCollider2D(new Vector2(150, 150)));
                 base.OnAdd();
             }
         }

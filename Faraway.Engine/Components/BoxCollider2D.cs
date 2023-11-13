@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
@@ -17,7 +19,7 @@ namespace Faraway.Engine.Components
         /// </summary>
         public bool IsTrigger = false;
         private Transform transform;
-        public Vector2 Size;
+        private Vector2 size;
         public float Density
         {
             get => Fixture.Shape.Density;
@@ -31,29 +33,32 @@ namespace Faraway.Engine.Components
 
         private bool eventOnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
+            // `fixtureB` would later become `fixtureA` in a different event call.
+
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
                 component.OnCollisionEnter(new CollisionData(GameObject));
 
-            foreach (Component component in GameObject.Scene.Fixtures[fixtureB].GameObject.Components)
-                component.OnCollisionEnter(new CollisionData(GameObject));
-            
             return true;
         }
         private void eventOnSeparation(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
+            // `fixtureB` would later become `fixtureA` in a different event call.
+
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
                 component.OnCollisionExit(new CollisionData(GameObject));
+        }
 
-            foreach (Component component in GameObject.Scene.Fixtures[fixtureB].GameObject.Components)
-                component.OnCollisionExit(new CollisionData(GameObject));
+        public BoxCollider2D(Vector2 size)
+        {
+            this.size = size;
         }
 
         public override void Start()
         {
             transform = GameObject.GetComponent<Transform>();
 
-            AVector2 center = new AVector2(Size.X, Size.Y) / 2;
-            Vertices fixtureVertices = PolygonTools.CreateRectangle(Size.X / 2, Size.Y / 2, center, transform.Rotation);
+            AVector2 center = new AVector2(size.X, size.Y) / 2;
+            Vertices fixtureVertices = PolygonTools.CreateRectangle(size.X / 2, size.Y / 2, center, transform.Rotation);
             fixtureVertices.Translate(new AVector2(transform.Position.X, transform.Position.Y));
 
             PolygonShape rectangle;
@@ -91,8 +96,8 @@ namespace Faraway.Engine.Components
 
             Transform otherTransform = collider.GameObject.GetComponent<Transform>();
 
-            return Collisions.RectToRect(transform.WorldPosition, Size,
-                otherTransform.WorldPosition, collider.Size);
+            return Collisions.RectToRect(transform.WorldPosition, size,
+                otherTransform.WorldPosition, collider.size);
         }
     }
 }
