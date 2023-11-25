@@ -155,6 +155,7 @@ namespace Faraway.Engine.Components
 
             Body.Add(boxCollider.Fixture);
             BoxCollider2Ds.Add(boxCollider);
+            boxCollider.AssignedRigidBody2D = this;
         }
         /// <summary>
         /// Removes a BoxCollider2D.
@@ -167,6 +168,7 @@ namespace Faraway.Engine.Components
 
             Body.Remove(boxCollider.Fixture);
             BoxCollider2Ds.Remove(boxCollider);
+            boxCollider.AssignedRigidBody2D = null;
         }
     }
 }

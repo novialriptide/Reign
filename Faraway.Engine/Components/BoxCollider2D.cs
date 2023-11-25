@@ -37,24 +37,7 @@ namespace Faraway.Engine.Components
         /// <summary>
         /// Returns null if no <see cref="RigidBody2D"/> is assigned.
         /// </summary>
-        public RigidBody2D AssignedRigidBody2D
-        {
-            get
-            {
-                // Traverse through all of the parents to see if a RigidBody2D is in one of them.
-                GameObject currentObject = GameObject;
-                while (currentObject is not null)
-                {
-                    RigidBody2D rb = currentObject.GetComponent<RigidBody2D>();
-                    if (rb is not null)
-                        return rb;
-
-                    currentObject = currentObject.GetComponent<Transform>().Parent.GameObject;
-                }
-
-                return null;
-            }
-        }
+        public RigidBody2D AssignedRigidBody2D { get; internal set; }
         internal bool IsInternalBodyDormant => AssignedRigidBody2D is not null;
 
         /// <summary>
