@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
@@ -30,11 +27,42 @@ namespace Faraway.Engine.Components
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
         internal Fixture Fixture;
+        /// <summary>
+        /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
+        /// 
+        /// Remains dormant if a <see cref="RigidBody2D"/> is attached. 
+        /// </summary>
+        internal Body Body;
+        
+        /// <summary>
+        /// Returns null if no <see cref="RigidBody2D"/> is assigned.
+        /// </summary>
+        public RigidBody2D AssignedRigidBody2D
+        {
+            get
+            {
+                // Traverse through all of the parents to see if a RigidBody2D is in one of them.
+                GameObject currentObject = GameObject;
+                while (currentObject is not null)
+                {
+                    RigidBody2D rb = currentObject.GetComponent<RigidBody2D>();
+                    if (rb is not null)
+                        return rb;
 
+                    currentObject = currentObject.GetComponent<Transform>().Parent.GameObject;
+                }
+
+                return null;
+            }
+        }
+        internal bool IsInternalBodyDormant => AssignedRigidBody2D is not null;
+
+        /// <summary>
+        /// Used internally to call <see cref="Component.OnCollisionEnter(CollisionData)"/> 
+        /// </summary>
+        /// <param name="fixtureB">`fixtureB` would later become `fixtureA` in a different event call.</param>
         private bool eventOnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
-            // `fixtureB` would later become `fixtureA` in a different event call.
-
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
                 component.OnCollisionEnter(new CollisionData(GameObject));
 
