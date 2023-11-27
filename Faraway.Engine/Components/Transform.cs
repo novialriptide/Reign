@@ -17,6 +17,13 @@ namespace Faraway.Engine.Components
     /// </summary>
     public sealed class Transform : Component
     {
+        private enum TransformDependent
+        {
+            Self,
+            BoxCollider2D,
+            RigidBody2D
+        }
+
         /// <summary>
         /// This component is never meant to be disabled.
         /// </summary>
@@ -27,6 +34,22 @@ namespace Faraway.Engine.Components
             {
                 RigidBody2D rigidBody2D = GameObject.GetComponent<RigidBody2D>();
                 return rigidBody2D is not null && rigidBody2D.IsEnabled;
+            }
+        }
+        private TransformDependent whichTransformToUse
+        {
+            get
+            {
+                RigidBody2D rigidBody2D = GameObject.GetComponent<RigidBody2D>();
+                BoxCollider2D boxCollider2D = GameObject.GetComponent<BoxCollider2D>();
+
+                if (rigidBody2D is not null && rigidBody2D.IsEnabled)
+                    return TransformDependent.RigidBody2D;
+
+                else if (boxCollider2D is not null && boxCollider2D.IsEnabled)
+                    return TransformDependent.BoxCollider2D;
+                
+                return TransformDependent.Self;
             }
         }
         private Vector2 position = Vector2.Zero;
