@@ -39,7 +39,7 @@ namespace Faraway.Engine.Components
 
                 else if (boxCollider2D is not null && boxCollider2D.IsEnabled)
                     return TransformDependent.BoxCollider2D;
-                
+
                 return TransformDependent.Self;
             }
         }

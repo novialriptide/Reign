@@ -33,7 +33,7 @@ namespace Faraway.Engine.Components
         /// Remains dormant if a <see cref="RigidBody2D"/> is attached. 
         /// </summary>
         internal Body Body;
-        
+
         /// <summary>
         /// Returns null if no <see cref="RigidBody2D"/> is assigned.
         /// </summary>
