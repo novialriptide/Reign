@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
@@ -28,14 +27,6 @@ namespace Faraway.Engine.Components
         /// This component is never meant to be disabled.
         /// </summary>
         public new bool IsEnabled => true;
-        private bool checkRigidBody2D
-        {
-            get
-            {
-                RigidBody2D rigidBody2D = GameObject.GetComponent<RigidBody2D>();
-                return rigidBody2D is not null && rigidBody2D.IsEnabled;
-            }
-        }
         private TransformDependent whichTransformToUse
         {
             get
@@ -60,24 +51,37 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                if (checkRigidBody2D)
+                switch (whichTransformToUse)
                 {
-                    RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
-                    if (rb.Body is null)
+                    case TransformDependent.Self:
                         return position;
+                    case TransformDependent.BoxCollider2D:
+                        break;
+                    case TransformDependent.RigidBody2D:
+                        RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
+                        if (rb.Body is null)
+                            return position;
 
-                    return new Vector2(rb.Body.Position.X, rb.Body.Position.Y);
+                        return new Vector2(rb.Body.Position.X, rb.Body.Position.Y);
                 }
+
                 return position;
             }
             set
             {
-                if (checkRigidBody2D)
+                switch (whichTransformToUse)
                 {
-                    RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
-                    rb.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
-                    return;
+                    case TransformDependent.Self:
+                        position = value;
+                        return;
+                    case TransformDependent.BoxCollider2D:
+                        break;
+                    case TransformDependent.RigidBody2D:
+                        RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
+                        rb.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
+                        return;
                 }
+
                 position = value;
             }
         }
@@ -93,24 +97,37 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                if (checkRigidBody2D)
+                switch (whichTransformToUse)
                 {
-                    RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
-                    if (rb.Body is null)
+                    case TransformDependent.Self:
                         return rotation;
+                    case TransformDependent.BoxCollider2D:
+                        break;
+                    case TransformDependent.RigidBody2D:
+                        RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
+                        if (rb.Body is null)
+                            return rotation;
 
-                    return rb.Body.Rotation;
+                        return rb.Body.Rotation;
                 }
+
                 return rotation;
             }
             set
             {
-                if (checkRigidBody2D)
+                switch (whichTransformToUse)
                 {
-                    RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
-                    rb.Body.SetTransform(rb.Body.Position, value);
-                    return;
+                    case TransformDependent.Self:
+                        rotation = value;
+                        return;
+                    case TransformDependent.BoxCollider2D:
+                        break;
+                    case TransformDependent.RigidBody2D:
+                        RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
+                        rb.Body.SetTransform(rb.Body.Position, value);
+                        return;
                 }
+
                 rotation = value;
             }
         }
