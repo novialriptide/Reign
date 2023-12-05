@@ -134,5 +134,31 @@ namespace Faraway.Engine.Tests.TestComponents
 
             scene.OnDestroy();
         }
+        [TestMethod]
+        public void TestPosition()
+        {
+            SceneBody scene = new SceneBody();
+            scene.OnStart();
+
+            Transform transform1 = scene.Obj3.GetComponent<Transform>();
+
+            transform1.Position = new Vector2(51251, -125123);
+            Assert.AreEqual(new Vector2(51251, -125123), transform1.Position);
+
+            scene.OnDestroy();
+        }
+        [TestMethod]
+        public void TestRotation()
+        {
+            SceneBody scene = new SceneBody();
+            scene.OnStart();
+
+            Transform transform1 = scene.Obj3.GetComponent<Transform>();
+
+            transform1.Rotation = 547246f;
+            Assert.AreEqual(547246f, transform1.Rotation);
+
+            scene.OnDestroy();
+        }
     }
 }
