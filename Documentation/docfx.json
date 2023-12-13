@@ -4,7 +4,8 @@
       "src": [
         {
           "files": [
-            "**/**.csproj"
+            "Faraway.Main/Faraway.Main.csproj",
+            "Faraway.Engine/Faraway.Engine.csproj"
           ],
           "src": ".."
 
