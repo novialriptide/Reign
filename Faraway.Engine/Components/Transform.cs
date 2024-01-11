@@ -156,7 +156,7 @@ namespace Faraway.Engine.Components
             get => parent;
             set
             {
-                if (Parent == null)
+                if (Parent is null)
                 {
                     parent = value;
                     return;

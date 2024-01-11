@@ -89,7 +89,7 @@ namespace Faraway.Engine
             {
                 var sprite2D = gameObject.GetComponent<SpriteRenderer>();
 
-                if (sprite2D.Texture == null)
+                if (sprite2D.Texture is null)
                     continue;
 
                 if (!sprite2D.IsEnabled)
@@ -107,7 +107,7 @@ namespace Faraway.Engine
 
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().WorldPosition;
 
-                if (fontRenderer.SpriteFont == null)
+                if (fontRenderer.SpriteFont is null)
                     continue;
 
                 spriteBatch.DrawString(fontRenderer.SpriteFont,
@@ -123,7 +123,7 @@ namespace Faraway.Engine
                 Vector2 renderPosition = gameObject.GetComponent<Transform>().WorldPosition + rectRenderer.Offset;
 
                 // TODO: Find a cleaner way to approach this. Texture2D being assigned here is not a great idea.
-                if (rectRenderer.Texture == null)
+                if (rectRenderer.Texture is null)
                 {
                     rectRenderer.Texture = new Texture2D(GameInstance.GraphicsDevice, 1, 1);
                     rectRenderer.Texture.SetData(new[] { Color.White });

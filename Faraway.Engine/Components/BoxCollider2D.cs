@@ -75,7 +75,7 @@ namespace Faraway.Engine.Components
             fixtureVertices.Translate(new AVector2(transform.Position.X, transform.Position.Y));
 
             PolygonShape rectangle;
-            if (Fixture == null)
+            if (Fixture is null)
                 rectangle = new PolygonShape(fixtureVertices, 1.0f);
             else
                 rectangle = new PolygonShape(fixtureVertices, Density);

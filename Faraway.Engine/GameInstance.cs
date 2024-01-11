@@ -28,7 +28,7 @@ namespace Faraway.Engine
         {
             var foundScene = Scenes.Find(item => scene == item);
 
-            if (foundScene == null)
+            if (foundScene is null)
                 return;
 
             foundScene.OnDestroy();
