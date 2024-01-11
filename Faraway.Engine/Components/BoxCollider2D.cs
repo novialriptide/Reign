@@ -4,6 +4,7 @@ using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
 using tainicom.Aether.Physics2D.Dynamics;
 using tainicom.Aether.Physics2D.Dynamics.Contacts;
+using ABodyType = tainicom.Aether.Physics2D.Dynamics.BodyType;
 using AVector2 = tainicom.Aether.Physics2D.Common.Vector2;
 using Vector2 = System.Numerics.Vector2;
 
@@ -23,6 +24,7 @@ namespace Faraway.Engine.Components
             set => Fixture.Shape.Density = value;
         }
 
+        internal World Simulation => GameObject.Scene.Simulation;
         /// <summary>
         /// Taken from <see href="https://github.com/tainicom/Aether.Physics2D">Aether.Physics2D</see>.
         /// </summary>
@@ -44,14 +46,14 @@ namespace Faraway.Engine.Components
         /// Used internally to call <see cref="Component.OnCollisionEnter(CollisionData)"/> 
         /// </summary>
         /// <param name="fixtureB">`fixtureB` would later become `fixtureA` in a different event call.</param>
-        private bool eventOnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        private bool eventOnCollision(Fixture fixtureA, Fixture _, Contact __)
         {
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
                 component.OnCollisionEnter(new CollisionData(GameObject));
 
             return true;
         }
-        private void eventOnSeparation(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        private void eventOnSeparation(Fixture fixtureA, Fixture _, Contact __)
         {
             // `fixtureB` would later become `fixtureA` in a different event call.
 
@@ -81,6 +83,18 @@ namespace Faraway.Engine.Components
             Fixture = new Fixture(rectangle);
             Fixture.OnCollision += eventOnCollision;
             Fixture.OnSeparation += eventOnSeparation;
+
+            AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
+            Body = Simulation.CreateBody(
+                position: av,
+                rotation: transform.Rotation,
+                bodyType: ABodyType.Dynamic
+            );
+            Body.IgnoreGravity = true;
+            Body.FixedRotation = true;
+
+            if (!GameObject.ContainsComponent<RigidBody2D>())
+                Body.Add(Fixture);
 
             /*
              * Add the Fixture to a dictionary in the scene so it can

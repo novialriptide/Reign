@@ -99,11 +99,12 @@ namespace Faraway.Engine.Tests.TestComponents
             private BoxCollider2D collider;
             private DetectionComponent detector;
 
-            public DummyObjectWithCollisionDetectors()
+            public DummyObjectWithCollisionDetectors(bool hasRigidBody2D)
             {
                 AddComponent(new Transform());
                 AddComponent(collider = new BoxCollider2D(new Vector2(150, 150)));
-                AddComponent(new RigidBody2D());
+                if (hasRigidBody2D)
+                    AddComponent(new RigidBody2D());
                 AddComponent(detector = new DetectionComponent());
                 base.OnAdd();
             }
@@ -115,7 +116,6 @@ namespace Faraway.Engine.Tests.TestComponents
         /// 
         /// TODO: Make this pass without needing a RigidBody2D.
         /// </summary>
-        [Ignore]
         [TestMethod]
         public void TestOnCollisionEnter()
         {
@@ -124,8 +124,7 @@ namespace Faraway.Engine.Tests.TestComponents
             DummyObjectWithCollisionDetectors o2;
             scene.OnStart();
 
-            scene.AddGameObject(o1 = new DummyObjectWithCollisionDetectors());
-            o1.GetComponent<Transform>().Position = new Vector2(0, 0);
+            scene.AddGameObject(o1 = new DummyObjectWithCollisionDetectors(false));
             DetectionComponent o1_c = o1.GetComponent<DetectionComponent>();
 
             Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
@@ -134,7 +133,7 @@ namespace Faraway.Engine.Tests.TestComponents
 
             Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
 
-            scene.AddGameObject(o2 = new DummyObjectWithCollisionDetectors());
+            scene.AddGameObject(o2 = new DummyObjectWithCollisionDetectors(false));
             DetectionComponent o2_c = o2.GetComponent<DetectionComponent>();
 
             Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);

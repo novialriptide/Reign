@@ -56,7 +56,11 @@ namespace Faraway.Engine.Components
                     case TransformDependent.Self:
                         return position;
                     case TransformDependent.BoxCollider2D:
-                        break;
+                        BoxCollider2D bc = GameObject.GetComponent<BoxCollider2D>();
+                        if (bc.Body is null)
+                            return position;
+
+                        return new Vector2(bc.Body.Position.X, bc.Body.Position.Y);
                     case TransformDependent.RigidBody2D:
                         RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                         if (rb.Body is null)
@@ -75,7 +79,9 @@ namespace Faraway.Engine.Components
                         position = value;
                         return;
                     case TransformDependent.BoxCollider2D:
-                        break;
+                        BoxCollider2D bc = GameObject.GetComponent<BoxCollider2D>();
+                        bc.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
+                        return;
                     case TransformDependent.RigidBody2D:
                         RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                         rb.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
@@ -102,7 +108,11 @@ namespace Faraway.Engine.Components
                     case TransformDependent.Self:
                         return rotation;
                     case TransformDependent.BoxCollider2D:
-                        break;
+                        BoxCollider2D bc = GameObject.GetComponent<BoxCollider2D>();
+                        if (bc.Body is null)
+                            return rotation;
+
+                        return bc.Body.Rotation;
                     case TransformDependent.RigidBody2D:
                         RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                         if (rb.Body is null)
@@ -121,7 +131,9 @@ namespace Faraway.Engine.Components
                         rotation = value;
                         return;
                     case TransformDependent.BoxCollider2D:
-                        break;
+                        BoxCollider2D bc = GameObject.GetComponent<BoxCollider2D>();
+                        bc.Body.SetTransform(bc.Body.Position, value);
+                        return;
                     case TransformDependent.RigidBody2D:
                         RigidBody2D rb = GameObject.GetComponent<RigidBody2D>();
                         rb.Body.SetTransform(rb.Body.Position, value);
