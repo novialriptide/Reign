@@ -1,17 +1,17 @@
 # Contributing to Reign (formally known as "Faraway")
 
 If you are reading this, thank you for accepting employement on developing
-*Reign*.
+_Reign_.
 
 ## Code Standards
 
 1. When building a new `Component` or `GameObject`, the `virtual` methods are not
-meant to be called outside or internally at all
+   meant to be called outside or internally at all
 2. Try to use `GameObject.GetComponent<T>()` as little as possible
 3. When calling `GameObject.AddComponent()`, cache your added object in the `GameObject`
-as a variable
+   as a variable
 4. If you're implementing something that can be used in another game project, write it in
-the game engine
+   the game engine
 
 ## Bugs & Enhancements
 
