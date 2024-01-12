@@ -1,4 +1,4 @@
-# Contributing to Reign (formally known as "Faraway")
+# Contributing to Reign
 
 If you are reading this, thank you for accepting employement on developing
 _Reign_.
