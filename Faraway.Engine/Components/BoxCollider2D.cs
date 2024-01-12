@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
@@ -42,6 +43,7 @@ namespace Faraway.Engine.Components
         public RigidBody2D AssignedRigidBody2D { get; internal set; }
         internal bool IsInternalBodyDormant => AssignedRigidBody2D is not null;
 
+        private List<Component> componentsCollided = new();
         /// <summary>
         /// Used internally to call <see cref="Component.OnCollisionEnter(CollisionData)"/> 
         /// </summary>
@@ -49,7 +51,10 @@ namespace Faraway.Engine.Components
         private bool eventOnCollision(Fixture fixtureA, Fixture _, Contact __)
         {
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
+            {
                 component.OnCollisionEnter(new CollisionData(GameObject));
+                componentsCollided.Add(component);
+            }
 
             return true;
         }
@@ -58,7 +63,10 @@ namespace Faraway.Engine.Components
             // `fixtureB` would later become `fixtureA` in a different event call.
 
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
+            {
                 component.OnCollisionExit(new CollisionData(GameObject));
+                componentsCollided.Remove(component);
+            }
         }
 
         public BoxCollider2D(Vector2 size)
@@ -103,6 +111,14 @@ namespace Faraway.Engine.Components
             GameObject.Scene.Fixtures[Fixture] = this;
 
             base.Start();
+        }
+        public override void Update(double deltaTime)
+        {
+            foreach (Component component in componentsCollided)
+            {
+                component.OnCollisionWhile(new CollisionData(GameObject));
+            }
+            base.Update(deltaTime);
         }
         public override void OnDestroy()
         {

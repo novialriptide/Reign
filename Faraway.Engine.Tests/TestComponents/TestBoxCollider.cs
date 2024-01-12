@@ -147,17 +147,70 @@ namespace Faraway.Engine.Tests.TestComponents
 
             scene.OnDestroy();
         }
-        [Ignore]
         [TestMethod]
         public void TestOnCollisionWhile()
         {
+            EmptyScene scene = new EmptyScene();
+            DummyObjectWithCollisionDetectors o1;
+            DummyObjectWithCollisionDetectors o2;
+            scene.OnStart();
 
+            scene.AddGameObject(o1 = new DummyObjectWithCollisionDetectors(false));
+            DetectionComponent o1_c = o1.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.Step(0);
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.AddGameObject(o2 = new DummyObjectWithCollisionDetectors(false));
+            DetectionComponent o2_c = o2.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionWhileCalledTimes);
+            Assert.AreEqual(0, o2_c.OnCollisionWhileCalledTimes);
+            scene.Step(0);
+            Assert.AreEqual(1, o1_c.OnCollisionWhileCalledTimes);
+            Assert.AreEqual(1, o2_c.OnCollisionWhileCalledTimes);
+            scene.Step(0);
+            Assert.AreEqual(2, o1_c.OnCollisionWhileCalledTimes);
+            Assert.AreEqual(2, o2_c.OnCollisionWhileCalledTimes);
+
+            scene.OnDestroy();
         }
-        [Ignore]
         [TestMethod]
         public void TestOnCollisionExit()
         {
+            EmptyScene scene = new EmptyScene();
+            DummyObjectWithCollisionDetectors o1;
+            DummyObjectWithCollisionDetectors o2;
+            scene.OnStart();
 
+            scene.AddGameObject(o1 = new DummyObjectWithCollisionDetectors(false));
+            DetectionComponent o1_c = o1.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.Step(0);
+
+            Assert.AreEqual(0, o1_c.OnCollisionEnterCalledTimes);
+
+            scene.AddGameObject(o2 = new DummyObjectWithCollisionDetectors(false));
+            DetectionComponent o2_c = o2.GetComponent<DetectionComponent>();
+
+            Assert.AreEqual(0, o1_c.OnCollisionExitCalledTimes);
+            Assert.AreEqual(0, o2_c.OnCollisionExitCalledTimes);
+
+            scene.Step(0);
+            Assert.AreEqual(0, o1_c.OnCollisionExitCalledTimes);
+            Assert.AreEqual(0, o2_c.OnCollisionExitCalledTimes);
+
+            o1.GetComponent<Transform>().Position = new Vector2(2000, 4124);
+            scene.Step(0);
+            Assert.AreEqual(1, o1_c.OnCollisionExitCalledTimes);
+            Assert.AreEqual(1, o2_c.OnCollisionExitCalledTimes);
+
+            scene.OnDestroy();
         }
     }
 }
