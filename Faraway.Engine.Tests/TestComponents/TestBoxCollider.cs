@@ -113,8 +113,6 @@ namespace Faraway.Engine.Tests.TestComponents
         /// <summary>
         /// Just like how women flirt to get what they want, the objects
         /// will flirt with each other while testing.
-        /// 
-        /// TODO: Make this pass without needing a RigidBody2D.
         /// </summary>
         [TestMethod]
         public void TestOnCollisionEnter()
