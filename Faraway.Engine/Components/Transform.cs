@@ -91,6 +91,16 @@ namespace Faraway.Engine.Components
                 position = value;
             }
         }
+        public float X
+        {
+            get => Position.X;
+            set => Position = new Vector2(value, Position.Y);
+        }
+        public float Y
+        {
+            get => Position.Y;
+            set => Position = new Vector2(Position.X, value);
+        }
         /// <summary>
         /// Scale of the Component; default set to <c>(1f, 1f)</c>.
         /// </summary>
