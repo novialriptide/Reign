@@ -40,7 +40,7 @@ namespace Faraway.Engine.Components
             }
             set
             {
-
+                // TODO: Fixture.Shape is *readonly*, make this assignable somehow.
             }
         }
         public float Density
