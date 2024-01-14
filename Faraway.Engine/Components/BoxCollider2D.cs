@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Faraway.Engine.MathExtended;
 using tainicom.Aether.Physics2D.Collision.Shapes;
 using tainicom.Aether.Physics2D.Common;
@@ -19,6 +20,29 @@ namespace Faraway.Engine.Components
         public bool IsTrigger = false;
         private Transform transform;
         private Vector2 size;
+        public Vector2 Size
+        {
+            get
+            {
+                Vertices vertices = ((PolygonShape)Fixture.Shape).Vertices;
+                if (vertices.Count != 4)
+                    throw new Exception("BoxCollider2D has an invalid amount of vertices.");
+
+                List<float> x = new() { vertices[0].X, vertices[1].X, vertices[2].X, vertices[3].X };
+                List<float> y = new() { vertices[0].Y, vertices[1].Y, vertices[2].Y, vertices[3].Y };
+
+                float topX = x.Min();
+                float topY = y.Min();
+                float bottomX = x.Max();
+                float bottomY = y.Max();
+
+                return new Vector2(bottomX - topX, bottomY - topY);
+            }
+            set
+            {
+
+            }
+        }
         public float Density
         {
             get => Fixture.Shape.Density;
@@ -78,6 +102,7 @@ namespace Faraway.Engine.Components
         {
             transform = GameObject.GetComponent<Transform>();
 
+            // Create actual collider using Aether.Physics2D
             AVector2 center = new AVector2(size.X, size.Y) / 2;
             Vertices fixtureVertices = PolygonTools.CreateRectangle(size.X / 2, size.Y / 2, center, transform.Rotation);
             fixtureVertices.Translate(new AVector2(transform.Position.X, transform.Position.Y));
@@ -119,6 +144,9 @@ namespace Faraway.Engine.Components
         }
         public override void OnDestroy()
         {
+            if (!GameObject.ContainsComponent<RigidBody2D>())
+                Body.Remove(Fixture);
+
             GameObject.Scene.Fixtures.Remove(Fixture);
         }
         /// <summary>

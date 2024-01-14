@@ -210,5 +210,23 @@ namespace Faraway.Engine.Tests.TestComponents
 
             scene.OnDestroy();
         }
+
+        [TestMethod]
+        public void TestChangeSize()
+        {
+            EmptyScene scene = new EmptyScene();
+            ObjectCollider o1;
+            scene.OnStart();
+
+            scene.AddGameObject(o1 = new ObjectCollider());
+
+            BoxCollider2D boxCollider2D = o1.GetComponent<BoxCollider2D>();
+            Assert.AreEqual(new Vector2(150, 150), boxCollider2D.Size);
+
+            boxCollider2D.Size = new Vector2(50, 50);
+            Assert.AreEqual(new Vector2(50, 50), boxCollider2D.Size);
+
+            scene.OnDestroy();
+        }
     }
 }
