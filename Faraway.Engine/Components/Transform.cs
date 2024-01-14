@@ -27,7 +27,7 @@ namespace Faraway.Engine.Components
         /// This component is never meant to be disabled.
         /// </summary>
         public new bool IsEnabled => true;
-        private TransformDependent whichTransformToUse
+        private TransformDependent selectedTransform
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                switch (whichTransformToUse)
+                switch (selectedTransform)
                 {
                     case TransformDependent.Self:
                         return position;
@@ -73,7 +73,7 @@ namespace Faraway.Engine.Components
             }
             set
             {
-                switch (whichTransformToUse)
+                switch (selectedTransform)
                 {
                     case TransformDependent.Self:
                         position = value;
@@ -113,7 +113,7 @@ namespace Faraway.Engine.Components
         {
             get
             {
-                switch (whichTransformToUse)
+                switch (selectedTransform)
                 {
                     case TransformDependent.Self:
                         return rotation;
@@ -135,7 +135,7 @@ namespace Faraway.Engine.Components
             }
             set
             {
-                switch (whichTransformToUse)
+                switch (selectedTransform)
                 {
                     case TransformDependent.Self:
                         rotation = value;
