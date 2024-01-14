@@ -104,10 +104,7 @@ namespace Faraway.Engine.Components
             if (!GameObject.ContainsComponent<RigidBody2D>())
                 Body.Add(Fixture);
 
-            /*
-             * Add the Fixture to a dictionary in the scene so it can
-             * easily be looked up.
-             */
+            // Add the Fixture to a dictionary in the scene so it can easily be looked up.
             GameObject.Scene.Fixtures[Fixture] = this;
 
             base.Start();
