@@ -41,6 +41,10 @@ namespace Faraway.Engine.Components
             set
             {
                 // TODO: Fixture.Shape is *readonly*, make this assignable somehow.
+                Body.Remove(Fixture);
+                Fixture f = createFixture(value);
+                Fixture = f;
+                Body.Add(Fixture);
             }
         }
         public float Density
@@ -71,9 +75,10 @@ namespace Faraway.Engine.Components
         /// <summary>
         /// Used internally to call <see cref="Component.OnCollisionEnter(CollisionData)"/> 
         /// </summary>
-        /// <param name="fixtureB">`fixtureB` would later become `fixtureA` in a different event call.</param>
         private bool eventOnCollision(Fixture fixtureA, Fixture _, Contact __)
         {
+            // `fixtureB` would later become `fixtureA` in a different event call.
+
             foreach (Component component in GameObject.Scene.Fixtures[fixtureA].GameObject.Components)
             {
                 component.OnCollisionEnter(new CollisionData(GameObject));
@@ -93,15 +98,8 @@ namespace Faraway.Engine.Components
             }
         }
 
-        public BoxCollider2D(Vector2 size)
+        private Fixture createFixture(Vector2 size)
         {
-            this.size = size;
-        }
-
-        public override void Start()
-        {
-            transform = GameObject.GetComponent<Transform>();
-
             // Create actual collider using Aether.Physics2D
             AVector2 center = new AVector2(size.X, size.Y) / 2;
             Vertices fixtureVertices = PolygonTools.CreateRectangle(size.X / 2, size.Y / 2, center, transform.Rotation);
@@ -113,9 +111,23 @@ namespace Faraway.Engine.Components
             else
                 rectangle = new PolygonShape(fixtureVertices, Density);
 
-            Fixture = new Fixture(rectangle);
-            Fixture.OnCollision += eventOnCollision;
-            Fixture.OnSeparation += eventOnSeparation;
+            Fixture f = new Fixture(rectangle);
+            f.OnCollision += eventOnCollision;
+            f.OnSeparation += eventOnSeparation;
+
+            return f;
+        }
+
+        public BoxCollider2D(Vector2 size)
+        {
+            this.size = size;
+        }
+
+        public override void Start()
+        {
+            transform = GameObject.GetComponent<Transform>();
+
+            Fixture = createFixture(size);
 
             AVector2 av = new AVector2(transform.Position.X, transform.Position.Y);
             Body = Simulation.CreateBody(

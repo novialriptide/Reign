@@ -221,10 +221,15 @@ namespace Faraway.Engine.Tests.TestComponents
             scene.AddGameObject(o1 = new ObjectCollider());
 
             BoxCollider2D boxCollider2D = o1.GetComponent<BoxCollider2D>();
+            Transform transform = o1.GetComponent<Transform>();
+            transform.Position = new Vector2(250, 250);
+
             Assert.AreEqual(new Vector2(150, 150), boxCollider2D.Size);
+            Assert.AreEqual(new Vector2(250, 250), transform.Position);
 
             boxCollider2D.Size = new Vector2(50, 50);
             Assert.AreEqual(new Vector2(50, 50), boxCollider2D.Size);
+            Assert.AreEqual(new Vector2(250, 250), transform.Position);
 
             scene.OnDestroy();
         }
