@@ -1,4 +1,4 @@
-# Reign ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https://reigngame.net/) ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https://engine.reigngame.net/)
+# Reign ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https://reigngame.net/) ![Website](https://img.shields.io/website?label=docs&up_message=online&down_message=offline&url=https://engine.reigngame.net/)
 
 **Reign** is a 2D video game taking place in space giving the player the power to control multiple vessels at once.
 
