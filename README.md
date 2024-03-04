@@ -7,8 +7,17 @@
 ## Getting Started
 
 1. Make sure you have the [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed.
-2. Clone this repository `git clone https://github.com/novialriptide/Reign.git`
-3. Run `dotnet run --project Faraway.Main`
+2. Clone this repository
+
+```
+git clone https://github.com/novialriptide/Reign.git
+```
+
+3. Execute the program
+
+```
+dotnet run --project Faraway.Main
+```
 
 ## Documentation
 
