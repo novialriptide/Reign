@@ -22,10 +22,12 @@ namespace Faraway.Main.Scenes
             player.RegisterSpaceCraft(playerSpaceCraft);
             playerSpaceCraft.GetComponent<Transform>().Position = new System.Numerics.Vector2(60, 60);
 
+            /*
             AddGameObject(playerSpaceCraft2 = new SpaceCraft(player));
             playerSpaceCraft2.SetModule(0, 1, new IonTurret());
             player.RegisterSpaceCraft(playerSpaceCraft);
             playerSpaceCraft2.GetComponent<Transform>().Position = new System.Numerics.Vector2(610, 60);
+            */
 
             AddGameObject(new PlayerInputHandler());
 

@@ -80,6 +80,11 @@ namespace Faraway.Engine.Components
                         return;
                     case TransformDependent.BoxCollider2D:
                         BoxCollider2D bc = GameObject.GetComponent<BoxCollider2D>();
+                        if (bc.Body is null)
+                        {
+                            position = value;
+                            return;
+                        }
                         bc.Body.SetTransform(new AVector2(value.X, value.Y), Rotation);
                         return;
                     case TransformDependent.RigidBody2D:

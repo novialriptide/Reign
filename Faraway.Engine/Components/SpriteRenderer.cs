@@ -12,7 +12,8 @@ namespace Faraway.Engine.Components
         public void LoadTexureFromFile(string path)
         {
             GraphicsDevice graphicsDevice = GameObject.Scene.GameInstance.GraphicsDevice;
-            Stream stream = new FileStream($"Content/{path}", FileMode.Open);
+            // TODO: Make this not `Faraway.Main`
+            Stream stream = new FileStream($"Faraway.Main/Content/{path}", FileMode.Open);
             Texture = Texture2D.FromStream(graphicsDevice, stream);
         }
     }

@@ -1,4 +1,5 @@
-﻿using Faraway.Engine;
+﻿using System.Numerics;
+using Faraway.Engine;
 using Faraway.Engine.Components;
 using Faraway.Main.Components.UserInterface;
 
@@ -17,7 +18,7 @@ namespace Faraway.Main.GameObjects
             AddComponent(DragSelect = new DragSelect());
             AddComponent(WorldPlayerInput = new WorldPlayerInput());
             AddComponent(RectangleRenderer = new RectangleRenderer());
-            AddComponent(BoxCollider2D = new BoxCollider2D());
+            AddComponent(BoxCollider2D = new BoxCollider2D(new Vector2(0, 0)));
         }
     }
 }
