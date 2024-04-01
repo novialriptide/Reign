@@ -37,7 +37,7 @@ namespace ImGuiNET.SampleProgram.XNA
         // Input
         private int scrollWheelValue;
         private int horizontalScrollWheelValue;
-        private readonly float WHEELDELTA = 120;
+        private readonly float wheelDelta = 120;
         private Keys[] allKeys = Enum.GetValues<Keys>();
 
         public ImGuiRenderer(Game game)
@@ -203,8 +203,8 @@ namespace ImGuiNET.SampleProgram.XNA
             io.AddMouseButtonEvent(4, mouse.XButton2 == ButtonState.Pressed);
 
             io.AddMouseWheelEvent(
-                (mouse.HorizontalScrollWheelValue - horizontalScrollWheelValue) / WHEELDELTA,
-                (mouse.ScrollWheelValue - scrollWheelValue) / WHEELDELTA);
+                (mouse.HorizontalScrollWheelValue - horizontalScrollWheelValue) / wheelDelta,
+                (mouse.ScrollWheelValue - scrollWheelValue) / wheelDelta);
             scrollWheelValue = mouse.ScrollWheelValue;
             horizontalScrollWheelValue = mouse.HorizontalScrollWheelValue;
 
