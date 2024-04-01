@@ -16,7 +16,7 @@ git clone https://github.com/novialriptide/Reign.git
 3. Execute the program
 
 ```
-dotnet run --project Faraway.Main
+dotnet run --project Faraway.Engine.Editor
 ```
 
 ## Documentation
