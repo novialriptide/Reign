@@ -17,6 +17,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build Reign.Engine.Editor/Reign.Engine.Editor.csproj --no-restore
+        run: |
+          dotnet build Reign.Engine.Editor/Reign.Engine.Editor.csproj --no-restore
+          dotnet build Reign.Engine.Tests/Reign.Engine.Tests.csproj --no-restore
       - name: Test
         run: dotnet test Reign.Engine.Tests --no-build --verbosity normal
