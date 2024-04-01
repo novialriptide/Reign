@@ -22,7 +22,12 @@ namespace Reign.Engine.Editor
 
         public Editor()
         {
-            graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2 / 3,
+                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 2 / 3
+            };
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -64,26 +69,46 @@ namespace Reign.Engine.Editor
             base.Update(gameTime);
         }
 
-
-        // Direct port of the example at https://github.com/ocornut/imgui/blob/master/examples/sdl_opengl2_example/main.cpp
-        private float f = 0.0f;
-        private Vector3 clear_color = new Vector3(114f / 255f, 144f / 255f, 154f / 255f);
-        private byte[] _textBuffer = new byte[100];
         protected virtual void ImGuiLayout()
         {
-            // 1. Show a simple window
-            // Tip: if we don't call ImGui.Begin()/ImGui.End() the widgets appears in a window automatically called "Debug"
+            float menuBarHeight = ImGui.GetFrameHeight();
+
+            // Create main menu bar
+            if (ImGui.BeginMainMenuBar())
             {
-                ImGui.Text("Hello, world!");
-                ImGui.SliderFloat("float", ref f, 0.0f, 1.0f, string.Empty);
-                ImGui.ColorEdit3("clear color", ref clear_color);
-                ImGui.Text(string.Format("Application average {0:F3} ms/frame ({1:F1} FPS)", 1000f / ImGui.GetIO().Framerate, ImGui.GetIO().Framerate));
+                if (ImGui.BeginMenu("File"))
+                {
+                    ImGui.MenuItem("New");
+                    ImGui.MenuItem("Open");
+                    ImGui.EndMenu();
+                }
 
-                ImGui.InputText("Text input", _textBuffer, 100);
+                if (ImGui.BeginMenu("Edit"))
+                {
+                    ImGui.MenuItem("Undo");
+                    ImGui.MenuItem("Redo");
+                    ImGui.EndMenu();
+                }
 
-                ImGui.Text("Texture sample");
-                ImGui.Image(imGuiTexture, new Vector2(300, 150), Vector2.Zero, Vector2.One, Vector4.One, Vector4.One); // Here, the previously loaded texture is used
+                ImGui.EndMainMenuBar();
             }
+
+            ImGui.Begin("Side Panel", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.MenuBar);
+
+            ImGui.SetWindowPos(new Vector2(0, menuBarHeight));
+            ImGui.SetWindowSize(new Vector2(GraphicsDevice.Viewport.Width / 4, GraphicsDevice.Viewport.Height - menuBarHeight));
+
+
+            if (ImGui.BeginMenuBar())
+            {
+                if (ImGui.BeginMenu("Hierarchy"))
+                {
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMenuBar();
+            }
+
+            ImGui.End();
         }
 
         protected override void Draw(GameTime gameTime)
