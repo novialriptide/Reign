@@ -1,3 +1,3 @@
-# Faraway Internal Documentation
+# Reign Internal Documentation
 
-Welcome to the Faraway Internal Documentation
+Welcome to the Reign Internal Documentation

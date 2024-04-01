@@ -1,6 +1,6 @@
 ## Resources
 
-### `Faraway.Engine`
+### `Reign.Engine`
 
 - **Leif Theden**, [Tuxemon's State Manager](https://github.com/Tuxemon/Tuxemon)
 - **Matt Hall**, [Creating an Entity-Component-System in C#](https://matthall.codes/blog/ecs/)
@@ -12,7 +12,7 @@
 - **Jack Mott**, [Rotated Rectangle Collision](https://gist.github.com/jackmott/021bb1bd1135df71c389b42b8b44cc30)
 - **Arthur Gerbelot**, [Rotated Rectangle Collision](https://stackoverflow.com/questions/62028169/how-to-detect-when-rotated-rectangles-are-colliding-each-other)
 
-### `Faraway.Main`
+### `Reign.Main`
 
 - **Gustav Dahl**, [Measuring How Game Feel Is Influenced by the Player Avatar�s Acceleration and Deceleration](https://gustavdahl.net/other/GameFeel_GustavDahl_Medialogy2015.pdf)
 - **Geek Tutorials**, [Photoshop Tutorial - Make a Space Background](https://www.youtube.com/watch?v=_TIGIxHp9b8)

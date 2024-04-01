@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "files": ["Faraway.Engine/Faraway.Engine.csproj"],
+          "files": ["Reign.Engine/Reign.Engine.csproj"],
           "src": ".."
         }
       ],
