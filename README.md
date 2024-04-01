@@ -1,8 +1,13 @@
-# Reign ![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https://reigngame.net/) ![Website](https://img.shields.io/website?label=docs&up_message=online&down_message=offline&url=https://engine.reigngame.net/)
+# Reign.Engine [![MIT License](https://img.shields.io/github/license/novialriptide/Reign)](./LICENSE) [![Website](https://img.shields.io/website?up_message=online&down_message=offline&url=https://reigngame.net/)](https://reigngame.net/) [![Documentation](https://img.shields.io/website?label=docs&up_message=online&down_message=offline&url=https://engine.reigngame.net/)](https://engine.reigngame.net/)
 
-**Reign** is a 2D video game taking place in space giving the player the power to control multiple vessels at once.
+`Reign.Engine` is a cross-platform game engine completely focused on 2D video game development powered by [the MonoGame Framework](https://monogame.net/). This game engine powers [Reign](https://reigngame.net/), a work-in-progress video game that draws inspiration from the likes of StarCraft II and Project Zomboid.
 
-`Reign.Engine` is a cross-platform game engine completely focused on 2D video game development. This is the developer's third iteration of the ideal 2D game engine; previous iterations being [SakuyaEngine](https://github.com/novialriptide/sakuya-engine) and [GameDen](https://github.com/novialriptide/gameden).
+## Planned Features
+
+- [x] Entity Component System
+- [x] Scene Manager
+- [ ] ImGui support for debugging
+- [ ] Hot-reloading support for game scripts
 
 ## Getting Started
 
