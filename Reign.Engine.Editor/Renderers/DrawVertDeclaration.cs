@@ -1,6 +1,7 @@
+using ImGuiNET;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ImGuiNET.SampleProgram.XNA
+namespace Reign.Engine.Editor.Renderers
 {
     public static class DrawVertDeclaration
     {
