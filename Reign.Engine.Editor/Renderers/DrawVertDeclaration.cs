@@ -4,16 +4,16 @@ namespace ImGuiNET.SampleProgram.XNA
 {
     public static class DrawVertDeclaration
     {
-        public static readonly VertexDeclaration Declaration;
+        public static readonly VertexDeclaration DECLARATION;
 
-        public static readonly int Size;
+        public static readonly int SIZE;
 
         static DrawVertDeclaration()
         {
-            unsafe { Size = sizeof(ImDrawVert); }
+            unsafe { SIZE = sizeof(ImDrawVert); }
 
-            Declaration = new VertexDeclaration(
-                Size,
+            DECLARATION = new VertexDeclaration(
+                SIZE,
 
                 // Position
                 new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),

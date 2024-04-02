@@ -42,7 +42,7 @@ namespace ImGuiNET.SampleProgram.XNA
 
         public ImGuiRenderer(Game game)
         {
-            var context = ImGui.CreateContext();
+            nint context = ImGui.CreateContext();
             ImGui.SetCurrentContext(context);
 
             this.game = game ?? throw new ArgumentNullException(nameof(game));
@@ -98,7 +98,7 @@ namespace ImGuiNET.SampleProgram.XNA
         /// </summary>
         public virtual IntPtr BindTexture(Texture2D texture)
         {
-            var id = new IntPtr(textureId++);
+            nint id = new IntPtr(textureId++);
 
             loadedTextures.Add(id, texture);
 
@@ -132,7 +132,7 @@ namespace ImGuiNET.SampleProgram.XNA
         {
             ImGui.Render();
 
-            unsafe { RenderDrawData(ImGui.GetDrawData()); }
+            unsafe { renderDrawData(ImGui.GetDrawData()); }
         }
 
         #endregion ImGuiRenderer
@@ -210,7 +210,7 @@ namespace ImGuiNET.SampleProgram.XNA
 
             foreach (var key in allKeys)
             {
-                if (TryMapKeys(key, out ImGuiKey imguikey))
+                if (tryMapKeys(key, out ImGuiKey imguikey))
                 {
                     io.AddKeyEvent(imguikey, keyboard.IsKeyDown(key));
                 }
@@ -220,7 +220,7 @@ namespace ImGuiNET.SampleProgram.XNA
             io.DisplayFramebufferScale = new System.Numerics.Vector2(1f, 1f);
         }
 
-        private bool TryMapKeys(Keys key, out ImGuiKey imguikey)
+        private bool tryMapKeys(Keys key, out ImGuiKey imguikey)
         {
             //Special case not handed in the switch...
             //If the actual key we put in is "None", return none and true. 
@@ -290,7 +290,7 @@ namespace ImGuiNET.SampleProgram.XNA
         /// <summary>
         /// Gets the geometry as set up by ImGui and sends it to the graphics device
         /// </summary>
-        private void RenderDrawData(ImDrawDataPtr drawData)
+        private void renderDrawData(ImDrawDataPtr drawData)
         {
             // Setup render state: alpha-blending enabled, no face culling, no depth testing, scissor enabled, vertex/texcoord/color pointers
             var lastViewport = graphicsDevice.Viewport;
@@ -307,16 +307,16 @@ namespace ImGuiNET.SampleProgram.XNA
             // Setup projection
             graphicsDevice.Viewport = new Viewport(0, 0, graphicsDevice.PresentationParameters.BackBufferWidth, graphicsDevice.PresentationParameters.BackBufferHeight);
 
-            UpdateBuffers(drawData);
+            updateBuffers(drawData);
 
-            RenderCommandLists(drawData);
+            renderCommandLists(drawData);
 
             // Restore modified state
             graphicsDevice.Viewport = lastViewport;
             graphicsDevice.ScissorRectangle = lastScissorBox;
         }
 
-        private unsafe void UpdateBuffers(ImDrawDataPtr drawData)
+        private unsafe void updateBuffers(ImDrawDataPtr drawData)
         {
             if (drawData.TotalVtxCount == 0)
             {
@@ -329,8 +329,8 @@ namespace ImGuiNET.SampleProgram.XNA
                 vertexBuffer?.Dispose();
 
                 vertexBufferSize = (int)(drawData.TotalVtxCount * 1.5f);
-                vertexBuffer = new VertexBuffer(graphicsDevice, DrawVertDeclaration.Declaration, vertexBufferSize, BufferUsage.None);
-                vertexData = new byte[vertexBufferSize * DrawVertDeclaration.Size];
+                vertexBuffer = new VertexBuffer(graphicsDevice, DrawVertDeclaration.DECLARATION, vertexBufferSize, BufferUsage.None);
+                vertexData = new byte[vertexBufferSize * DrawVertDeclaration.SIZE];
             }
 
             if (drawData.TotalIdxCount > indexBufferSize)
@@ -350,10 +350,10 @@ namespace ImGuiNET.SampleProgram.XNA
             {
                 ImDrawListPtr cmdList = drawData.CmdLists[n];
 
-                fixed (void* vtxDstPtr = &vertexData[vtxOffset * DrawVertDeclaration.Size])
+                fixed (void* vtxDstPtr = &vertexData[vtxOffset * DrawVertDeclaration.SIZE])
                 fixed (void* idxDstPtr = &indexData[idxOffset * sizeof(ushort)])
                 {
-                    Buffer.MemoryCopy((void*)cmdList.VtxBuffer.Data, vtxDstPtr, vertexData.Length, cmdList.VtxBuffer.Size * DrawVertDeclaration.Size);
+                    Buffer.MemoryCopy((void*)cmdList.VtxBuffer.Data, vtxDstPtr, vertexData.Length, cmdList.VtxBuffer.Size * DrawVertDeclaration.SIZE);
                     Buffer.MemoryCopy((void*)cmdList.IdxBuffer.Data, idxDstPtr, indexData.Length, cmdList.IdxBuffer.Size * sizeof(ushort));
                 }
 
@@ -362,11 +362,11 @@ namespace ImGuiNET.SampleProgram.XNA
             }
 
             // Copy the managed byte arrays to the gpu vertex- and index buffers
-            vertexBuffer.SetData(vertexData, 0, drawData.TotalVtxCount * DrawVertDeclaration.Size);
+            vertexBuffer.SetData(vertexData, 0, drawData.TotalVtxCount * DrawVertDeclaration.SIZE);
             indexBuffer.SetData(indexData, 0, drawData.TotalIdxCount * sizeof(ushort));
         }
 
-        private unsafe void RenderCommandLists(ImDrawDataPtr drawData)
+        private unsafe void renderCommandLists(ImDrawDataPtr drawData)
         {
             graphicsDevice.SetVertexBuffer(vertexBuffer);
             graphicsDevice.Indices = indexBuffer;
