@@ -20,12 +20,16 @@ namespace Reign.Engine.Editor
         private SpriteBatch spriteBatch;
         private RenderTarget2D gameScreen;
 
+        private float sidePanelWidth;
+        private float sidePanelHeight;
+        private float menuBarHeight;
+
         public Editor()
         {
             graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 2 / 3,
-                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 2 / 3
+                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width * 4 / 5,
+                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 4 / 5
             };
 
             Content.RootDirectory = "Content";
@@ -39,8 +43,8 @@ namespace Reign.Engine.Editor
 
             gameScreen = new RenderTarget2D(
                 GraphicsDevice,
-                GraphicsDevice.Viewport.Width,
-                GraphicsDevice.Viewport.Height);
+                1280,
+                720);
 
             base.Initialize();
         }
@@ -71,7 +75,9 @@ namespace Reign.Engine.Editor
 
         protected virtual void ImGuiLayout()
         {
-            float menuBarHeight = ImGui.GetFrameHeight();
+            menuBarHeight = ImGui.GetFrameHeight();
+            sidePanelWidth = GraphicsDevice.Viewport.Width / 4;
+            sidePanelHeight = GraphicsDevice.Viewport.Height * 5 / 7 - menuBarHeight;
 
             // Create main menu bar
             if (ImGui.BeginMainMenuBar())
@@ -90,22 +96,58 @@ namespace Reign.Engine.Editor
                     ImGui.EndMenu();
                 }
 
+                if (ImGui.BeginMenu("Run"))
+                {
+                    ImGui.MenuItem("Start Debugging");
+                    ImGui.EndMenu();
+                }
+
+                if (ImGui.BeginMenu("Build"))
+                {
+                    ImGui.MenuItem("Package a Debug Build");
+                    ImGui.MenuItem("Package a Release Build");
+                    ImGui.EndMenu();
+                }
+
                 ImGui.EndMainMenuBar();
             }
 
-            ImGui.Begin("Side Panel", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.MenuBar);
+            ImGui.Begin("Side Panel", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar);
 
             ImGui.SetWindowPos(new Vector2(0, menuBarHeight));
-            ImGui.SetWindowSize(new Vector2(GraphicsDevice.Viewport.Width / 4, GraphicsDevice.Viewport.Height - menuBarHeight));
+            ImGui.SetWindowSize(new Vector2(sidePanelWidth, sidePanelHeight));
 
-
-            if (ImGui.BeginMenuBar())
+            if (ImGui.BeginTabBar("Tabs"))
             {
-                if (ImGui.BeginMenu("Hierarchy"))
+                if (ImGui.BeginTabItem("Hierarchy"))
                 {
-                    ImGui.EndMenu();
+                    ImGui.EndTabItem();
                 }
-                ImGui.EndMenuBar();
+                if (ImGui.BeginTabItem("Scenes"))
+                {
+                    ImGui.EndTabItem();
+                }
+                if (ImGui.BeginTabItem("Inspector"))
+                {
+                    ImGui.EndTabItem();
+                }
+                ImGui.EndTabBar();
+            }
+
+            ImGui.End();
+
+            ImGui.Begin("Bottom Panel", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar);
+
+            ImGui.SetWindowPos(new Vector2(0, sidePanelHeight + menuBarHeight));
+            ImGui.SetWindowSize(new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - sidePanelHeight));
+
+            if (ImGui.BeginTabBar("Tabs"))
+            {
+                if (ImGui.BeginTabItem("Assets"))
+                {
+                    ImGui.EndTabItem();
+                }
+                ImGui.EndTabBar();
             }
 
             ImGui.End();
@@ -121,7 +163,7 @@ namespace Reign.Engine.Editor
             GraphicsDevice.SetRenderTarget(null);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(gameScreen, new Rectangle(100, 100, gameScreen.Width, gameScreen.Height), Color.White);
+            spriteBatch.Draw(gameScreen, new Rectangle((int)sidePanelWidth, (int)menuBarHeight, gameScreen.Width, gameScreen.Height), Color.White);
             spriteBatch.End();
 
             imGuiRenderer.BeforeLayout(gameTime);
