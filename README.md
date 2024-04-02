@@ -11,7 +11,7 @@
 
 ## Getting Started
 
-1. Make sure you have the [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed.
+1. Make sure you have the [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed.
 2. Clone this repository
 
 ```
