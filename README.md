@@ -6,7 +6,7 @@
 
 - [x] Entity Component System
 - [x] Scene Manager
-- [ ] ImGui support for debugging
+- [x] ImGui support for debugging
 - [ ] Hot-reloading support for game scripts
 
 ## Getting Started
